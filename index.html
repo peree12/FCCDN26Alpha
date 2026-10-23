@@ -191,7 +191,9 @@
         #btn-touch-pass { width: 58px; height: 58px; right: 92px; bottom: 4px; }
         #btn-touch-sprint { width: 54px; height: 54px; right: 18px; bottom: 92px; }
         #btn-touch-switch { width: 50px; height: 50px; right: 88px; bottom: 76px; font-size: 8px; }
-        #btn-touch-switch.dim { opacity: .35; }
+        #btn-touch-switch.dim, #btn-touch-through.dim { opacity: .35; }
+        #btn-touch-through { width: 50px; height: 50px; right: 160px; bottom: 34px; font-size: 7.5px; }
+        #touch-actions { width: 216px !important; }
         @media (max-height: 380px) {
             #dpad-container { width: 104px; height: 104px; }
             #touch-actions { transform: scale(.88); transform-origin: bottom right; }
@@ -568,6 +570,7 @@
                         <li><b class="text-white">Tiro (mantén para cargar):</b> Z o K · sin balón: barrida</li>
                         <li><b class="text-white">Pase:</b> X o J · sin balón: presión con un compañero</li>
                         <li><b class="text-white">Cambiar jugador:</b> C o Q · o haz clic sobre el jugador</li>
+                        <li><b class="text-white">Pase filtrado:</b> V o I · el balón va al espacio delante del compañero</li>
                         <li><b class="text-white">Correr:</b> Shift o L</li>
                     </ul>
                 </div>
@@ -587,7 +590,7 @@
 
                 <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
                     <span class="font-bold text-yellow-400 block mb-1">Móviles / Tablets:</span>
-                    <p class="text-xs">Joystick para moverte + botones TIRO, PASE, CORRER y CAMBIAR. También puedes tocar a un compañero en la cancha para elegirlo o pasarle el balón.</p>
+                    <p class="text-xs">Joystick para moverte + botones TIRO, PASE, FILTRADO, CORRER y CAMBIAR. También puedes tocar a un compañero en la cancha para elegirlo o pasarle el balón.</p>
                 </div>
             </div>
 
@@ -716,6 +719,9 @@
             </div>
             <div class="set-section">
                 <div class="set-sub">Juego</div>
+                <div class="set-row"><span>Dificultad de la IA <b id="set-diff-val" class="set-val">Normal</b></span>
+                    <div class="set-range"><small>Fácil</small><input id="set-diff" type="range" min="0" max="4" step="1"><small>Difícil</small></div></div>
+                <label class="set-row"><span>Asistencia de pases <small style="display:block;color:#94a3b8;font-weight:500">Pases precisos y directos al compañero</small></span><input id="set-passassist" type="checkbox" class="set-toggle"></label>
                 <label class="set-row"><span>Flecha para apuntar tiros y pases</span><input id="set-aim" type="checkbox" class="set-toggle"></label>
                 <div class="set-row"><span>FOV de cámara <b id="set-fov-val" class="set-val">Normal</b></span>
                     <div class="set-range"><small>Cerca</small><input id="set-fov" type="range" min="0.7" max="1.5" step="0.05"><small>Lejos</small></div></div>
@@ -755,6 +761,7 @@
         </div>
         <div id="touch-actions">
             <div id="btn-touch-switch" class="touch-btn fifa-btn"><span>CAMBIAR</span></div>
+            <div id="btn-touch-through" class="touch-btn fifa-btn"><span>FILTRADO</span></div>
             <div id="btn-touch-sprint" class="touch-btn fifa-btn"><span>CORRER</span></div>
             <div id="btn-touch-pass" class="touch-btn fifa-btn"><span class="lbl">PASE</span></div>
             <div id="btn-touch-shoot" class="touch-btn fifa-btn"><span class="lbl">TIRO</span></div>
@@ -1075,17 +1082,31 @@
         // --- AJUSTES (se guardan en este navegador) ---
         const ACTIONS = [
             ['up', 'Arriba'], ['down', 'Abajo'], ['left', 'Izquierda'], ['right', 'Derecha'],
-            ['shoot', 'Tiro / Barrida'], ['pass', 'Pase / Presión'], ['sprint', 'Correr'], ['switch', 'Cambiar jugador']
+            ['shoot', 'Tiro / Barrida'], ['pass', 'Pase / Presión'], ['through', 'Pase filtrado'], ['sprint', 'Correr'], ['switch', 'Cambiar jugador']
         ];
         const DEFAULT_KEYS = {
             solo: { up: ['ArrowUp', 'KeyW'], down: ['ArrowDown', 'KeyS'], left: ['ArrowLeft', 'KeyA'], right: ['ArrowRight', 'KeyD'],
-                    shoot: ['KeyZ', 'KeyK'], pass: ['KeyX', 'KeyJ'], sprint: ['ShiftLeft', 'KeyL'], switch: ['KeyC', 'KeyQ'] },
+                    shoot: ['KeyZ', 'KeyK'], pass: ['KeyX', 'KeyJ'], through: ['KeyV', 'KeyI'], sprint: ['ShiftLeft', 'KeyL'], switch: ['KeyC', 'KeyQ'] },
             p1:   { up: ['KeyW', ''], down: ['KeyS', ''], left: ['KeyA', ''], right: ['KeyD', ''],
-                    shoot: ['KeyF', ''], pass: ['KeyG', ''], sprint: ['KeyH', 'ShiftLeft'], switch: ['KeyE', ''] },
+                    shoot: ['KeyF', ''], pass: ['KeyG', ''], through: ['KeyR', ''], sprint: ['KeyH', 'ShiftLeft'], switch: ['KeyE', ''] },
             p2:   { up: ['ArrowUp', ''], down: ['ArrowDown', ''], left: ['ArrowLeft', ''], right: ['ArrowRight', ''],
-                    shoot: ['KeyK', ''], pass: ['KeyJ', ''], sprint: ['KeyL', 'ShiftRight'], switch: ['KeyU', ''] }
+                    shoot: ['KeyK', ''], pass: ['KeyJ', ''], through: ['KeyO', ''], sprint: ['KeyL', 'ShiftRight'], switch: ['KeyU', ''] }
         };
-        const DEFAULT_SETTINGS = { aimArrow: true, fov: 1.0, musicVol: 0.5, sfxVol: 0.8, keys: JSON.parse(JSON.stringify(DEFAULT_KEYS)) };
+        const DEFAULT_SETTINGS = { aimArrow: true, passAssist: false, difficulty: 2, fov: 1.0, musicVol: 0.5, sfxVol: 0.8, keys: JSON.parse(JSON.stringify(DEFAULT_KEYS)) };
+
+        // Niveles de dificultad de la IA rival (de más fácil a más difícil)
+        const DIFFICULTIES = [
+            { name: 'Muy fácil', speed: 0.92, tackle: -0.10, tcd: 1.35, think: 1.45, aim: 1.5,  gk: -0.06, press2: false },
+            { name: 'Fácil',     speed: 0.96, tackle: -0.05, tcd: 1.15, think: 1.2,  aim: 1.25, gk: -0.03, press2: false },
+            { name: 'Normal',    speed: 1.00, tackle: 0,     tcd: 1.0,  think: 1.0,  aim: 1.0,  gk: 0,     press2: false },
+            { name: 'Difícil',   speed: 1.06, tackle: 0.07,  tcd: 0.85, think: 0.75, aim: 0.75, gk: 0.06,  press2: true },
+            { name: 'Leyenda',   speed: 1.12, tackle: 0.13,  tcd: 0.7,  think: 0.55, aim: 0.55, gk: 0.12,  press2: true }
+        ];
+        // Solo afecta a la IA rival en 1 Jugador; tus compañeros IA juegan siempre en Normal
+        function aiDiff(p) {
+            const lvl = (window.settings && Number.isInteger(settings.difficulty)) ? settings.difficulty : 2;
+            return (p && !p.isHome && gameMode === '1P' && !p.controlled) ? DIFFICULTIES[clamp(lvl, 0, 4)] : DIFFICULTIES[2];
+        }
         window.settings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
         try {
             const saved = JSON.parse(localStorage.getItem('cdn26_settings') || 'null');
@@ -1140,6 +1161,9 @@
             bgMusic.volume = settings.musicVol;
             audio.setVolume(settings.sfxVol);
             document.getElementById('set-aim').checked = !!settings.aimArrow;
+            document.getElementById('set-passassist').checked = !!settings.passAssist;
+            document.getElementById('set-diff').value = settings.difficulty;
+            document.getElementById('set-diff-val').textContent = DIFFICULTIES[clamp(settings.difficulty, 0, 4)].name;
             document.getElementById('set-fov').value = settings.fov;
             document.getElementById('set-fov-val').textContent = settings.fov < 0.9 ? 'Cerca' : (settings.fov > 1.15 ? 'Lejos' : 'Normal');
             document.getElementById('set-music').value = settings.musicVol;
@@ -1213,6 +1237,12 @@
             document.getElementById('pm-menu').addEventListener('click', () => leaveMatch(true));
             document.getElementById('set-close').addEventListener('click', closeSettings);
             document.getElementById('set-aim').addEventListener('change', (e) => { settings.aimArrow = e.target.checked; saveSettings(); });
+            document.getElementById('set-passassist').addEventListener('change', (e) => { settings.passAssist = e.target.checked; saveSettings(); });
+            document.getElementById('set-diff').addEventListener('input', (e) => {
+                settings.difficulty = parseInt(e.target.value, 10);
+                document.getElementById('set-diff-val').textContent = DIFFICULTIES[settings.difficulty].name;
+                saveSettings();
+            });
             document.getElementById('set-fov').addEventListener('input', (e) => { settings.fov = parseFloat(e.target.value); applySettings(); saveSettings(); });
             document.getElementById('set-music').addEventListener('input', (e) => { settings.musicVol = parseFloat(e.target.value); applySettings(); saveSettings(); });
             document.getElementById('set-sfx').addEventListener('input', (e) => { settings.sfxVol = parseFloat(e.target.value); applySettings(); saveSettings(); });
@@ -1697,7 +1727,7 @@
 
         function steer(p, tx, ty, speedMul, k, sharp = 0.22) {
             const dx = tx - p.x, dy = ty - p.y, d = Math.hypot(dx, dy);
-            let sp = p.baseSpeed * speedMul;
+            let sp = p.baseSpeed * speedMul * aiDiff(p).speed;
             if (d < 30) sp *= d / 30;             // frena al llegar
             const vx = d > 0.5 ? dx / d * sp : 0, vy = d > 0.5 ? dy / d * sp : 0;
             const a = Math.min(1, sharp * k);
@@ -1717,10 +1747,53 @@
             ball.gkTried = null;
             ball.shotByHome = p.isHome;
             ball.passTarget = null;
+            ball.throughPoint = null;
             p.kickCooldown = 0.32;
             p.angle = angle;
             audio.playKick(speed / 20);
             if (isShot) { if (p.isHome) matchStats.homeShots++; else matchStats.awayShots++; }
+        }
+
+        // Pase asistido: directo a los pies del compañero, sin desviarse
+        function precisePass(p, target) {
+            const d = dist(p, target);
+            const speed = clamp(5 + d * 0.02, 8, 17);
+            kickBall(p, Math.atan2(target.y - p.y, target.x - p.x), speed, false);
+            ball.passTarget = target;
+        }
+
+        // Pase manual: sale hacia donde apuntas; la fuerza se ajusta al compañero más cercano en esa dirección
+        function manualPass(p, angle, best) {
+            const d = best ? dist(p, best.p) : 160;
+            const speed = clamp(5 + d * 0.02, 8, 16);
+            const err = (Math.random() - 0.5) * 0.12 * (1.2 - p.att / 100) * 2;
+            kickBall(p, angle + err, speed, false);
+            if (best) ball.passTarget = best.p;
+        }
+
+        // Pase filtrado: el balón va al espacio por delante del compañero, rumbo al arco
+        function throughPass(p, facing) {
+            let best = null;
+            mates(p).forEach(m => {
+                if (m.isGK || m.stun > 0) return;
+                const cos = Math.cos(Math.atan2(m.y - p.y, m.x - p.x) - facing);
+                if (cos < 0.15) return;
+                const ahead = (m.x - p.x) * p.dir;
+                const score = ahead * 0.9 + cos * 140 - dist(p, m) * 0.12;
+                if (!best || score > best.score) best = { p: m, score };
+            });
+            if (!best) { kickBall(p, facing, 13, false); return; }
+            const m = best.p;
+            const gx = m.oppGoalX - m.x, gy = MID_Y - m.y, gl = Math.hypot(gx, gy) || 1;
+            const dirX = gx / gl * 0.7 + Math.cos(facing) * 0.3, dirY = gy / gl * 0.7 + Math.sin(facing) * 0.3;
+            const dl = Math.hypot(dirX, dirY) || 1;
+            const lead = 115;
+            const tx = clamp(m.x + dirX / dl * lead, FIELD.minX + 30, FIELD.maxX - 30);
+            const ty = clamp(m.y + dirY / dl * lead, FIELD.minY + 30, FIELD.maxY - 30);
+            const d = Math.hypot(tx - p.x, ty - p.y);
+            kickBall(p, Math.atan2(ty - p.y, tx - p.x), clamp(6 + d * 0.02, 9, 17), false);
+            ball.passTarget = m;
+            ball.throughPoint = { x: tx, y: ty };
         }
 
         function passTo(p, target) {
@@ -1745,7 +1818,7 @@
         function shoot(p, power01, aimY) {
             const gx = p.oppGoalX + p.dir * 6;
             let ty = aimY === undefined ? shotTargetY(p) : aimY;
-            const error = (1 - p.att / 100) * 110 * (0.4 + power01 * 0.7);
+            const error = (1 - p.att / 100) * 110 * (0.4 + power01 * 0.7) * aiDiff(p).aim;
             ty += (Math.random() * 2 - 1) * error * 0.5;
             kickBall(p, Math.atan2(ty - p.y, gx - p.x), 9 + power01 * 13, true);
         }
@@ -1758,6 +1831,7 @@
             ball.vx = 0; ball.vy = 0;
             ball.isShot = false;
             ball.passTarget = null;
+            ball.throughPoint = null;
             p.holdTime = 0;
             p.decisionTimer = 0.15 + Math.random() * 0.15;
             if (p.isGK) p.gkHoldTarget = 0.55 + Math.random() * 0.5;
@@ -1770,8 +1844,8 @@
             if (h.isGK && inOwnArea(h)) return false;     // el portero con el balón en sus manos no se roba
             if (h.holdTime < 0.4) return false;           // protección al recibir
             if (dist(t, h) > 29 + extraReach) return false;
-            t.tackleCooldown = t.controlled ? 0.7 : 1.0;          // la IA no puede intentar quitar sin parar
-            let chance = 0.42 + (t.def - h.att) / 60;
+            t.tackleCooldown = t.controlled ? 0.7 : 1.0 * aiDiff(t).tcd;   // la IA no puede intentar quitar sin parar
+            let chance = 0.42 + (t.def - h.att) / 60 + aiDiff(t).tackle;
             if (t.isGK) chance += 0.15;
             if (h.controlled && !t.controlled) chance -= 0.14;    // conducir con el jugador se siente firme
             chance = clamp(chance, 0.15, 0.75);
@@ -1841,7 +1915,7 @@
 
             p.decisionTimer -= dt;
             if (p.holdTime > 0.22 && (p.decisionTimer <= 0 || (pressured && p.decisionTimer < 0.12) || dGoal < 140)) {
-                p.decisionTimer = 0.2 + Math.random() * 0.18;
+                p.decisionTimer = (0.2 + Math.random() * 0.18) * aiDiff(p).think;
                 const aimY = shotTargetY(p);
                 const lane = laneClearance(p, { x: goal.x, y: aimY }, opps.filter(o => !o.isGK));
                 const angleOk = Math.abs(p.y - MID_Y) < 150 + (300 - Math.min(dGoal, 300)) * 0.3;
@@ -1930,7 +2004,9 @@
         function aiWithoutBall(p, role, ctx, k) {
             const ownGoal = { x: p.ownGoalX, y: MID_Y };
             if (role === 'press' || role === 'receive') {
-                const tgt = role === 'receive' ? ball : (ball.holder ? ball.holder : ctx.predicted);
+                const tgt = role === 'receive'
+                    ? (ball.throughPoint && dist(p, ball.throughPoint) > 18 ? ball.throughPoint : ball)
+                    : (ball.holder ? ball.holder : ctx.predicted);
                 steer(p, tgt.x, tgt.y, ball.holder ? 0.97 : 1.0, k, 0.3);
                 if (ball.holder) tryTackle(p, ball.holder);
                 return;
@@ -2030,6 +2106,8 @@
             const sh = document.querySelector('#btn-touch-shoot .lbl'), ps = document.querySelector('#btn-touch-pass .lbl');
             if (sh) sh.textContent = hasBall ? 'TIRO' : 'BARRIDA';
             if (ps) ps.textContent = hasBall ? 'PASE' : 'PRESIÓN';
+            const th = document.getElementById('btn-touch-through');
+            if (th) th.classList.toggle('dim', !hasBall);
             const sw = document.getElementById('btn-touch-switch');
             if (sw) sw.classList.toggle('dim', hasBall);
         }
@@ -2069,6 +2147,8 @@
             p.aimDy = dy;
 
             const passEdge = ck.pass && !side.prevPass;
+            const throughEdge = ck.through && !side.prevThrough;
+            side.prevThrough = ck.through;
             const switchEdge = ck.switch && !side.prevSwitch;
             side.prevSwitch = ck.switch;
             if (switchEdge && !hasBall) manualSwitch(side);
@@ -2079,10 +2159,14 @@
             if (hasBall) {
                 if (passEdge) {
                     const best = bestPassTarget(p, true, p.angle);
-                    if (best) passTo(p, best.p);
-                    else kickBall(p, p.angle, 11, false);
+                    if (settings.passAssist) {                      // asistencia activada: pase exacto al compañero
+                        if (best) precisePass(p, best.p); else kickBall(p, p.angle, 11, false);
+                    } else {
+                        manualPass(p, p.angle, best);              // sin asistencia: hacia donde apuntas
+                    }
                     return;
                 }
+                if (throughEdge && !p.isGK) { throughPass(p, p.angle); return; }
                 if (ck.shoot) {
                     p.isChargingShot = true;
                     p.kickPower = Math.min(100, p.kickPower + 230 * dt);   // potencia máxima en ~0,45 s
@@ -2105,6 +2189,10 @@
                 }
             } else {
                 if (p.isChargingShot) { p.isChargingShot = false; p.kickPower = 0; if (side.isHome) document.getElementById('power-bar-container').classList.add('hidden'); }
+                if (ball.passTarget === p && !ball.holder && len < 0.15) {
+                    const t = ball.throughPoint && dist(p, ball.throughPoint) > 18 ? ball.throughPoint : ball;
+                    steer(p, t.x, t.y, ball.throughPoint ? 1.15 : 1, k, 0.35);
+                }
                 side.pressHeld = !!ck.pass;   // sin balón, mantener PASE = presión con un compañero (como en FIFA)
                 // Quitar el balón: al contacto, o con TIRO para una barrida con más alcance
                 if (ball.holder && ball.holder.isHome !== p.isHome) {
@@ -2188,11 +2276,12 @@
             bindHold('btn-touch-shoot', ['TouchShoot'], false);
             bindHold('btn-touch-sprint', ['TouchSprint'], false);
             bindHold('btn-touch-switch', ['TouchSwitch'], true);
+            bindHold('btn-touch-through', ['TouchThrough'], true);
 
             // Si se cambia de app o de pantalla completa, soltar todo para que nada quede pegado
             const releaseAll = () => {
                 releaseStick();
-                ['TouchPass', 'TouchShoot', 'TouchSprint', 'TouchSwitch'].forEach(k => keys[k] = false);
+                ['TouchPass', 'TouchShoot', 'TouchSprint', 'TouchSwitch', 'TouchThrough'].forEach(k => keys[k] = false);
             };
             document.addEventListener('visibilitychange', releaseAll);
             document.addEventListener('fullscreenchange', releaseAll);
@@ -2328,7 +2417,8 @@
                     shoot: shootHeld, shootTap: shootAny && !shootHeld,
                     pass: any(prof, 'pass', k) || (touch && k('TouchPass')),
                     sprint: any(prof, 'sprint', k) || (touch && k('TouchSprint')),
-                    switch: any(prof, 'switch', k) || (touch && k('TouchSwitch'))
+                    switch: any(prof, 'switch', k) || (touch && k('TouchSwitch')),
+                    through: any(prof, 'through', k) || (touch && k('TouchThrough'))
                 };
             };
             if (gameMode === '2P') return { p1: read('p1', true), p2: read('p2', false) };
@@ -2382,6 +2472,8 @@
                         const humanDist = dist(side.current, ball);
                         if (humanDist < dist(p, ball) + 60) role = 'cover';
                     }
+                    // En Difícil y Leyenda la IA rival presiona de a dos
+                    if (role === 'cover' && aiDiff(p).press2 && ball.holder && ball.holder.isHome !== p.isHome && dist(p, ball.holder) < 170) role = 'press';
                     // PRESIÓN: el compañero que cubre sale a apretar al rival junto contigo
                     if (role === 'cover' && side.pressHeld && (p.isHome || twoPlayers) && ball.holder && ball.holder.isHome !== p.isHome) role = 'press';
                     if (p.stun > 0) { p.vx *= 0.85; p.vy *= 0.85; }
@@ -2455,7 +2547,7 @@
                     ball.gkTried = best;
                     const d = dist(best, ball);
                     // probabilidad de atajar: menor si el tiro es fuerte y va lejos de su cuerpo
-                    const save = clamp(0.95 - Math.max(0, sp - 10) * 0.035 - Math.max(0, d - 16) * 0.02 + (best.def - 85) / 100, 0.35, 0.95);
+                    const save = clamp(0.95 - Math.max(0, sp - 10) * 0.035 - Math.max(0, d - 16) * 0.02 + (best.def - 85) / 100 + aiDiff(best).gk, 0.2, 0.97);
                     if (Math.random() < save) gainPossession(best);
                     else if (Math.random() < 0.5) {                      // la desvía con la mano
                         if (best.isHome) matchStats.homeSaves++; else matchStats.awaySaves++;
@@ -2659,8 +2751,8 @@
                     tx = p.oppGoalX; ty = MID_Y + (p.aimDy || 0) * 48; col = '#f87171';
                 } else {
                     const best = bestPassTarget(p, true, p.angle);
-                    if (best) { tx = best.p.x; ty = best.p.y; col = '#34d399'; }
-                    else { tx = p.x + Math.cos(p.angle) * 110; ty = p.y + Math.sin(p.angle) * 110; col = '#fde047'; }
+                    if (best && settings.passAssist) { tx = best.p.x; ty = best.p.y; col = '#34d399'; }   // asistido: apunta al compañero
+                    else { tx = p.x + Math.cos(p.angle) * 110; ty = p.y + Math.sin(p.angle) * 110; col = best ? '#34d399' : '#fde047'; }
                 }
                 const ang = Math.atan2(ty - p.y, tx - p.x);
                 const full = Math.hypot(tx - p.x, ty - p.y);
