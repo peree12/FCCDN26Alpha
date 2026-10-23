@@ -208,6 +208,12 @@
         #pause-menu, #settings-panel { position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center;
             background: rgba(3,7,18,.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 16px; overflow-y: auto; }
         #pause-menu.hidden, #settings-panel.hidden { display: none !important; }
+        #halftime-panel { position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(3,7,18,.72); }
+        #halftime-panel.hidden { display: none !important; }
+        .ht-score-row { display: flex; align-items: center; justify-content: center; gap: 18px; font-family: 'Teko', sans-serif; color: #fff; font-size: 30px; margin: 2px 0 2px; }
+        .ht-score-row b { font-size: 48px; line-height: 1; }
+        .ht-stats { text-align: center; color: #94a3b8; font: 600 12px Inter, sans-serif; margin-bottom: 4px; }
+        .ht-note { text-align: center; color: #fbbf24; font: 600 11px Inter, sans-serif; margin-bottom: 10px; }
         .pm-card { width: min(340px, 100%); display: flex; flex-direction: column; gap: 8px; background: rgba(15,23,42,.95);
             border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 18px; margin: auto; }
         .pm-title { font: 700 34px Teko, sans-serif; letter-spacing: .1em; color: #fff; text-align: center; line-height: 1; margin-bottom: 4px; }
@@ -242,6 +248,14 @@
         .set-key.wait { border-color: #fde047; color: #fde047; animation: splashPulse 1s infinite; }
         .set-hint { font-size: 11px; color: #64748b; margin: 8px 0; }
         .set-reset { background: transparent; border: 1px solid #475569; color: #cbd5e1; border-radius: 9px; padding: 7px 12px; font-weight: 600; cursor: pointer; }
+
+        /* Alineación arrastrable */
+        .lu-row { cursor: grab; user-select: none; -webkit-user-select: none; touch-action: pan-y; transition: box-shadow .12s, opacity .12s; }
+        .lu-handle { color: #64748b; font-size: 14px; letter-spacing: -2px; padding: 4px 4px 4px 2px; touch-action: none; cursor: grab; line-height: 1; }
+        .lu-row.lu-selected { box-shadow: 0 0 0 2px #fbbf24 inset; }
+        .lu-row.lu-over { box-shadow: 0 0 0 2px #34d399 inset; background: rgba(16,185,129,.18) !important; }
+        .lu-row.lu-dragging { opacity: .35; }
+        .lu-ghost { position: fixed; z-index: 100; pointer-events: none; opacity: .95; box-shadow: 0 10px 28px rgba(0,0,0,.5); transform: rotate(-1.5deg); cursor: grabbing; }
 
         .custom-scroll::-webkit-scrollbar {
             width: 6px;
@@ -410,9 +424,9 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tiempo de Juego</label>
                     <div class="grid grid-cols-3 gap-2">
-                        <button class="time-btn py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm border border-slate-700 transition" data-time="60">1 Min</button>
-                        <button class="time-btn active py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm border border-emerald-400 transition" data-time="120">2 Min</button>
-                        <button class="time-btn py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm border border-slate-700 transition" data-time="180">3 Min</button>
+                        <button class="time-btn py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm border border-slate-700 transition" data-time="60">2 × 30 s</button>
+                        <button class="time-btn active py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm border border-emerald-400 transition" data-time="120">2 × 1 min</button>
+                        <button class="time-btn py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm border border-slate-700 transition" data-time="180">2 × 1:30</button>
                     </div>
                 </div>
             </div>
@@ -495,7 +509,7 @@
                     <!-- Titulares (5 Jugadores) -->
                     <div>
                         <div class="text-[11px] font-extrabold text-emerald-400 uppercase tracking-wider mb-1.5 flex justify-between items-center">
-                            <span>Titulares (Haz clic en un jugador para cambiar)</span>
+                            <span>Titulares · arrastra ⋮⋮ o toca dos jugadores para cambiarlos</span>
                             <span class="text-[10px] text-amber-400 font-normal"><i class="fa-solid fa-hand"></i> GK = Portero</span>
                         </div>
                         <div id="home-starters-list" class="space-y-1.5">
@@ -532,7 +546,7 @@
 
                     <div>
                         <div class="text-[11px] font-extrabold text-blue-400 uppercase tracking-wider mb-1.5 flex justify-between items-center">
-                            <span>Titulares (Haz clic en un jugador para cambiar)</span>
+                            <span>Titulares · arrastra ⋮⋮ o toca dos jugadores para cambiarlos</span>
                             <span class="text-[10px] text-amber-400 font-normal"><i class="fa-solid fa-hand"></i> GK = Portero</span>
                         </div>
                         <div id="away-starters-list" class="space-y-1.5">
@@ -707,6 +721,18 @@
             <button id="pm-settings" class="pm-btn">⚙ Ajustes</button>
             <button id="pm-fullscreen" class="pm-btn">⛶ Pantalla completa</button>
             <button id="pm-menu" class="pm-btn pm-exit">⌂ Salir al menú principal</button>
+        </div>
+    </div>
+
+    <!-- MEDIO TIEMPO -->
+    <div id="halftime-panel" class="hidden">
+        <div class="pm-card">
+            <div class="pm-title">MEDIO TIEMPO</div>
+            <div class="ht-score-row"><span id="ht-home">VPC</span><b id="ht-score">0 - 0</b><span id="ht-away">CFC</span></div>
+            <div id="ht-stats" class="ht-stats"></div>
+            <div class="ht-note">En el 2º tiempo los equipos cambian de lado</div>
+            <button id="ht-start" class="pm-btn pm-main">▶ Comenzar 2º tiempo</button>
+            <button id="ht-menu" class="pm-btn pm-exit">⌂ Salir al menú principal</button>
         </div>
     </div>
 
@@ -1222,6 +1248,7 @@
         }
         function leaveMatch(toMenu) {
             document.getElementById('pause-menu').classList.add('hidden');
+            document.getElementById('halftime-panel').classList.add('hidden');
             document.getElementById('settings-panel').classList.add('hidden');
             pausedFrom = null;
             if (toMenu) showMenu('menu-main'); else startMatch();
@@ -1235,6 +1262,9 @@
             document.getElementById('pm-settings').addEventListener('click', () => openSettings('pause'));
             document.getElementById('pm-fullscreen').addEventListener('click', () => toggleFullscreen());
             document.getElementById('pm-menu').addEventListener('click', () => leaveMatch(true));
+            document.getElementById('ht-start').addEventListener('click', startSecondHalf);
+            document.getElementById('ht-menu').addEventListener('click', () => { gameState = 'MENU'; leaveMatch(true); });
+            window.addEventListener('keydown', (e) => { if (gameState === 'HALFTIME' && (e.code === 'Enter' || e.code === 'Space')) { e.preventDefault(); startSecondHalf(); } });
             document.getElementById('set-close').addEventListener('click', closeSettings);
             document.getElementById('set-aim').addEventListener('change', (e) => { settings.aimArrow = e.target.checked; saveSettings(); });
             document.getElementById('set-passassist').addEventListener('change', (e) => { settings.passAssist = e.target.checked; saveSettings(); });
@@ -1276,6 +1306,7 @@
             setupMenuBackground();
             setupMobileSupport();
             setupTapToSelect();
+            setupLineupDrag();
             setupSettings();
             requestAnimationFrame(gameLoop);
         }
@@ -1592,51 +1623,128 @@
             renderTeamRosterLists(awayTeam, 'away');
         }
 
+        // --- Alineación: arrastrar (o tocar dos jugadores) para intercambiar titulares y suplentes ---
+        let luSelected = null;   // { side, list, idx } tocado primero
+        function lineupRowHTML(p, side, list, idx) {
+            const isStarter = list === 's';
+            const tag = isStarter
+                ? `<span class="${p.isGK ? 'bg-amber-500 text-slate-950 font-black' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'} px-2 py-0.5 rounded text-[10px]">${p.isGK ? 'PORTERO' : 'CAMPO'}</span>`
+                : `<span class="${p.natGK ? 'bg-amber-600 text-white' : 'bg-slate-700 text-slate-300'} px-1.5 py-0.5 rounded text-[10px]">${p.natGK ? 'GK' : 'SUP'}</span>`;
+            const right = isStarter
+                ? `<button type="button" class="lu-gk px-2 py-1 rounded text-[10px] font-bold ${p.isGK ? 'bg-amber-500/30 text-amber-300 border border-amber-500' : 'bg-slate-700 text-slate-300 hover:bg-amber-500 hover:text-slate-950'} transition" onclick="setAsGoalkeeper('${side}', ${idx})">${p.isGK ? 'Es Portero' : 'Hacer GK'}</button>`
+                : `<span class="text-slate-400 font-mono text-[11px]">${p.stats} PTS</span>`;
+            return `<span class="lu-handle" title="Arrastrar">⋮⋮</span>
+                <div class="flex items-center gap-2 flex-1 min-w-0">${tag}<span class="font-bold truncate">${p.name}</span></div>
+                <div class="flex items-center gap-2">${right}</div>`;
+        }
+
         function renderTeamRosterLists(team, side) {
             const startersEl = document.getElementById(`${side}-starters-list`);
             const benchEl = document.getElementById(`${side}-bench-list`);
-
             startersEl.innerHTML = '';
             benchEl.innerHTML = '';
+            [...team.activeStarters, ...team.activeBench].forEach(p => { if (p.natGK === undefined) p.natGK = !!p.isGK; });
 
-            team.activeStarters.forEach((p, idx) => {
+            const make = (p, list, idx) => {
                 const row = document.createElement('div');
-                row.className = 'flex justify-between items-center bg-slate-800/90 hover:bg-slate-700/80 px-3 py-1.5 rounded-xl border border-slate-700/60 text-xs font-semibold text-white transition';
-                
-                row.innerHTML = `
-                    <div class="flex items-center gap-2 cursor-pointer flex-1" onclick="swapWithBench('${side}', ${idx})">
-                        <span class="${p.isGK ? 'bg-amber-500 text-slate-950 font-black' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'} px-2 py-0.5 rounded text-[10px]">
-                            ${p.isGK ? 'PORTERO (GK)' : 'CAMPO'}
-                        </span>
-                        <span class="font-bold hover:underline">${p.name}</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button class="px-2 py-1 rounded text-[10px] font-bold ${p.isGK ? 'bg-amber-500/30 text-amber-300 border border-amber-500' : 'bg-slate-700 text-slate-300 hover:bg-amber-500 hover:text-slate-950'} transition" onclick="setAsGoalkeeper('${side}', ${idx})">
-                            ${p.isGK ? 'Es Portero' : 'Hacer GK'}
-                        </button>
-                    </div>
-                `;
-                startersEl.appendChild(row);
-            });
-
+                row.className = 'lu-row ' + (list === 's'
+                    ? 'flex justify-between items-center gap-2 bg-slate-800/90 px-2 py-1.5 rounded-xl border border-slate-700/60 text-xs font-semibold text-white'
+                    : 'flex justify-between items-center gap-2 bg-slate-900/90 px-2 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300');
+                row.dataset.side = side; row.dataset.list = list; row.dataset.idx = idx;
+                if (luSelected && luSelected.side === side && luSelected.list === list && luSelected.idx === idx) row.classList.add('lu-selected');
+                row.innerHTML = lineupRowHTML(p, side, list, idx);
+                return row;
+            };
+            team.activeStarters.forEach((p, idx) => startersEl.appendChild(make(p, 's', idx)));
             if (team.activeBench.length === 0) {
                 benchEl.innerHTML = `<div class="text-xs text-slate-500 italic p-2">Sin suplentes en banca</div>`;
             } else {
-                team.activeBench.forEach((p, benchIdx) => {
-                    const row = document.createElement('div');
-                    row.className = 'flex justify-between items-center bg-slate-900/90 hover:bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300 transition cursor-pointer';
-                    row.innerHTML = `
-                        <div class="flex items-center gap-2" onclick="swapBenchPlayer('${side}', ${benchIdx})">
-                            <span class="${p.isGK ? 'bg-amber-600 text-white' : 'bg-slate-700 text-slate-300'} px-1.5 py-0.5 rounded text-[10px]">
-                                ${p.isGK ? 'GK' : 'SUP'}
-                            </span>
-                            <span>${p.name}</span>
-                        </div>
-                        <span class="text-slate-400 font-mono text-[11px]">${p.stats} PTS</span>
-                    `;
-                    benchEl.appendChild(row);
-                });
+                team.activeBench.forEach((p, idx) => benchEl.appendChild(make(p, 'b', idx)));
             }
+        }
+
+        // Intercambia dos puestos. El rol de portero se queda en el puesto de titular.
+        function lineupSwap(side, a, b) {
+            const team = side === 'home' ? homeTeam : awayTeam;
+            const arr = (x) => x.list === 's' ? team.activeStarters : team.activeBench;
+            const A = arr(a), B = arr(b);
+            const pa = A[a.idx], pb = B[b.idx];
+            if (!pa || !pb || pa === pb) return;
+            if (a.list === 's' && b.list === 's') {
+                const g = pa.isGK; pa.isGK = pb.isGK; pb.isGK = g;
+            } else if (a.list !== b.list) {
+                const starter = a.list === 's' ? pa : pb, bench = a.list === 's' ? pb : pa;
+                bench.isGK = starter.isGK;           // el que entra toma el puesto (si era portero, ahora ataja él)
+                starter.isGK = false;
+            }
+            A[a.idx] = pb; B[b.idx] = pa;
+            renderTeamRosterLists(team, side);
+        }
+
+        function setupLineupDrag() {
+            let drag = null;
+            const rowAt = (x, y) => {
+                const el = document.elementFromPoint(x, y);
+                return el ? el.closest('.lu-row') : null;
+            };
+            const info = (row) => ({ side: row.dataset.side, list: row.dataset.list, idx: parseInt(row.dataset.idx, 10) });
+            const clearOver = () => document.querySelectorAll('.lu-over').forEach(r => r.classList.remove('lu-over'));
+
+            document.addEventListener('pointerdown', (e) => {
+                const row = e.target.closest('.lu-row');
+                if (!row || e.target.closest('button')) return;
+                const canDrag = e.pointerType === 'mouse' || !!e.target.closest('.lu-handle');
+                drag = { row, x0: e.clientX, y0: e.clientY, id: e.pointerId, canDrag, started: false, ghost: null };
+            });
+            document.addEventListener('pointermove', (e) => {
+                if (!drag || e.pointerId !== drag.id) return;
+                const moved = Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0);
+                if (!drag.started) {
+                    if (!drag.canDrag || moved < 6) { if (moved > 10) drag.tapCancelled = true; return; }
+                    drag.started = true;
+                    const r = drag.row.getBoundingClientRect();
+                    const g = drag.row.cloneNode(true);
+                    g.classList.add('lu-ghost');
+                    g.style.width = r.width + 'px';
+                    g.style.left = r.left + 'px'; g.style.top = r.top + 'px';
+                    drag.offX = e.clientX - r.left; drag.offY = e.clientY - r.top;
+                    document.body.appendChild(g);
+                    drag.ghost = g;
+                    drag.row.classList.add('lu-dragging');
+                    luSelected = null;
+                }
+                e.preventDefault();
+                drag.ghost.style.left = (e.clientX - drag.offX) + 'px';
+                drag.ghost.style.top = (e.clientY - drag.offY) + 'px';
+                clearOver();
+                const over = rowAt(e.clientX, e.clientY);
+                if (over && over !== drag.row && over.dataset.side === drag.row.dataset.side) over.classList.add('lu-over');
+            }, { passive: false });
+            const finish = (e, cancelled) => {
+                if (!drag || e.pointerId !== drag.id) return;
+                const d = drag; drag = null;
+                clearOver();
+                if (d.started) {
+                    d.ghost.remove();
+                    d.row.classList.remove('lu-dragging');
+                    const over = cancelled ? null : rowAt(e.clientX, e.clientY);
+                    if (over && over !== d.row && over.dataset.side === d.row.dataset.side) lineupSwap(d.row.dataset.side, info(d.row), info(over));
+                    else renderLineupCustomizer();
+                    return;
+                }
+                if (cancelled || d.tapCancelled) return;
+                // Toque: el primero selecciona, el segundo intercambia
+                const cur = info(d.row);
+                if (luSelected && luSelected.side === cur.side && !(luSelected.list === cur.list && luSelected.idx === cur.idx)) {
+                    const a = luSelected; luSelected = null;
+                    lineupSwap(cur.side, a, cur);
+                } else {
+                    luSelected = (luSelected && luSelected.side === cur.side && luSelected.list === cur.list && luSelected.idx === cur.idx) ? null : cur;
+                    renderTeamRosterLists(cur.side === 'home' ? homeTeam : awayTeam, cur.side);
+                }
+            };
+            document.addEventListener('pointerup', (e) => finish(e, false));
+            document.addEventListener('pointercancel', (e) => finish(e, true));
         }
 
         window.setAsGoalkeeper = function(side, starterIdx) {
@@ -1670,6 +1778,9 @@
         const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
         const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
         let matchClock = 0;
+        let sidesSwapped = false;   // en el 2º tiempo los equipos cambian de lado
+        let secondHalf = false;
+        const attacksRight = (isHome) => isHome !== sidesSwapped;
         let lastGoalHomeConceded = true;
         let kickoffHome = true;
 
@@ -1693,7 +1804,7 @@
                 this.baseSpeed = (spd / 100) * 3.4 + 1.2;
                 this.att = (team.stats.att + this.rating) / 2;
                 this.def = (team.stats.def + this.rating) / 2;
-                this.angle = isHome ? 0 : Math.PI;
+                this.angle = attacksRight(isHome) ? 0 : Math.PI;
                 this.kickCooldown = 0;   // tras patear no puede volver a tocar el balón al instante
                 this.tackleCooldown = 0;
                 this.stun = 0;           // tras perder el balón queda medio segundo sin reaccionar
@@ -1705,9 +1816,9 @@
                 this.controlled = false;
                 this.seed = Math.random() * 1000;
             }
-            get dir() { return this.isHome ? 1 : -1; }
-            get oppGoalX() { return this.isHome ? FIELD.maxX : FIELD.minX; }
-            get ownGoalX() { return this.isHome ? FIELD.minX : FIELD.maxX; }
+            get dir() { return attacksRight(this.isHome) ? 1 : -1; }
+            get oppGoalX() { return this.dir > 0 ? FIELD.maxX : FIELD.minX; }
+            get ownGoalX() { return this.dir > 0 ? FIELD.minX : FIELD.maxX; }
         }
 
         const mates = (p) => players.filter(q => q.isHome === p.isHome && q !== p);
@@ -1893,7 +2004,7 @@
                 if (p.holdTime > p.gkHoldTarget) {
                     const t = bestPassTarget(p, false);
                     if (t) passTo(p, t.p);
-                    else kickBall(p, p.isHome ? (Math.random() - 0.5) * 0.9 : Math.PI + (Math.random() - 0.5) * 0.9, 14, false);
+                    else kickBall(p, p.dir > 0 ? (Math.random() - 0.5) * 0.9 : Math.PI + (Math.random() - 0.5) * 0.9, 14, false);
                 }
                 return;
             }
@@ -2049,7 +2160,7 @@
             steer(p, tx, ty, speed, k, 0.35);
             // nunca se aleja demasiado de su arco
             const maxOut = 140;
-            if (p.isHome) p.x = Math.min(p.x, FIELD.minX + maxOut); else p.x = Math.max(p.x, FIELD.maxX - maxOut);
+            if (p.dir > 0) p.x = Math.min(p.x, FIELD.minX + maxOut); else p.x = Math.max(p.x, FIELD.maxX - maxOut);
         }
 
         // --- Control del jugador humano ---
@@ -2308,9 +2419,13 @@
             gameTimer = matchDuration;
 
             matchClock = 0;
+            secondHalf = false;
+            sidesSwapped = false;
+            document.getElementById('halftime-panel').classList.add('hidden');
             resetPositions(true);
             gameState = 'PLAYING';
             audio.playWhistle();
+            updateHudClock();
         }
 
         function resetPositions(homeKicksOff = true) {
@@ -2326,7 +2441,7 @@
             [[homeTeam, true], [awayTeam, false]].forEach(([team, isHome]) => {
                 const starters = team.activeStarters.map(p => ({ ...p }));
                 if (!starters.some(p => p.isGK)) starters[0].isGK = true;   // nunca juega sin portero
-                const coords = getFormationCoordinates(team.formation, isHome);
+                const coords = getFormationCoordinates(team.formation, attacksRight(isHome));
                 const gk = starters.find(p => p.isGK);
                 const field = starters.filter(p => p !== gk);
                 const ordered = [gk, ...field];
@@ -2341,12 +2456,12 @@
             const taker = kickTeam.sort((a, b) => Math.abs(a.x - pitch.width / 2) - Math.abs(b.x - pitch.width / 2))[0];
             taker.x = pitch.width / 2 - taker.dir * 16;
             taker.y = pitch.height / 2;
-            taker.angle = homeKicksOff ? 0 : Math.PI;
+            taker.angle = taker.dir > 0 ? 0 : Math.PI;
             gainPossession(taker);
             taker.holdTime = -0.8;   // protección extra en el saque: nadie lo roba al instante
             // Los rivales esperan fuera del círculo central
             players.filter(p => p.isHome !== homeKicksOff).forEach(p => {
-                if (Math.abs(p.x - pitch.width / 2) < 90) p.x = pitch.width / 2 + (p.isHome ? -90 : 90);
+                if (Math.abs(p.x - pitch.width / 2) < 90) p.x = pitch.width / 2 - p.dir * 90;
             });
 
             ['home', 'away'].forEach(s => { humanSides[s].current = null; humanSides[s].switchCooldown = 0; });
@@ -2431,6 +2546,11 @@
             matchClock += dt;
 
             gameTimer -= dt;
+            if (!secondHalf && gameTimer <= matchDuration / 2) {
+                gameTimer = matchDuration / 2;
+                startHalfTime();
+                return;
+            }
             if (gameTimer <= 0) {
                 gameTimer = 0;
                 endMatch();
@@ -2486,7 +2606,7 @@
                 p.x = clamp(p.x + p.vx * k, FIELD.minX, FIELD.maxX);
                 p.y = clamp(p.y + p.vy * k, FIELD.minY, FIELD.maxY);
                 if (p.isGK && p.controlled) {
-                    p.x = p.isHome ? Math.min(p.x, FIELD.minX + 150) : Math.max(p.x, FIELD.maxX - 150);
+                    p.x = p.dir > 0 ? Math.min(p.x, FIELD.minX + 150) : Math.max(p.x, FIELD.maxX - 150);
                     p.y = clamp(p.y, MID_Y - 150, MID_Y + 150);
                 }
             });
@@ -2523,10 +2643,10 @@
                 // Gol o rebote en las líneas de fondo
                 const inMouth = ball.y > GOAL_TOP && ball.y < GOAL_BOTTOM;
                 if (ball.x <= FIELD.minX) {
-                    if (inMouth) { matchStats.awayScore++; triggerGoal(true); return; }
+                    if (inMouth) { scoreGoalAt('left'); return; }
                     ball.x = FIELD.minX + 1; ball.vx = Math.abs(ball.vx) * 0.7;
                 } else if (ball.x >= FIELD.maxX) {
-                    if (inMouth) { matchStats.homeScore++; triggerGoal(false); return; }
+                    if (inMouth) { scoreGoalAt('right'); return; }
                     ball.x = FIELD.maxX - 1; ball.vx = -Math.abs(ball.vx) * 0.7;
                 }
                 if (ball.y <= FIELD.minY + ball.radius) { ball.y = FIELD.minY + ball.radius; ball.vy = Math.abs(ball.vy) * 0.7; }
@@ -2559,15 +2679,58 @@
 
             // Gol conduciendo el balón hasta dentro del arco
             if (ball.holder && !ball.holder.isGK && ball.y > GOAL_TOP && ball.y < GOAL_BOTTOM) {
-                if (ball.x <= FIELD.minX + ball.radius) { matchStats.awayScore++; triggerGoal(true); return; }
-                if (ball.x >= FIELD.maxX - ball.radius) { matchStats.homeScore++; triggerGoal(false); return; }
+                if (ball.x <= FIELD.minX + ball.radius) { scoreGoalAt('left'); return; }
+                if (ball.x >= FIELD.maxX - ball.radius) { scoreGoalAt('right'); return; }
             }
 
             document.getElementById('hud-score-home').textContent = matchStats.homeScore;
             document.getElementById('hud-score-away').textContent = matchStats.awayScore;
-            const mins = Math.floor(gameTimer / 60).toString().padStart(2, '0');
-            const secs = Math.floor(gameTimer % 60).toString().padStart(2, '0');
-            document.getElementById('hud-time').textContent = `${mins}:${secs}`;
+            updateHudClock();
+        }
+
+        // Reloj del marcador: tiempo que queda del tiempo en curso (1T / 2T)
+        function updateHudClock() {
+            const left = Math.max(0, secondHalf ? gameTimer : gameTimer - matchDuration / 2);
+            const mins = Math.floor(left / 60).toString().padStart(2, '0');
+            const secs = Math.floor(left % 60).toString().padStart(2, '0');
+            document.getElementById('hud-time').textContent = `${secondHalf ? '2T' : '1T'} ${mins}:${secs}`;
+        }
+
+        function startHalfTime() {
+            gameState = 'HALFTIME';
+            audio.playWhistle(); setTimeout(() => audio.playWhistle(), 350);
+            Object.keys(keys).forEach(k => keys[k] = false);
+            touchStick.active = false; touchStick.dx = 0; touchStick.dy = 0;
+            document.getElementById('power-bar-container').classList.add('hidden');
+            updateHudClock();
+            const tot = (matchStats.homePossessionTicks + matchStats.awayPossessionTicks) || 1;
+            const posH = Math.round(matchStats.homePossessionTicks / tot * 100);
+            document.getElementById('ht-home').textContent = homeTeam.short;
+            document.getElementById('ht-away').textContent = awayTeam.short;
+            document.getElementById('ht-score').textContent = `${matchStats.homeScore} - ${matchStats.awayScore}`;
+            document.getElementById('ht-stats').textContent = `Tiros ${matchStats.homeShots}-${matchStats.awayShots} · Posesión ${posH}%-${100 - posH}%`;
+            document.getElementById('halftime-panel').classList.remove('hidden');
+        }
+
+        function startSecondHalf() {
+            if (gameState !== 'HALFTIME') return;
+            document.getElementById('halftime-panel').classList.add('hidden');
+            secondHalf = true;
+            sidesSwapped = true;                 // cambio de lado
+            gameTimer = matchDuration / 2;
+            resetPositions(false);               // saca el visitante
+            gameState = 'PLAYING';
+            lastFrameTime = performance.now();
+            audio.playWhistle();
+            updateHudClock();
+        }
+
+        // Gol en el arco izquierdo o derecho: suma al equipo que ataca hacia ese arco
+        function scoreGoalAt(goalSide) {
+            const homeDefendsLeft = attacksRight(true);
+            const homeConceded = goalSide === 'left' ? homeDefendsLeft : !homeDefendsLeft;
+            if (homeConceded) matchStats.awayScore++; else matchStats.homeScore++;
+            triggerGoal(homeConceded);
         }
 
         function triggerGoal(homeConceded) {
