@@ -261,6 +261,17 @@
         .ic-lg { font-size: 1.4em; }
         .kit-pick { display: flex; align-items: center; gap: 6px; font: 700 10px Inter, sans-serif; color: #94a3b8; text-transform: uppercase; letter-spacing: .05em; cursor: pointer; }
         .kit-pick input { width: 30px; height: 22px; border: 1px solid #475569; border-radius: 6px; background: none; padding: 0; cursor: pointer; }
+        .lu-ovr { flex-shrink: 0; min-width: 30px; text-align: center; font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; color: #fde047; background: rgba(250,204,21,.1); border: 1px solid rgba(250,204,21,.35); border-radius: 7px; padding: 2px 4px 0; }
+        @media (max-width: 560px) {
+            .lu-row { flex-wrap: wrap; row-gap: 4px; }
+            .lu-row > div.flex-1 { min-width: 0; flex: 1 1 0; }
+            .lu-row > div:last-child { flex-basis: 100%; justify-content: flex-end; }
+            .lu-row > div:last-child:empty { display: none; }
+            .lu-row .lu-gk { padding: 3px 8px !important; font-size: 10px !important; }
+            .lu-row > div.flex-1 > span:first-child { display: none; }   /* etiquetas fuera en celular: el botón ya indica quién es portero */
+            .lu-num { width: 28px; }
+            .lu-ovr { font-size: 20px; min-width: 28px; }
+        }
         .lu-photo { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 1px solid rgba(255,255,255,.25); background: #1e293b; }
         .lu-initials { display: inline-flex; align-items: center; justify-content: center; font: 800 9px Inter, sans-serif; color: #cbd5e1; }
         .lu-num { width: 34px; flex-shrink: 0; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #fde047; font: 800 11px ui-monospace, monospace; text-align: center; padding: 3px 0; -moz-appearance: textfield; }
@@ -524,6 +535,7 @@
         .cr-val { font-size: 12px; font-weight: 800; color: #4ade80; text-align: right; min-width: 62px; }
         .cr-tag { font-size: 9px; font-weight: 900; padding: 2px 5px; border-radius: 5px; background: #334155; color: #e2e8f0; letter-spacing: .05em; }
         .cr-tag.loan { background: #0e7490; }
+        .cm-offer img.cr-flag, .cr-pn img.cr-flag, .cr-flag { width: 18px !important; height: 12px !important; border-radius: 2px; object-fit: cover; vertical-align: -1px; display: inline-block; box-shadow: 0 0 0 1px rgba(255,255,255,.15); }
         .cr-tag.gk { background: #b45309; } .cr-tag.st { background: #047857; } .cr-tag.me { background: #6d28d9; }
         .cr-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
         .cr-filters select, .cr-filters input, .cr-input { background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 10px; padding: 8px 10px; font-size: 13px; font-weight: 600; }
@@ -554,12 +566,55 @@
         .cr-photo-btns .tr-btn { cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
         .cr-form { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .cr-form label { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; display: flex; flex-direction: column; gap: 4px; }
+        @media (max-width: 560px) {
+            .cr-p { grid-template-columns: 38px 1fr auto; row-gap: 6px; }
+            .cr-p .cr-pr { display: contents; }
+            .cr-p .cr-ovr { grid-column: 3; grid-row: 1; font-size: 30px; }
+            .cr-p .cr-val { grid-column: 1 / 3; grid-row: 2; text-align: left; padding-left: 47px; align-self: center; }
+            .cr-p .cr-pr > .tr-btn, .cr-p .cr-pr > .cr-tag { grid-row: 2; }
+            .cr-p:has(.cr-pr > .tr-btn) { grid-template-columns: 38px 1fr auto auto; }
+            .cr-p:has(.cr-pr > .tr-btn) .cr-ovr { grid-column: 4; }
+            .cr-p:has(.cr-pr > .tr-btn) .cr-pn { grid-column: 2 / 4; }
+            .cr-p .cr-pr > .tr-btn { padding: 7px 10px; font-size: 12px; }
+            #menu-career .tr-head { flex-wrap: wrap; row-gap: 8px; }
+            #menu-career .tr-head .tr-sp { flex-basis: calc(100% - 110px); }
+            #menu-career .tr-head .cr-money { order: 4; }
+        }
         @media (max-width: 640px) {
             #menu-career { padding: 14px; }
             .cr-vs img, .cr-vs .tr-ini { width: 48px; height: 48px; }
             .cr-val { min-width: 50px; font-size: 11px; }
             .cr-form { grid-template-columns: 1fr; }
         }
+        #pad-toast { position: fixed; left: 50%; top: 14px; transform: translate(-50%, -80px); z-index: 99; background: rgba(15,23,42,.95); color: #fff; border: 1px solid #6366f1; border-radius: 999px; padding: 9px 16px; font-weight: 800; font-size: 13px; transition: transform .3s; pointer-events: none; }
+        #pad-toast.show { transform: translate(-50%, 0); }
+        body.pad-nav :focus { outline: 3px solid #fbbf24 !important; outline-offset: 2px; }
+        body.pad-on #touch-layer { display: none !important; }
+        @media (pointer: fine) { body.in-match #gameCanvas { cursor: crosshair; } }
+        .comp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 12px; }
+        .comp-card { display: flex; align-items: center; gap: 12px; text-align: left; padding: 10px 12px; border-radius: 16px; background: rgba(15,23,42,.85); border: 2px solid #1e293b; color: #e2e8f0; }
+        .comp-card.sel { border-color: #f59e0b; background: rgba(245,158,11,.1); }
+        .comp-card img { width: 52px; height: 52px; object-fit: contain; filter: drop-shadow(0 3px 8px rgba(0,0,0,.5)); }
+        .comp-card b { display: block; font-family: 'Teko', sans-serif; font-size: 24px; line-height: 1; color: #fff; }
+        .comp-card span { display: block; font-size: 12px; color: #fbbf24; font-weight: 700; }
+        .comp-card small { display: block; font-size: 11px; color: #94a3b8; }
+        .cal-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: rgba(15,23,42,.8); border: 1px solid #1e293b; margin-bottom: 6px; }
+        .cal-row.now { border-color: #10b981; background: rgba(6,78,59,.35); }
+        .cal-row.past { opacity: .75; }
+        .cal-date { width: 46px; text-align: center; flex-shrink: 0; }
+        .cal-date b { display: block; font-family: 'Teko', sans-serif; font-size: 26px; line-height: 1; color: #fff; }
+        .cal-date span { font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 800; }
+        .cal-comp { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+        .cal-mid { flex: 1; min-width: 0; }
+        .cal-t { font-size: 11px; font-weight: 800; color: #c7d2fe; text-transform: uppercase; letter-spacing: .05em; }
+        .cal-m { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; margin-top: 2px; flex-wrap: wrap; }
+        .cal-crest { width: 22px; height: 22px; object-fit: contain; }
+        .cal-crest.tr-ini { font-size: 8px; }
+        .cal-opp { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .cal-res { display: inline-flex; width: 20px; height: 20px; border-radius: 6px; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #fff; }
+        .cal-res.G { background: #16a34a; } .cal-res.E { background: #64748b; } .cal-res.P { background: #dc2626; }
+        .cal-win { font-size: 11px; color: #86efac; font-weight: 700; margin-top: 3px; }
+        .set-select { background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 8px; padding: 6px 8px; font-size: 13px; font-weight: 700; }
     </style>
 </head>
 <body class="w-screen h-screen relative flex items-center justify-center bg-slate-950 overflow-hidden">
@@ -907,6 +962,21 @@
                 </div>
 
                 <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                    <span class="font-bold text-indigo-300 block mb-1">🎮 Control de PS4 / PS5 / Xbox:</span>
+                    <ul class="space-y-1 text-xs">
+                        <li><b class="text-white">Moverse:</b> stick izquierdo o cruceta</li>
+                        <li><b class="text-white">Pase:</b> ✕ / A (mantén para más potencia) · <b class="text-white">Filtrado:</b> △ / Y</li>
+                        <li><b class="text-white">Tiro:</b> □ / X o ◯ / B (mantén para cargar) · sin balón: barrida</li>
+                        <li><b class="text-white">Cambiar jugador:</b> L1 / LB · <b class="text-white">Correr:</b> R1 / RB o R2 / RT</li>
+                        <li><b class="text-white">Pausa:</b> Options / Start · en los menús: cruceta para moverte, ✕ / A para elegir y ◯ / B para volver</li>
+                        <li>Conecta el control por cable o Bluetooth y presiona un botón. En 2 jugadores, el segundo control maneja al visitante. <b class="text-white">Todos los botones se pueden cambiar en Ajustes.</b></li>
+                    </ul>
+                </div>
+                <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                    <span class="font-bold text-pink-300 block mb-1">🖱️ Teclado y mouse (PC):</span>
+                    <p class="text-xs">Te mueves con el teclado y <b class="text-white">apuntas con el mouse</b>: <b class="text-white">clic izquierdo</b> = pase hacia el cursor (si apuntas a un compañero, le llega directo; mantén para más fuerza), <b class="text-white">clic derecho</b> = tiro hacia donde apuntas (mantén para cargar), <b class="text-white">clic de la rueda</b> = pase filtrado. Sin balón, clic izquierdo sobre un compañero lo elige. Los botones del mouse se pueden cambiar (o desactivar) en Ajustes.</p>
+                </div>
+                <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
                     <span class="font-bold text-yellow-400 block mb-1">Móviles / Tablets:</span>
                     <p class="text-xs">Joystick para moverte + botones TIRO, PASE, FILTRADO, CORRER y CAMBIAR. También puedes tocar a un compañero en la cancha para elegirlo o pasarle el balón.</p>
                 </div>
@@ -1088,6 +1158,7 @@
                     <div class="set-range"><small>Fácil</small><input id="set-diff" type="range" min="0" max="4" step="1"><small>Difícil</small></div></div>
                 <label class="set-row"><span>Asistencia de pases <small style="display:block;color:#94a3b8;font-weight:500">Pases precisos y directos al compañero</small></span><input id="set-passassist" type="checkbox" class="set-toggle"></label>
                 <label class="set-row"><span>Flecha para apuntar tiros y pases</span><input id="set-aim" type="checkbox" class="set-toggle"></label>
+                <label class="set-row"><span>Apuntar con el mouse (PC) <small style="display:block;color:#94a3b8;font-weight:500">Clic izq = pase · clic der = tiro · clic rueda = filtrado</small></span><input id="set-mouse" type="checkbox" class="set-toggle"></label>
                 <div class="set-row"><span>Velocidad de jugadores <b id="set-speed-val" class="set-val">Normal</b></span>
                     <div class="set-range"><small>Lenta</small><input id="set-speed" type="range" min="0.8" max="1.25" step="0.05"><small>Rápida</small></div></div>
                 <div class="set-row"><span>FOV de cámara <b id="set-fov-val" class="set-val">Normal</b></span>
@@ -1117,6 +1188,23 @@
                 <div id="set-keys"></div>
                 <p class="set-hint">Toca una tecla y luego presiona la nueva. Esc cancela · Retroceso la borra.</p>
                 <button id="set-reset-keys" class="set-reset">Restablecer teclas</button>
+            </div>
+            <div class="set-section">
+                <div class="set-sub">🎮 Control (PS4 / PS5 / Xbox)</div>
+                <p class="set-hint" id="set-pad-info"></p>
+                <div class="set-row"><span>Moverse con</span><select id="set-padmove" class="set-select"><option value="left">Stick izquierdo</option><option value="right">Stick derecho</option></select></div>
+                <div class="set-keyhead"><span>Acción</span><span>Principal</span><span>Alternativa</span></div>
+                <div id="set-pad"></div>
+                <p class="set-hint">Toca un botón de la tabla y luego presiona el botón del control que quieras. Clic derecho en la casilla la deja vacía. La cruceta siempre sirve para moverte.</p>
+                <button id="set-reset-pad" class="set-reset">Restablecer control</button>
+            </div>
+            <div class="set-section">
+                <div class="set-sub">🖱️ Mouse (PC)</div>
+                <div class="set-row"><span>Clic izquierdo</span><select id="set-mouse-left" class="set-select"><option value="pass">Pase</option><option value="shoot">Tiro</option><option value="through">Pase filtrado</option><option value="sprint">Correr</option><option value="switch">Cambiar jugador</option><option value="none">Nada</option></select></div>
+                <div class="set-row"><span>Clic derecho</span><select id="set-mouse-right" class="set-select"><option value="pass">Pase</option><option value="shoot">Tiro</option><option value="through">Pase filtrado</option><option value="sprint">Correr</option><option value="switch">Cambiar jugador</option><option value="none">Nada</option></select></div>
+                <div class="set-row"><span>Clic de la rueda</span><select id="set-mouse-middle" class="set-select"><option value="pass">Pase</option><option value="shoot">Tiro</option><option value="through">Pase filtrado</option><option value="sprint">Correr</option><option value="switch">Cambiar jugador</option><option value="none">Nada</option></select></div>
+                <p class="set-hint">Con el mouse apuntas los pases y tiros hacia el cursor. Puedes desactivarlo arriba en "Apuntar con el mouse".</p>
+                <button id="set-reset-mouse" class="set-reset">Restablecer mouse</button>
             </div>
         </div>
     </div>
@@ -1498,6 +1586,7 @@
                 osc.start(now); osc.stop(now + 0.28);
             }
             playKick(strength = 0.6) {
+                try { rumble(Math.min(1, strength * 0.8), Math.min(1, strength * 0.5), 60 + strength * 60); } catch (e) {}
                 // patada real; los tiros fuertes suenan más fuerte y con leve variación natural
                 if (this.playSample('kick', 0.35 + 0.65 * Math.min(1, strength), 0.94 + Math.random() * 0.12)) return;
                 if (!isAudioEnabled || !this.init()) return;
@@ -1513,6 +1602,7 @@
                 osc.start(now); osc.stop(now + 0.12);
             }
             playGoal() {
+                try { rumble(1, 1, 450); } catch (e) {}
                 // el balón golpea la red y enseguida el sonido de gol
                 const net = this.playSample('net', 1);
                 setTimeout(() => this.playSample('goal', 0.9), net ? 120 : 0);
@@ -1686,6 +1776,7 @@
             bgMusic.volume = settings.musicVol;
             audio.setVolume(settings.sfxVol);
             document.getElementById('set-aim').checked = !!settings.aimArrow;
+            document.getElementById('set-mouse').checked = settings.mouseAim !== false;
             document.getElementById('set-passassist').checked = !!settings.passAssist;
             document.getElementById('set-diff').value = settings.difficulty;
             document.getElementById('set-speed').value = settings.playerSpeed;
@@ -1708,6 +1799,8 @@
             settingsProfile = gameMode === '2P' ? 'p1' : 'solo';
             applySettings();
             renderKeyTable();
+            padRebind = null;
+            renderPadTable();
         }
         function closeSettings() {
             rebinding = null;
@@ -1777,6 +1870,7 @@
             window.addEventListener('keydown', (e) => { if (gameState === 'HALFTIME' && (e.code === 'Enter' || e.code === 'Space')) { e.preventDefault(); startSecondHalf(); } });
             document.getElementById('set-close').addEventListener('click', closeSettings);
             document.getElementById('set-aim').addEventListener('change', (e) => { settings.aimArrow = e.target.checked; saveSettings(); });
+            document.getElementById('set-mouse').addEventListener('change', (e) => { settings.mouseAim = e.target.checked; saveSettings(); });
             document.getElementById('set-passassist').addEventListener('change', (e) => { settings.passAssist = e.target.checked; saveSettings(); });
             document.getElementById('set-speed').addEventListener('input', (e) => { settings.playerSpeed = parseFloat(e.target.value); applySettings(); saveSettings(); });
             document.getElementById('set-tscale').addEventListener('input', (e) => { settings.touchScale = parseFloat(e.target.value); applySettings(); saveSettings(); });
@@ -1935,23 +2029,40 @@
         const leagueTable = () => standings(tour.teams, m => m.stage === 'league');
         const groupTable = (gr) => standings(gr.teams, m => m.group === gr.name && m.stage === 'group');
 
+        function pstat(team, name) {
+            tour.pstats = tour.pstats || {};
+            const k = team + '|' + name;
+            return tour.pstats[k] = tour.pstats[k] || { team, name, goals: 0, assists: 0, apps: 0 };
+        }
         function addScorers(list) {
-            list.forEach(({ team, name }) => {
+            list.forEach(({ team, name, assist }) => {
                 const k = team + '|' + name;
                 tour.scorers[k] = tour.scorers[k] || { team, name, goals: 0 };
                 tour.scorers[k].goals++;
+                pstat(team, name).goals++;
+                if (assist) pstat(team, assist).assists++;
             });
+        }
+        function addApps(team, names) { names.forEach(n => pstat(team, n).apps++); }
+        function pickAssister(id, scorer) {
+            const pool = tTeam(id).roster.filter(p => !p.isGK && p.name !== scorer);
+            if (!pool.length || Math.random() > 0.68) return null;
+            const w = pool.map((p, i) => Math.max(1, (Number(p.stats) || 80) - 70) * (i < 5 ? 3 : 1) * (p.me ? 2 : 1));
+            let r = Math.random() * w.reduce((a, b) => a + b, 0);
+            for (let i = 0; i < pool.length; i++) { r -= w[i]; if (r <= 0) return pool[i].name; }
+            return pool[0].name;
         }
         function simulateMatch(m) {
             const sh = teamStrength(m.h), sa = teamStrength(m.a), d = sh - sa;
             const hg = Math.min(9, poisson(1.75 * Math.exp(d / 9) + 0.12));
             const ag = Math.min(9, poisson(1.75 * Math.exp(-d / 9)));
             const sc = [];
-            for (let i = 0; i < hg; i++) sc.push({ team: m.h, name: pickScorer(m.h) });
-            for (let i = 0; i < ag; i++) sc.push({ team: m.a, name: pickScorer(m.a) });
+            for (let i = 0; i < hg; i++) { const n = pickScorer(m.h); sc.push({ team: m.h, name: n, assist: pickAssister(m.h, n) }); }
+            for (let i = 0; i < ag; i++) { const n = pickScorer(m.a); sc.push({ team: m.a, name: n, assist: pickAssister(m.a, n) }); }
             m.hg = hg; m.ag = ag; m.played = true; m.sim = true;
             if (isKO(m) && hg === ag) { const p = pensSequence(); m.pens = { h: p.h, a: p.a }; }
             addScorers(sc);
+            [m.h, m.a].forEach(id => addApps(id, tTeam(id).roster.slice(0, 5).map(p => p.name)));
         }
         const curRound = () => tour && tour.rounds[tour.roundIdx];
         const roundDone = (r) => r && r.every(m => m.played);
@@ -2063,7 +2174,8 @@
             const u = matchStats.homeScore, o = matchStats.awayScore;
             m.hg = tourCtx.userHome ? u : o; m.ag = tourCtx.userHome ? o : u;
             m.played = true; m.sim = false;
-            addScorers(matchGoals.filter(g => !g.own).map(g => ({ team: g.forHome ? homeTeam.id : awayTeam.id, name: g.name })));
+            addScorers(matchGoals.filter(g => !g.own).map(g => ({ team: g.forHome ? homeTeam.id : awayTeam.id, name: g.name, assist: g.assist })));
+            addApps(homeTeam.id, homeTeam.activeStarters.map(p => p.name)); addApps(awayTeam.id, awayTeam.activeStarters.map(p => p.name));
             tourCtx.done = true;
             tourCtx.needPens = isKO(m) && m.hg === m.ag;
             saveTour();
@@ -2299,6 +2411,23 @@
                 <div class="cr-banner info">${crestHTML(squadSel, 'tr-crest')} <b>${esc(t.name)}</b> · ${(inCareer ? club.roster : t.roster).length} jugadores · media titular ${avg}${inCareer ? ' · valor ' + fmtMoney(club.roster.reduce((a, p) => a + playerValue(p), 0)) : ''}</div>
                 <div class="cr-plist">${list}</div>`;
         }
+        let statSort = 'goals';
+        function statsTableHTML() {
+            let rows = Object.values(tour.pstats || {});
+            if (!rows.length) rows = Object.values(tour.scorers || {}).map(s => ({ ...s, assists: 0, apps: 0 }));
+            const key = (r) => statSort === 'assists' ? r.assists : statSort === 'ga' ? r.goals + r.assists : statSort === 'apps' ? r.apps : r.goals;
+            rows = rows.filter(r => r.goals || r.assists || statSort === 'apps').sort((a, b) => key(b) - key(a) || b.goals - a.goals || b.assists - a.assists || a.name.localeCompare(b.name)).slice(0, 25);
+            const btn = (k, l) => `<button class="${statSort === k ? 'sel' : ''}" data-stsort="${k}">${l}</button>`;
+            return `<div class="cr-sub">${btn('goals', '⚽ Goles')}${btn('assists', '🎯 Asistencias')}${btn('ga', 'G + A')}${btn('apps', '👟 Partidos')}</div>` + (rows.length ? `<div class="tr-wrap"><table class="tr-table"><thead><tr><th>#</th><th style="text-align:left">Jugador</th><th style="text-align:left">Equipo</th><th>PJ</th><th>G</th><th>A</th><th>G+A</th></tr></thead><tbody>
+                ${rows.map((s, i) => `<tr class="${s.team === tour.userTeam ? 'me' : ''}"><td>${i + 1}</td><td class="tn"><div><span>${i === 0 ? (statSort === 'assists' ? '🎯 ' : statSort === 'apps' ? '' : '👟 ') : ''}${esc(s.name)}</span></div></td><td class="tn"><div>${crestHTML(s.team, '')}<span>${esc((tTeam(s.team) || { short: '?' }).short)}</span></div></td>
+                    <td>${s.apps || 0}</td><td class="${statSort === 'goals' ? 'pts' : ''}">${s.goals}</td><td class="${statSort === 'assists' ? 'pts' : ''}">${s.assists}</td><td class="${statSort === 'ga' ? 'pts' : ''}">${s.goals + s.assists}</td></tr>`).join('')}
+                </tbody></table></div>` : '<div class="tr-empty">Todavía no hay estadísticas.</div>');
+        }
+        document.addEventListener('click', (e) => {
+            const b = e.target.closest('[data-stsort]'); if (!b) return;
+            statSort = b.dataset.stsort;
+            if (!document.getElementById('menu-career').classList.contains('hidden')) refreshCareer(); else refreshTour();
+        });
         function tourTabBody(tab) {
             let body = '';
             if (tab === 'planteles') return squadsHTML(tour.teams, 'data-t');
@@ -2333,10 +2462,7 @@
                     body = `<div class="tr-bracket">${cols.join('')}</div>`;
                 }
             } else if (tab === 'goleadores') {
-                const list = Object.values(tour.scorers).sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name)).slice(0, 15);
-                body = list.length ? `<div class="tr-wrap"><table class="tr-table"><thead><tr><th>#</th><th style="text-align:left">Jugador</th><th style="text-align:left">Equipo</th><th>Goles</th></tr></thead><tbody>
-                    ${list.map((s, i) => `<tr class="${s.team === tour.userTeam ? 'me' : ''}"><td>${i + 1}</td><td class="tn"><div><span>${i === 0 ? '👟 ' : ''}${esc(s.name)}</span></div></td><td class="tn"><div>${crestHTML(s.team, '')}<span>${esc(tTeam(s.team).short)}</span></div></td><td class="pts">${s.goals}</td></tr>`).join('')}
-                    </tbody></table></div>` : '<div class="tr-empty">Todavía no hay goles.</div>';
+                body = statsTableHTML();
             } else {
                 const played = tour.rounds.map((rd, i) => ({ rd, i })).filter(x => x.rd.some(m => m.played)).reverse();
                 body = played.length ? played.map(({ rd, i }) => {
@@ -2349,7 +2475,7 @@
         function tourHubHTML() {
             if (!tour) return tourHomeHTML();
             const r = curRound();
-            const tabs = [['partidos', 'Partidos'], ['tabla', tour.type === 'liga' ? 'Tabla' : 'Grupos'], ['llaves', tour.type === 'liga' ? 'Play-offs' : 'Llaves'], ['goleadores', 'Goleadores'], ['planteles', 'Planteles'], ['calendario', 'Resultados']];
+            const tabs = [['partidos', 'Partidos'], ['tabla', tour.type === 'liga' ? 'Tabla' : 'Grupos'], ['llaves', tour.type === 'liga' ? 'Play-offs' : 'Llaves'], ['goleadores', 'Estadísticas'], ['planteles', 'Planteles'], ['calendario', 'Resultados']];
             let body = '';
             if (tourTab === 'partidos') {
                 if (tour.phase === 'done') {
@@ -2442,11 +2568,44 @@
         const CAREER_KEY = 'cdn26_career';
         let career = (() => { try { return JSON.parse(localStorage.getItem(CAREER_KEY) || 'null'); } catch (e) { return null; } })();
         let careerCtx = null;
+        let careerComp = 'liga';
         let careerTab = 'inicio', careerSub = 'tabla', careerConfirm = null, careerView = 'home';
         let careerSetup = { mode: 'dt', club: 'valpo', length: 'larga', duration: 240, name: '', pos: 'campo', num: 10, kind: 'ficticio', existing: null, photo: null, dtKind: 'existente', cName: '', cShort: '', c1: '#7c3aed', c2: '#facc15', crest: null };
         let mkt = { pos: 'all', club: 'all', sort: 'ovr', q: '' };
-        const FIRST_N = ['Matías', 'Benjamín', 'Vicente', 'Agustín', 'Tomás', 'Joaquín', 'Maximiliano', 'Cristóbal', 'Bastián', 'Diego', 'Ignacio', 'Felipe', 'Gaspar', 'Lucas', 'Martín', 'Renato'];
-        const LAST_N = ['Muñoz', 'Rojas', 'Díaz', 'Soto', 'Silva', 'Morales', 'Sepúlveda', 'Araya', 'Fuentes', 'Castro', 'Pizarro', 'Vergara', 'Tapia', 'Reyes', 'Espinoza', 'Cárdenas'];
+        const FIRST_N = ['Matías', 'Benjamín', 'Vicente', 'Agustín', 'Tomás', 'Joaquín', 'Maximiliano', 'Cristóbal', 'Bastián', 'Diego', 'Ignacio', 'Felipe', 'Gaspar', 'Lucas', 'Martín', 'Renato',
+                         'Emiliano', 'Facundo', 'Simón', 'Alonso', 'Julián', 'Damián', 'Gabriel', 'Nicolás', 'Sebastián', 'Kevin', 'Bruno', 'Thiago', 'Mateo', 'Franco', 'Byron', 'Esteban'];
+        const LAST_N = ['Muñoz', 'Rojas', 'Díaz', 'Soto', 'Silva', 'Morales', 'Sepúlveda', 'Araya', 'Fuentes', 'Castro', 'Pizarro', 'Vergara', 'Tapia', 'Reyes', 'Espinoza', 'Cárdenas',
+                        'Bravo', 'Valdés', 'Orellana', 'Navarro', 'Figueroa', 'Henríquez', 'Leiva', 'Carrasco', 'Gallardo', 'Riquelme', 'Toledo', 'Cortés', 'Jara', 'Salinas', 'Ibarra', 'Molina'];
+        // Foto ilustrada para jugadores ficticios: cara, pelo y camiseta generados a partir de una semilla
+        const faceCache = {};
+        function fakeFace(seed, shirt, skinIdx) {
+            const key = seed + '|' + shirt + '|' + skinIdx;
+            if (faceCache[key]) return faceCache[key];
+            let s = seed >>> 0; const r = (n) => { s = (s * 1664525 + 1013904223) >>> 0; return s % n; };
+            const skins = ['#f5d0b5', '#e8b896', '#d29e74', '#b47a52', '#8d5a3b', '#6b4329'];
+            const hairs = ['#1c1917', '#3f2a1d', '#6b4423', '#a0522d', '#d4a54a', '#2b2b2b', '#5c3a21'];
+            const bgs = ['#1e3a8a', '#065f46', '#7c2d12', '#4c1d95', '#0f766e', '#334155', '#831843'];
+            let skin = skins[r(skins.length)]; if (skinIdx != null && skins[skinIdx]) skin = skins[skinIdx];
+            const hair = hairs[r(hairs.length)], bg = bgs[r(bgs.length)], style = r(6), beard = r(4) === 0;
+            const hairSvg = [
+                `<path d="M28 40 Q30 20 50 19 Q70 20 72 40 Q66 30 50 30 Q34 30 28 40Z" fill="${hair}"/>`,
+                `<path d="M29 38 Q32 22 50 21 Q68 22 71 38 L71 33 Q60 26 50 27 Q40 26 29 33Z" fill="${hair}" opacity=".85"/>`,
+                `<g fill="${hair}"><circle cx="36" cy="27" r="8"/><circle cx="46" cy="22" r="8"/><circle cx="56" cy="22" r="8"/><circle cx="65" cy="28" r="8"/><circle cx="30" cy="36" r="6"/><circle cx="70" cy="36" r="6"/></g>`,
+                `<path d="M27 46 Q26 18 50 18 Q74 18 73 46 L70 46 Q68 30 50 29 Q32 30 30 46Z" fill="${hair}"/>`,
+                `<path d="M44 14 L56 14 L57 33 L43 33Z" fill="${hair}"/><path d="M30 38 Q32 30 43 30 L43 34 Q35 34 30 40Z M70 38 Q68 30 57 30 L57 34 Q65 34 70 40Z" fill="${hair}" opacity=".35"/>`,
+                `<path d="M28 42 Q28 21 50 20 Q72 21 72 42 Q70 26 50 26 Q30 26 28 42Z" fill="${hair}"/><path d="M30 26 Q50 10 70 26" stroke="${hair}" stroke-width="5" fill="none"/>`
+            ][style];
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="${bg}"/>
+                <path d="M14 100 Q16 74 36 70 L64 70 Q84 74 86 100Z" fill="${shirt}"/><path d="M40 70 L50 80 L60 70" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3"/>
+                <rect x="43" y="58" width="14" height="14" rx="4" fill="${skin}"/>
+                <ellipse cx="50" cy="44" rx="21" ry="24" fill="${skin}"/><ellipse cx="29" cy="45" rx="3.5" ry="5" fill="${skin}"/><ellipse cx="71" cy="45" rx="3.5" ry="5" fill="${skin}"/>
+                ${beard ? `<path d="M31 50 Q33 68 50 69 Q67 68 69 50 Q63 60 50 60 Q37 60 31 50Z" fill="${hair}" opacity=".8"/>` : ''}
+                <ellipse cx="42" cy="44" rx="2.6" ry="3" fill="#1c1917"/><ellipse cx="58" cy="44" rx="2.6" ry="3" fill="#1c1917"/>
+                <path d="M38 38 L46 37 M54 37 L62 38" stroke="${hair}" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M49 46 Q47 52 50 53" stroke="rgba(0,0,0,.25)" stroke-width="1.6" fill="none"/>
+                <path d="M43 57 Q50 ${r(2) ? 61 : 59} 57 57" stroke="#7f1d1d" stroke-width="2" fill="none" stroke-linecap="round"/>${hairSvg}</svg>`;
+            return faceCache[key] = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+        }
 
         function saveCareer() { try { if (career) localStorage.setItem(CAREER_KEY, JSON.stringify(career)); else localStorage.removeItem(CAREER_KEY); } catch (e) {} }
         function hashStr(s) { let h = 7; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) | 0; return Math.abs(h); }
@@ -2462,6 +2621,7 @@
         function photoOf(p) {
             if (!p) return null;
             if (p.photo) return p.photo;                       // foto propia (cámara o galería)
+            if (p.face) return fakeFace(p.face, p.faceColor || '#475569', p.faceSkin);
             if (p.pid === 'me' || String(p.pid).startsWith('gen')) return null;
             let o = origPlayer(p.pid);
             if (!o || o.name !== p.name) { const t = TEAMS.find(x => x.id === String(p.pid).split(':')[0]); o = t && t.roster.find(q => q.name === p.name); }
@@ -2469,7 +2629,8 @@
         }
         function playerValue(p) {
             const base = Math.pow(Math.max(1, p.stats - 68), 2.1) * 900;
-            const af = p.age <= 21 ? 1.3 : p.age <= 25 ? 1.1 : p.age <= 29 ? 1 : p.age <= 32 ? 0.75 : 0.55;
+            const pf = p.pot && p.pot > p.stats ? 1 + (p.pot - p.stats) / 20 : 1;
+            const af = pf * (p.age <= 21 ? 1.3 : p.age <= 25 ? 1.1 : p.age <= 29 ? 1 : p.age <= 32 ? 0.75 : 0.55);
             return Math.max(5000, Math.round(base * af / 5000) * 5000);
         }
         const careerClub = (id) => career.clubs.find(c => c.id === id);
@@ -2517,17 +2678,312 @@
         function genYouth(club) {
             career.genId = (career.genId || 0) + 1;
             const taken = new Set(career.clubs.flatMap(c => c.roster.map(p => normName(p.name))));
-            let name, tries = 0;
-            do { name = FIRST_N[rndInt(0, FIRST_N.length - 1)] + ' ' + LAST_N[rndInt(0, LAST_N.length - 1)]; } while (taken.has(normName(name)) && ++tries < 50);
-            const p = { pid: 'gen:' + career.genId, name, isGK: !club.roster.some(q => q.isGK), stats: rndInt(72, 78), age: rndInt(17, 19) };
+            const nat = randomNat();
+            const name = nameFor(nat, taken);
+            const base = (typeof baseTeam === 'function' && baseTeam(club.id)) || TEAMS.find(t => t.id === club.id);
+            const p = { pid: 'gen:' + career.genId, name, isGK: !club.roster.some(q => q.isGK), stats: rndInt(72, 78), age: rndInt(17, 19),
+                        face: hashStr(name + career.genId) + 1, faceColor: base ? base.primaryColor : '#475569', nat, faceSkin: skinFor(nat) };
             p.num = freeNum(club);
             club.roster.push(p);
             return p;
+        }
+        // Completa cada plantel con jugadores ficticios (con foto ilustrada) para que haya mercado
+        function fillFictional(club, target = 12) {
+            const s = club.roster.length ? strengthOfClub(club) : 78;
+            while (club.roster.filter(p => p.isGK).length < 2 && club.roster.length < target + 1) { const p = genYouth(club); p.isGK = true; p.stats = rndInt(Math.round(s) - 8, Math.round(s) - 3); p.age = rndInt(18, 31); }
+            while (club.roster.length < target) { const p = genYouth(club); p.isGK = false; p.stats = clamp(rndInt(Math.round(s) - 8, Math.round(s) - 2), 68, 88); p.age = rndInt(18, 31); }
         }
         function strengthOfClub(c) { const s = c.roster.map(p => p.stats).sort((a, b) => b - a).slice(0, 5); return s.reduce((a, b) => a + b, 0) / s.length; }
         function objectiveFor(id) {
             const rank = career.clubs.slice().sort((a, b) => strengthOfClub(b) - strengthOfClub(a)).findIndex(c => c.id === id) + 1;
             return rank <= 3 ? { k: 'title', t: 'Ganar un título (Liga CDA o Copa CDA)' } : rank <= 6 ? { k: 'semis', t: 'Llegar a semifinales de los play-offs de la Liga CDA' } : { k: 'playoffs', t: 'Clasificar a los play-offs de la Liga CDA (top 8)' };
+        }
+
+        // --- Nacionalidades, banderas, ojeadores y fuerzas básicas ---
+        const NATIONS = {
+            CL: ['Chile', 'es'], AR: ['Argentina', 'es'], BR: ['Brasil', 'pt'], UY: ['Uruguay', 'es'], CO: ['Colombia', 'es'], PE: ['Perú', 'es'],
+            PY: ['Paraguay', 'es'], EC: ['Ecuador', 'es'], VE: ['Venezuela', 'es'], MX: ['México', 'es'], US: ['Estados Unidos', 'en'],
+            ES: ['España', 'es'], PT: ['Portugal', 'pt'], FR: ['Francia', 'fr'], IT: ['Italia', 'it'], DE: ['Alemania', 'de'], GB: ['Inglaterra', 'en'],
+            NG: ['Nigeria', 'af'], GH: ['Ghana', 'af'], SN: ['Senegal', 'af'], JP: ['Japón', 'jp']
+        };
+        const NAME_POOLS = {
+            es: [['Mateo', 'Santiago', 'Thiago', 'Lautaro', 'Emiliano', 'Juan Pablo', 'Andrés', 'Samuel', 'Valentín', 'Facundo'], ['González', 'Rodríguez', 'López', 'Martínez', 'Gómez', 'Fernández', 'Ramírez', 'Torres', 'Vargas', 'Herrera']],
+            pt: [['João', 'Pedro', 'Gabriel', 'Rafael', 'Vinícius', 'Gustavo', 'Caio', 'Murilo'], ['Silva', 'Santos', 'Oliveira', 'Souza', 'Costa', 'Ferreira', 'Almeida', 'Lima']],
+            fr: [['Hugo', 'Théo', 'Nathan', 'Enzo', 'Kylian', 'Mathis', 'Noah', 'Rayan'], ['Martin', 'Bernard', 'Dubois', 'Laurent', 'Moreau', 'Girard', 'Lefebvre', 'Mercier']],
+            it: [['Lorenzo', 'Matteo', 'Alessandro', 'Federico', 'Davide', 'Marco', 'Riccardo', 'Luca'], ['Rossi', 'Bianchi', 'Romano', 'Ricci', 'Marino', 'Greco', 'Conti', 'Esposito']],
+            de: [['Leon', 'Lukas', 'Finn', 'Jonas', 'Niklas', 'Elias', 'Felix', 'Paul'], ['Müller', 'Schmidt', 'Schneider', 'Fischer', 'Weber', 'Wagner', 'Becker', 'Hoffmann']],
+            en: [['Jack', 'Harry', 'Oliver', 'Charlie', 'James', 'Mason', 'Tyler', 'Ethan'], ['Smith', 'Johnson', 'Walker', 'Wright', 'Taylor', 'Brown', 'Wilson', 'Hughes']],
+            af: [['Chidi', 'Emeka', 'Kwame', 'Kofi', 'Ibrahim', 'Moussa', 'Yaw', 'Sadio'], ['Okafor', 'Mensah', 'Diallo', 'Adeyemi', 'Boateng', 'Ndiaye', 'Osei', 'Eze']],
+            jp: [['Haruto', 'Yuto', 'Sota', 'Ren', 'Kaito', 'Riku', 'Takumi', 'Daiki'], ['Sato', 'Suzuki', 'Takahashi', 'Tanaka', 'Watanabe', 'Ito', 'Nakamura', 'Kobayashi']]
+        };
+        const SKIN_BY_NAT = { af: [3, 5], jp: [0, 1], de: [0, 1], en: [0, 2], fr: [0, 4], it: [0, 2], pt: [0, 5], es: [0, 4] };
+        const REGIONS = [
+            { id: 'chile', n: 'Chile', nats: ['CL'], q: 0, fee: 5000 },
+            { id: 'sudam', n: 'Sudamérica', nats: ['AR', 'BR', 'UY', 'CO', 'PE', 'PY', 'EC', 'VE'], q: 1, fee: 15000 },
+            { id: 'norte', n: 'Norte y Centroamérica', nats: ['MX', 'US'], q: 0, fee: 15000 },
+            { id: 'europa', n: 'Europa', nats: ['ES', 'PT', 'FR', 'IT', 'DE', 'GB'], q: 2, fee: 40000 },
+            { id: 'africa', n: 'África', nats: ['NG', 'GH', 'SN'], q: 1, fee: 25000 },
+            { id: 'asia', n: 'Asia', nats: ['JP'], q: 0, fee: 25000 }
+        ];
+        const flagCache = {};
+        function flagSrc(code) {
+            if (flagCache[code]) return flagCache[code];
+            const H = (cs) => cs.map((c, i) => `<rect y="${i * 20 / cs.length}" width="30" height="${20 / cs.length + .1}" fill="${c}"/>`).join('');
+            const V = (cs) => cs.map((c, i) => `<rect x="${i * 30 / cs.length}" width="${30 / cs.length + .1}" height="20" fill="${c}"/>`).join('');
+            const star = (x, y, r, c) => { let d = ''; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; d += (i ? 'L' : 'M') + (x + rr * Math.cos(a)).toFixed(2) + ' ' + (y + rr * Math.sin(a)).toFixed(2); } return `<path d="${d}Z" fill="${c}"/>`; };
+            const art = {
+                CL: H(['#fff', '#d52b1e']) + `<rect width="10" height="10" fill="#0039a6"/>` + star(5, 5, 3, '#fff'),
+                AR: H(['#74acdf', '#fff', '#74acdf']) + `<circle cx="15" cy="10" r="2" fill="#f6b40e"/>`,
+                BR: `<rect width="30" height="20" fill="#009c3b"/><path d="M15 2 L28 10 L15 18 L2 10Z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.2" fill="#002776"/>`,
+                UY: H(['#fff', '#0038a8', '#fff', '#0038a8', '#fff', '#0038a8', '#fff', '#0038a8', '#fff']) + `<rect width="12" height="11" fill="#fff"/><circle cx="6" cy="5.5" r="3" fill="#fcd116"/>`,
+                CO: `<rect width="30" height="10" fill="#fcd116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#ce1126"/>`,
+                PE: V(['#d91023', '#fff', '#d91023']), MX: V(['#006847', '#fff', '#ce1126']) + `<circle cx="15" cy="10" r="2" fill="#8c5a2b"/>`,
+                PY: H(['#d52b1e', '#fff', '#0038a8']), EC: `<rect width="30" height="10" fill="#ffdd00"/><rect y="10" width="30" height="5" fill="#034ea2"/><rect y="15" width="30" height="5" fill="#ed1c24"/>`,
+                VE: H(['#ffcc00', '#00247d', '#cf142b']), US: H(['#b22234', '#fff', '#b22234', '#fff', '#b22234', '#fff', '#b22234']) + `<rect width="13" height="11" fill="#3c3b6e"/>`,
+                ES: `<rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/>`, PT: `<rect width="30" height="20" fill="#ff0000"/><rect width="12" height="20" fill="#006600"/><circle cx="12" cy="10" r="3.2" fill="#ffcc00"/>`,
+                FR: V(['#002395', '#fff', '#ed2939']), IT: V(['#009246', '#fff', '#ce2b37']), DE: H(['#000', '#dd0000', '#ffce00']),
+                GB: `<rect width="30" height="20" fill="#fff"/><rect x="13" width="4" height="20" fill="#ce1124"/><rect y="8" width="30" height="4" fill="#ce1124"/>`,
+                NG: V(['#008751', '#fff', '#008751']), GH: H(['#ce1126', '#fcd116', '#006b3f']) + star(15, 10, 3, '#000'), SN: V(['#00853f', '#fdef42', '#e31b23']) + star(15, 10, 2.6, '#00853f'),
+                JP: `<rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/>`
+            }[code] || `<rect width="30" height="20" fill="#64748b"/>`;
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20">${art}<rect width="30" height="20" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1"/></svg>`;
+            return flagCache[code] = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+        }
+        function flagHTML(code) { const c = code || 'CL'; return `<img class="cr-flag" src="${flagSrc(c)}" alt="${c}" title="${esc((NATIONS[c] || ['?'])[0])}">`; }
+        function randomNat() {     // jugadores ficticios del medio local: mayoría chilenos
+            const r = Math.random();
+            return r < 0.7 ? 'CL' : ['AR', 'BR', 'UY', 'CO', 'PE', 'VE', 'PY', 'EC', 'ES', 'MX'][rndInt(0, 9)];
+        }
+        function nameFor(nat, taken) {
+            const lang = (NATIONS[nat] || NATIONS.CL)[1];
+            const [F, L] = nat === 'CL' ? [FIRST_N, LAST_N] : NAME_POOLS[lang];
+            let name, tries = 0;
+            do { name = F[rndInt(0, F.length - 1)] + ' ' + L[rndInt(0, L.length - 1)]; } while (taken.has(normName(name)) && ++tries < 60);
+            return name;
+        }
+        function skinFor(nat) { const sk = SKIN_BY_NAT[(NATIONS[nat] || NATIONS.CL)[1]] || [0, 4]; return rndInt(sk[0], sk[1]); }
+        function takenNames() { return new Set([...career.clubs.flatMap(c => c.roster.map(p => normName(p.name))), ...(career.academy || []).map(p => normName(p.name)), ...(career.reports || []).map(p => normName(p.name))]); }
+        const potText = (p) => p.potLo === p.potHi ? String(p.potHi) : `${p.potLo}-${p.potHi}`;
+
+        // Ojeadores
+        function scoutCandidates() {
+            const used = new Set((career.scouts || []).map(s => s.name));
+            return [1, 2, 3].map(i => {
+                const nat = i === 1 ? 'CL' : randomNat(); const stars = clamp(rndInt(1, 5) + (i === 3 ? 1 : 0), 1, 5);
+                let name = nameFor(nat, used); used.add(name);
+                return { id: 'sc' + Date.now() + i, name, nat, stars, cost: stars * 15000, face: hashStr(name) + 3, skin: skinFor(nat), mission: null };
+            });
+        }
+        function openScoutHire() {
+            const box = document.getElementById('career-modal');
+            const cands = scoutCandidates();
+            box.innerHTML = `<div class="cm-card"><h3>CONTRATAR OJEADOR</h3><p style="font-size:13px;color:#cbd5e1">Más estrellas = descubre jugadores con más potencial y te da un rango más exacto.</p>
+                ${cands.map((s, i) => `<div class="cm-offer"><img class="cr-ph" src="${fakeFace(s.face, '#334155', s.skin)}" alt=""><div><b>${esc(s.name)}</b> ${flagHTML(s.nat)}<br><span style="color:#fbbf24">${'★'.repeat(s.stars)}${'☆'.repeat(5 - s.stars)}</span> · <span style="color:#4ade80;font-weight:800">${fmtMoney(s.cost)}</span></div><button class="tr-btn pri" data-hire="${i}">Contratar</button></div>`).join('')}
+                <div class="cm-msg" id="sc-msg"></div><div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button></div></div>`;
+            box.classList.remove('hidden');
+            box.onclick = (e) => {
+                const b = e.target.closest('button'); if (!b) { if (e.target === box) box.classList.add('hidden'); return; }
+                if (b.dataset.x === 'close') { box.classList.add('hidden'); refreshCareer(); return; }
+                if (b.dataset.hire !== undefined) {
+                    const s = cands[+b.dataset.hire];
+                    if (career.money < s.cost) { document.getElementById('sc-msg').textContent = 'No tienes fondos suficientes.'; document.getElementById('sc-msg').className = 'cm-msg bad'; return; }
+                    career.money -= s.cost; career.scouts.push(s); addNews(`🔭 Contrataste al ojeador ${s.name} (${s.stars}★).`);
+                    saveCareer(); box.classList.add('hidden'); refreshCareer();
+                }
+            };
+        }
+        function openScoutMission(id) {
+            const s = career.scouts.find(x => x.id === id); if (!s) return;
+            let region = REGIONS[0].id, weeks = 2;
+            const box = document.getElementById('career-modal');
+            const draw = (msg = '') => {
+                const R = REGIONS.find(r => r.id === region);
+                box.innerHTML = `<div class="cm-card"><h3>ENVIAR A ${esc(s.name.toUpperCase())}</h3>
+                    <div class="tr-label" style="margin-top:4px">¿A qué parte del mundo?</div>
+                    ${REGIONS.map(r => `<button class="cm-offer" style="width:100%;text-align:left;${r.id === region ? 'border-color:#10b981;background:rgba(16,185,129,.12)' : ''}" data-reg="${r.id}"><div><b>${r.n}</b><br><span style="display:inline-flex;gap:3px;flex-wrap:wrap">${r.nats.map(flagHTML).join('')}</span></div><span style="color:#4ade80;font-weight:800">${fmtMoney(r.fee)}</span></button>`).join('')}
+                    <div class="tr-label">Duración</div><div class="tr-opts">${[2, 4].map(w => `<button class="tr-opt ${weeks === w ? 'sel' : ''}" data-wk="${w}">${w} semanas${w === 4 ? ' (más jugadores)' : ''}</button>`).join('')}</div>
+                    <div class="cr-stat" style="margin-top:8px"><span>Costo total</span><b style="color:#4ade80">${fmtMoney(R.fee * weeks / 2)}</b></div>
+                    <div class="cm-msg bad">${msg}</div>
+                    <div class="cm-row"><button class="tr-btn" data-x="close">Cancelar</button><button class="tr-btn pri" data-x="go">🌍 Enviar</button></div></div>`;
+            };
+            draw(); box.classList.remove('hidden');
+            box.onclick = (e) => {
+                const b = e.target.closest('button'); if (!b) { if (e.target === box) box.classList.add('hidden'); return; }
+                if (b.dataset.reg) { region = b.dataset.reg; draw(); return; }
+                if (b.dataset.wk) { weeks = +b.dataset.wk; draw(); return; }
+                if (b.dataset.x === 'close') { box.classList.add('hidden'); return; }
+                if (b.dataset.x === 'go') {
+                    const R = REGIONS.find(r => r.id === region), cost = R.fee * weeks / 2;
+                    if (career.money < cost) return draw('No tienes fondos suficientes.');
+                    career.money -= cost; s.mission = { region, weeks, left: weeks };
+                    addNews(`🌍 ${s.name} viaja a ${R.n} a buscar talentos (${weeks} semanas).`);
+                    saveCareer(); box.classList.add('hidden'); refreshCareer();
+                }
+            };
+        }
+        function makeProspect(R, stars) {
+            const nat = R.nats[rndInt(0, R.nats.length - 1)];
+            const pot = clamp(rndInt(66, 78) + R.q * 3 + Math.round(stars * 1.5) + (Math.random() < 0.12 ? rndInt(3, 7) : 0), 60, 94);
+            const w = 6 - stars, lo = clamp(pot - rndInt(0, w), 50, 94), hi = clamp(lo + w, lo, 95);
+            const isGK = Math.random() < 0.15;
+            const name = nameFor(nat, takenNames());
+            const stats = clamp(rndInt(50, 62) + R.q * 2 + Math.round((pot - 75) / 4), 45, 72);
+            career.ythId = (career.ythId || 0) + 1;
+            return { pid: 'yth:' + career.ythId, name, nat, isGK, stats, sf: stats, pot, potLo: lo, potHi: Math.max(hi, lo), age: rndInt(15, 17),
+                     face: hashStr(name) + 7, faceColor: '#475569', faceSkin: skinFor(nat), fee: Math.max(5000, Math.round((5000 + (pot - 68) * 2000) / 1000) * 1000), region: R.n };
+        }
+        function youthWeek() {        // se llama cada semana
+            if (career.mode !== 'dt') return;
+            (career.scouts || []).forEach(s => {
+                if (!s.mission) return;
+                s.mission.left--;
+                if (s.mission.left > 0) return;
+                const R = REGIONS.find(r => r.id === s.mission.region);
+                const n = (s.mission.weeks === 4 ? rndInt(2, 3) : rndInt(1, 2)) + (s.stars >= 4 && Math.random() < 0.5 ? 1 : 0);
+                for (let i = 0; i < n; i++) career.reports.push(makeProspect(R, s.stars));
+                addNews(`📋 ${s.name} volvió de ${R.n} con ${n} jugador${n > 1 ? 'es' : ''} en su informe.`);
+                s.mission = null;
+            });
+            career.reports = career.reports.slice(-12);
+            (career.academy || []).forEach(p => { p.sf = Math.min(p.pot, p.sf + Math.max(0, (p.pot - p.sf) * 0.03 + rnd(0, 0.15))); p.stats = Math.round(p.sf); });
+        }
+        function youthSeason() {      // fin de temporada: cumplen años; con 20 suben solos o se liberan
+            if (career.mode !== 'dt') return;
+            (career.academy || []).slice().forEach(p => {
+                p.age++;
+                if (p.age >= 20) {
+                    if (myClub().roster.length < 16) promoteYouth(p.pid, true);
+                    else { career.academy.splice(career.academy.indexOf(p), 1); addNews(`👋 ${p.name} dejó la academia (tenía 20 años y no había cupo).`); }
+                }
+            });
+        }
+        function promoteYouth(pid, auto) {
+            const i = career.academy.findIndex(p => p.pid === pid); if (i < 0) return false;
+            const club = myClub();
+            if (club.roster.length >= 16) return false;
+            const p = career.academy.splice(i, 1)[0];
+            const b = baseTeam(club.id);
+            const pl = { pid: p.pid, name: p.name, nat: p.nat, isGK: p.isGK, stats: Math.round(p.sf), age: p.age, pot: p.pot, potLo: p.potLo, potHi: p.potHi,
+                         face: p.face, faceColor: b ? b.primaryColor : '#475569', faceSkin: p.faceSkin, youth: true };
+            pl.num = freeNum(club, 20 + rndInt(0, 15));
+            club.roster.push(pl);
+            addNews(`⬆️ ${p.name} ${auto ? 'cumplió 20 y subió' : 'sube'} al primer equipo desde las fuerzas básicas.`);
+            return true;
+        }
+        function careerBasicasHTML() {
+            const sc = career.scouts || [], ac = career.academy || [], rp = career.reports || [];
+            const scoutCard = (s) => {
+                const R = s.mission && REGIONS.find(r => r.id === s.mission.region);
+                return `<div class="cm-offer"><img class="cr-ph" src="${fakeFace(s.face, '#334155', s.skin)}" alt=""><div><b>${esc(s.name)}</b> ${flagHTML(s.nat)} <span style="color:#fbbf24">${'★'.repeat(s.stars)}</span><br>
+                    <span style="font-size:12px;color:#94a3b8">${s.mission ? `🌍 En ${R.n} · vuelve en ${s.mission.left} semana${s.mission.left > 1 ? 's' : ''}` : '✅ Disponible'}</span></div>
+                    ${s.mission ? '' : `<button class="tr-btn pri" data-c="scsend" data-id="${s.id}">Enviar</button>`}<button class="tr-btn danger" data-c="scfire" data-id="${s.id}">Despedir</button></div>`;
+            };
+            const yrow = (p, btns, extra = '') => `<div class="cr-p">${phHTML(p)}<div class="cr-pn"><b>${esc(p.name)}</b><span>${flagHTML(p.nat)} ${p.age} años ${p.isGK ? '<span class="cr-tag gk">POR</span>' : ''} <span class="cr-tag" style="background:#4c1d95">POT ${potText(p)}</span>${extra}</span></div>
+                <div class="cr-pr">${btns}<span class="cr-ovr">${Math.round(p.sf ?? p.stats)}</span></div></div>`;
+            return `<div class="cr-banner info">🌱 Busca talentos por el mundo con tus ojeadores, fíchalos para la academia, míralos crecer cada semana y súbelos al primer equipo. Con 20 años suben solos (si hay cupo).</div>
+                <div class="tr-label">Ojeadores (${sc.length}/3)</div>
+                ${sc.map(scoutCard).join('') || '<div class="tr-empty" style="padding:10px">Aún no tienes ojeadores.</div>'}
+                ${sc.length < 3 ? '<div class="tr-actions"><button class="tr-btn gold" data-c="schire">🔭 Contratar ojeador</button></div>' : ''}
+                <div class="tr-label">Informes de los ojeadores (${rp.length})</div>
+                <div class="cr-plist">${rp.map(p => yrow(p, `<span class="cr-val">${fmtMoney(p.fee)}</span><button class="tr-btn pri" data-c="ysign" data-id="${p.pid}">Fichar</button><button class="tr-btn" data-c="ydrop" data-id="${p.pid}">✕</button>`, ` <span style="font-size:10px;color:#64748b">${esc(p.region)}</span>`)).join('') || '<div class="tr-empty" style="padding:10px">Envía un ojeador para recibir informes.</div>'}</div>
+                <div class="tr-label">Academia (${ac.length}/10)</div>
+                <div class="cr-plist">${ac.map(p => yrow(p, `<button class="tr-btn pri" data-c="yup" data-id="${p.pid}">⬆️ Subir</button><button class="tr-btn" data-c="yfree" data-id="${p.pid}">Liberar</button>`, p.age >= 19 ? ' <span class="cr-tag" style="background:#b91c1c">ÚLTIMO AÑO</span>' : '')).join('') || '<div class="tr-empty" style="padding:10px">La academia está vacía.</div>'}</div>`;
+        }
+
+        // --- Calendario y fechas de la temporada (cada semana = un sábado de partido) ---
+        function seasonStartDate(season) {
+            const d = new Date(2026 + season - 1, 2, 1);          // primer sábado de marzo
+            while (d.getDay() !== 6) d.setDate(d.getDate() + 1);
+            return d;
+        }
+        function weekDate(week, season) { const d = seasonStartDate(season || career.season); d.setDate(d.getDate() + (week - 1) * 7); return d; }
+        function fmtDate(d, mode) {
+            try {
+                if (mode === 'short') return d.toLocaleDateString('es-CL', { weekday: 'short', day: 'numeric', month: 'short' });
+                if (mode === 'month') return d.toLocaleDateString('es-CL', { month: 'long', year: 'numeric' });
+                return d.toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            } catch (e) { return d.toDateString(); }
+        }
+        const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+        // Plan de semanas que quedan: repite la misma regla que usa la carrera para alternar Liga y Copa
+        function planSchedule() {
+            const out = [];
+            if (!career.comps) return out;
+            const done = {}, total = {};
+            ['liga', 'copa'].forEach(k => { const c = career.comps[k]; total[k] = compTotalRounds(c); done[k] = c.phase === 'done' ? total[k] : c.roundIdx; });
+            const played = {};
+            // semanas ya jugadas (historial guardado)
+            (career.weekLog || []).forEach(w => out.push({ ...w, past: true }));
+            if (!career.cur) return out;
+            let week = career.week, guard = 0;
+            out.push({ week, key: career.cur, idx: career.comps[career.cur].roundIdx, now: true });
+            done[career.cur]++;
+            while (guard++ < 80) {
+                const ks = ['liga', 'copa'].filter(k => done[k] < total[k]);
+                if (!ks.length) break;
+                const k = ks.sort((a, b) => done[a] / total[a] - done[b] / total[b])[0];
+                week++;
+                out.push({ week, key: k, idx: done[k] });
+                done[k]++;
+            }
+            return out;
+        }
+        function roundLabel(c, idx) {
+            const r = c.rounds[idx];
+            if (r && r[0] && isKO(r[0])) return stageName(r[0].stage);
+            const groupR = c.koStart === null ? c.rounds.length : c.koStart;
+            if (idx >= groupR) { const n = idx - groupR; const sizes = c.type === 'liga' ? ['QF', 'SF', 'F'] : (c.groups.length % 2 === 0 && c.groups.length * 2 >= 8 ? ['QF', 'SF', 'F'] : ['SF', 'F']); return stageName(sizes[n] || 'F'); }
+            return `${c.type === 'liga' ? 'Jornada' : 'Fecha'} ${idx + 1}`;
+        }
+        function careerCalendarHTML() {
+            const plan = planSchedule();
+            const club = career.clubId, mid = career.midDone ? null : Math.round(career.totalWeeks / 2);
+            let html = `<div class="cr-banner info"><span>📅 Hoy es <b>${cap(fmtDate(weekDate(career.week)))}</b>. Cada semana hay un partido (sábado). Las fechas de la fase final se confirman al terminar cada fase.</span></div>`;
+            let month = '';
+            plan.forEach(w => {
+                const d = weekDate(w.week, w.season);
+                const m = fmtDate(d, 'month');
+                if (m !== month) { month = m; html += `<div class="tr-label">${cap(m)}</div>`; }
+                const c = w.past ? null : career.comps[w.key];
+                const r = c && c.rounds[w.idx];
+                const um = r ? r.find(x => x.h === club || x.a === club) : null;
+                let mid2 = '';
+                if (w.res) mid2 = w.res;
+                else if (!c) mid2 = '—';
+                else if (!r) mid2 = `<span style="color:#94a3b8">Rival por definir</span>`;
+                else if (!um) mid2 = `<span style="color:#94a3b8">${c.phase === 'knockout' && r && isKO(r[0]) ? 'Sin partido (eliminado)' : 'Descansa'}</span>`;
+                else {
+                    const home = um.h === club, opp = home ? um.a : um.h;
+                    let badge = '';
+                    if (um.played) {
+                        const gf = home ? um.hg : um.ag, ga = home ? um.ag : um.hg;
+                        const res = gf > ga ? 'G' : gf < ga ? 'P' : (um.pens ? (matchWinner(um) === club ? 'G' : 'P') : 'E');
+                        badge = `<span class="cal-res ${res}">${res}</span><b>${gf}-${ga}${um.pens ? ` <small>(pen ${home ? um.pens.h : um.pens.a}-${home ? um.pens.a : um.pens.h})</small>` : ''}</b>`;
+                    }
+                    mid2 = `${crestHTML(opp, 'cal-crest')}<span class="cal-opp">${home ? 'vs' : '@'} ${esc(tTeam(opp).name)}</span>${badge}`;
+                }
+                const tag = w.now ? '<span class="cr-tag st">ESTA SEMANA</span>' : '';
+                const win = (w.week === 1 || w.week === Math.round(career.totalWeeks / 2)) ? `<div class="cal-win">🟢 Mercado de fichajes abierto</div>` : '';
+                html += `<div class="cal-row ${w.now ? 'now' : ''} ${w.past ? 'past' : ''}"><div class="cal-date"><b>${d.getDate()}</b><span>${fmtDate(d, 'short').split(' ')[0].replace(',', '')}</span></div>
+                    <img class="cal-comp" src="${TOUR_LOGOS[w.key]}" alt=""><div class="cal-mid"><div class="cal-t">${esc(TOUR_NAMES[w.key])} · ${esc(w.past ? (w.title || '') : c ? roundLabel(c, w.idx) : '')} ${tag}</div><div class="cal-m">${mid2}</div>${win}</div></div>`;
+            });
+            if (career.cur) html += `<div class="tr-label">Fin de temporada</div><div class="cal-row"><div class="cal-date"><b>🏁</b></div><div class="cal-mid"><div class="cal-t">Cierre de la temporada ${career.season} · ${cap(fmtDate(weekDate((plan[plan.length - 1] || { week: career.week }).week + 1)))}</div></div></div>`;
+            return html;
+        }
+        // Al avanzar de semana se guarda el partido jugado para mostrarlo en el calendario
+        function logWeek() {
+            const c = career.comps[career.cur]; if (!c) return;
+            const r = c.rounds[c.roundIdx];
+            const um = r && r.find(x => x.h === career.clubId || x.a === career.clubId);
+            let res = '<span style="color:#94a3b8">Descansa</span>';
+            if (um && um.played) {
+                const home = um.h === career.clubId, opp = home ? um.a : um.h;
+                const gf = home ? um.hg : um.ag, ga = home ? um.ag : um.hg;
+                const R = gf > ga ? 'G' : gf < ga ? 'P' : (um.pens ? (matchWinner(um) === career.clubId ? 'G' : 'P') : 'E');
+                res = `${crestHTML(opp, 'cal-crest')}<span class="cal-opp">${home ? 'vs' : '@'} ${esc(tTeam(opp).name)}</span><span class="cal-res ${R}">${R}</span><b>${gf}-${ga}${um.pens ? ` <small>(pen ${home ? um.pens.h : um.pens.a}-${home ? um.pens.a : um.pens.h})</small>` : ''}</b>`;
+            } else if (!um && c.phase === 'knockout') res = '<span style="color:#94a3b8">Sin partido (eliminado)</span>';
+            career.weekLog = career.weekLog || [];
+            career.weekLog.push({ week: career.week, key: career.cur, title: roundLabel(c, c.roundIdx), res, season: career.season });
         }
 
         // --- Crear carrera y temporadas ---
@@ -2551,7 +3007,7 @@
                 liga: createComp({ type: 'liga', team: career.clubId, duration: career.duration, perTeam: 99, groups: 3, double: career.length === 'larga' }),
                 copa: createComp({ type: 'copa', team: career.clubId, duration: career.duration, perTeam: 0, groups: 3 })
             };
-            career.week = 1; career.window = 'pre'; career.midDone = false; career.summary = null;
+            career.week = 1; career.window = 'pre'; career.midDone = false; career.summary = null; career.weekLog = [];
             career.cur = pickComp();
             career.totalWeeks = compTotalRounds(career.comps.liga) + compTotalRounds(career.comps.copa);
             career.seasonStats = { apps: 0, goals: 0, ratings: [], wins: 0, draws: 0, losses: 0, income: 0, spent: 0 };
@@ -2562,9 +3018,9 @@
         }
         function newCareer(cfg) {
             career = { v: 1, mode: cfg.mode, clubId: cfg.club, season: 1, week: 1, length: cfg.length, duration: cfg.duration, money: 0,
-                       window: 'pre', news: [], history: [], negot: {}, clubs: [], comps: null, cur: null, offers: [], trainedKey: '', xp: 0, genId: 0, created: Date.now() };
+                       window: 'pre', news: [], history: [], negot: {}, clubs: [], comps: null, cur: null, offers: [], trainedKey: '', xp: 0, genId: 0, created: Date.now(), scouts: [], academy: [], reports: [], youthV: 1 };
             career.clubs = TEAMS.map(t => ({ id: t.id, budget: 300000 + Math.round((teamStrength(t.id) - 80) * 40000),
-                roster: t.roster.map((p, i) => ({ pid: `${t.id}:${i}`, name: p.name, isGK: !!p.isGK, stats: Number(p.stats) || 80, num: p.num || i + 1, age: 18 + hashStr(p.name) % 15, ...(p.locked ? { locked: true } : {}) })) }));
+                roster: t.roster.map((p, i) => ({ pid: `${t.id}:${i}`, name: p.name, isGK: !!p.isGK, stats: Number(p.stats) || 80, num: p.num || i + 1, age: 18 + hashStr(p.name) % 15, nat: 'CL', ...(p.locked ? { locked: true } : {}) })) }));
             if (cfg.mode === 'dt' && cfg.dtKind === 'nuevo') {          // club creado por el usuario
                 const name = (cfg.cName || '').trim() || 'Mi Club FC';
                 const short = cleanShort(cfg.cShort, name);
@@ -2576,6 +3032,7 @@
                 for (let i = 0; i < 8; i++) { const y = genYouth(club); y.stats = rndInt(74, 79); y.age = rndInt(17, 24); }
             }
             dedupeCareer();
+            career.clubs.forEach(c => fillFictional(c)); career.filled = true;
             if (cfg.mode === 'dt') {
                 career.money = career.custom ? 900000 : myClub().budget + 150000;
             } else {
@@ -2638,7 +3095,9 @@
             const um = withTour(c, () => userMatch(curRound()));
             if (um && !um.played) simUserMatch(c, um);
             const phaseBefore = c.phase;
-            withTour(c, () => { simRest(curRound()); advanceTour(); });
+            withTour(c, () => simRest(curRound()));
+            logWeek();
+            withTour(c, () => advanceTour());
             if (phaseBefore !== 'knockout' && c.phase === 'knockout') {
                 const q = c.qualified.includes(career.clubId);
                 addNews(`${TOUR_NAMES[c.type]}: ${c.type === 'liga' ? 'terminó la fase liga' : 'terminó la fase de grupos'}. ${q ? '✅ ¡Tu equipo clasificó!' : '❌ Tu equipo quedó fuera.'}`);
@@ -2648,6 +3107,7 @@
             if (career.mode === 'player') { const w = weeklyWage(); career.money += w; career.seasonStats.income += w; }
             // ventanas de fichajes
             if (career.window) closeWindow();
+            youthWeek();
             career.week++;
             if (!career.midDone && career.week >= Math.round(career.totalWeeks / 2)) {
                 career.window = 'mid'; career.midDone = true; career.negot = {}; career.askedTransfer = false; career.askedLoan = false;
@@ -2710,12 +3170,14 @@
         }
         function newSeason() {
             returnLoans();
+            youthSeason();
             // envejecimiento y progresión
             career.clubs.forEach(club => {
                 club.roster.slice().forEach(p => {
                     p.age++;
                     if (p.me) return;
-                    const d = p.age <= 21 ? rndInt(0, 3) : p.age <= 25 ? rndInt(0, 2) : p.age <= 29 ? rndInt(-1, 1) : p.age <= 32 ? rndInt(-2, 0) : rndInt(-3, -1);
+                    let d = p.age <= 21 ? rndInt(0, 3) : p.age <= 25 ? rndInt(0, 2) : p.age <= 29 ? rndInt(-1, 1) : p.age <= 32 ? rndInt(-2, 0) : rndInt(-3, -1);
+                    if (p.pot && p.age <= 25 && p.pot > p.stats) d = Math.max(d, Math.round((p.pot - p.stats) * 0.3));   // canteranos crecen hacia su potencial
                     p.stats = clamp(p.stats + d, 65, 94);
                     if (p.age >= 36) { club.roster.splice(club.roster.indexOf(p), 1); addNews(`👋 ${p.name} (${tTeam(club.id).name}) se retira.`); }
                 });
@@ -2953,7 +3415,10 @@
             const u = matchStats.homeScore, o = matchStats.awayScore;
             m.hg = careerCtx.userHome ? u : o; m.ag = careerCtx.userHome ? o : u;
             m.played = true; m.sim = false;
-            withTour(c, () => addScorers(matchGoals.filter(g => !g.own).map(g => ({ team: g.forHome ? homeTeam.id : awayTeam.id, name: g.name }))));
+            withTour(c, () => {
+                addScorers(matchGoals.filter(g => !g.own).map(g => ({ team: g.forHome ? homeTeam.id : awayTeam.id, name: g.name, assist: g.assist })));
+                addApps(homeTeam.id, homeTeam.activeStarters.map(p => p.name)); addApps(awayTeam.id, awayTeam.activeStarters.map(p => p.name));
+            });
             const me = myPlayer();
             careerCtx.meGoals = me ? matchGoals.filter(g => g.forHome && !g.own && g.name === me.name).length : 0;
             careerCtx.done = true;
@@ -3071,7 +3536,7 @@
         function careerHomeHTML() {
             const saved = career ? `<div class="tr-saved">${crestHTML(career.clubId, '')}
                 <div style="flex:1;min-width:160px"><div style="font-weight:800;color:#fff">Carrera de ${career.mode === 'dt' ? 'DT' : 'Jugador'} · ${esc(baseTeam(career.clubId).name)}</div>
-                <div style="font-size:12px;color:#94a3b8">Temporada ${career.season} · Semana ${career.week}${career.mode === 'player' ? ' · ' + esc(myPlayer().name) : ''}</div></div>
+                <div style="font-size:12px;color:#94a3b8">Temporada ${career.season} · ${cap(fmtDate(weekDate(career.week), 'short'))}${career.mode === 'player' ? ' · ' + esc(myPlayer().name) : ''}</div></div>
                 <button class="tr-btn pri" data-c="continue">▶ Continuar</button>
                 <button class="tr-btn danger" data-c="quit">${careerConfirm === 'quit' ? '¿Seguro? Toca otra vez' : 'Abandonar'}</button></div>` : '';
             return `<div class="tr-head"><span style="font-size:34px">⭐</span><div class="tr-sp"><h2>MODO CARRERA</h2><p>Temporadas completas con Liga CDA y Copa CDA, fichajes y fondos</p></div>
@@ -3128,22 +3593,32 @@
         }
         function careerHubHTML() {
             const club = myClub(), me = myPlayer(), dt = career.mode === 'dt';
-            const tabs = [['inicio', 'Inicio'], ['liga', 'Liga CDA'], ['copa', 'Copa CDA'], ['plantel', 'Mi plantel'], ['equipos', 'Planteles'], dt ? ['mercado', 'Mercado'] : ['ofertas', 'Ofertas'], dt ? null : ['jugador', 'Mi jugador'], ['historial', 'Historial']].filter(Boolean);
+            const tabs = [['inicio', 'Inicio'], ['competiciones', 'Competiciones'], ['calendario', 'Calendario'], ['plantel', 'Mi plantel'], ['equipos', 'Planteles'], dt ? ['mercado', 'Mercado'] : null, dt ? ['basicas', 'Fuerzas básicas'] : null, dt ? null : ['ofertas', 'Ofertas'], dt ? null : ['jugador', 'Mi jugador'], ['historial', 'Historial']].filter(Boolean);
             let body = '';
             if (careerTab === 'inicio') body = careerInicioHTML();
-            else if (careerTab === 'liga' || careerTab === 'copa') {
-                const c = career.comps[careerTab];
-                const subs = [['tabla', c.type === 'liga' ? 'Tabla' : 'Grupos'], ['llaves', c.type === 'liga' ? 'Play-offs' : 'Llaves'], ['goleadores', 'Goleadores'], ['calendario', 'Resultados']];
-                body = `<div class="cr-sub">${subs.map(([k, l]) => `<button class="${careerSub === k ? 'sel' : ''}" data-c="sub" data-k="${k}">${l}</button>`).join('')}</div>
+            else if (careerTab === 'calendario') body = careerCalendarHTML();
+            else if (careerTab === 'competiciones' || careerTab === 'liga' || careerTab === 'copa') {
+                if (careerTab !== 'competiciones') careerComp = careerTab;
+                const c = career.comps[careerComp];
+                const compCard = (k) => {
+                    const cc = career.comps[k], ttl = withTour(cc, roundTitle);
+                    const me = cc.phase === 'done' ? (cc.champion === career.clubId ? '🏆 ¡Campeón!' : 'Campeón: ' + esc(tTeam(cc.champion).name))
+                        : cc.phase === 'knockout' ? (cc.qualified.includes(career.clubId) && withTour(cc, () => userMatch(curRound())) ? '✅ Sigues en carrera' : '❌ Eliminado')
+                        : (k === 'liga' ? `${withTour(cc, leagueTable).findIndex(r => r.id === career.clubId) + 1}º en la tabla` : (() => { const g = cc.groups.find(g => g.teams.includes(career.clubId)); return g ? `Grupo ${g.name} · ${withTour(cc, () => groupTable(g)).findIndex(r => r.id === career.clubId) + 1}º` : ''; })());
+                    return `<button class="comp-card ${careerComp === k ? 'sel' : ''}" data-c="comp" data-k="${k}"><img src="${TOUR_LOGOS[k]}" alt=""><div><b>${TOUR_NAMES[k]}</b><span>${esc(ttl)}</span><small>${me}</small></div></button>`;
+                };
+                const subs = [['tabla', c.type === 'liga' ? 'Tabla' : 'Grupos'], ['llaves', c.type === 'liga' ? 'Play-offs' : 'Llaves'], ['goleadores', 'Estadísticas'], ['calendario', 'Resultados']];
+                body = `<div class="comp-cards">${compCard('liga')}${compCard('copa')}</div><div class="cr-sub">${subs.map(([k, l]) => `<button class="${careerSub === k ? 'sel' : ''}" data-c="sub" data-k="${k}">${l}</button>`).join('')}</div>
                     <div class="tr-round" style="font-size:20px">${esc(withTour(c, roundTitle))}</div>` + withTour(c, () => tourTabBody(careerSub));
             } else if (careerTab === 'plantel') body = careerPlantelHTML();
             else if (careerTab === 'mercado') body = careerMercadoHTML();
             else if (careerTab === 'ofertas') body = careerOfertasHTML();
             else if (careerTab === 'jugador') body = careerJugadorHTML();
+            else if (careerTab === 'basicas') body = careerBasicasHTML();
             else if (careerTab === 'equipos') body = squadsHTML(career.clubs.map(c => c.id), 'data-c');
             else body = careerHistorialHTML();
             return `<div class="tr-head">${crestHTML(career.clubId, '')}<div class="tr-sp"><h2>${esc(tTeam(career.clubId).name.toUpperCase())}</h2>
-                <p>${dt ? '📋 Carrera de DT' : '🏃 ' + esc(me.name) + ' · media ' + me.stats} · Temporada ${career.season} · Semana ${career.week}</p></div>
+                <p>${dt ? '📋 Carrera de DT' : '🏃 ' + esc(me.name) + ' · media ' + me.stats} · Temporada ${career.season} · 📅 ${cap(fmtDate(weekDate(career.week), 'short'))} ${weekDate(career.week).getFullYear()}</p></div>
                 <div class="cr-money"><small>${dt ? 'Fondos del club' : 'Tus ahorros'}</small>${fmtMoney(career.money)}</div>
                 <button class="tr-btn" data-c="main">⌂</button></div>
                 <div class="tr-tabs">${tabs.map(([k, l]) => `<button class="tr-tab ${careerTab === k ? 'sel' : ''}" data-c="tab" data-k="${k}">${l}</button>`).join('')}</div>${body}`;
@@ -3168,7 +3643,8 @@
             const r = withTour(c, curRound);
             const um = withTour(c, () => userMatch(r));
             const done = roundDone(r);
-            html += `<div class="cr-next"><div class="cr-comp"><img src="${TOUR_LOGOS[c.type]}" alt="">${TOUR_NAMES[c.type]} · ${esc(withTour(c, roundTitle))}</div>`;
+            html += `<div class="cr-next"><div class="cr-comp"><img src="${TOUR_LOGOS[c.type]}" alt="">${TOUR_NAMES[c.type]} · ${esc(withTour(c, roundTitle))}</div>
+                <div style="font-size:13px;color:#e0e7ff;margin-top:4px">📅 ${cap(fmtDate(weekDate(career.week)))} <button class="tr-btn" style="padding:3px 9px;font-size:11px;margin-left:6px" data-c="tab" data-k="calendario">Ver calendario</button></div>`;
             if (um) {
                 const sc = um.played ? `${um.hg} - ${um.ag}${um.pens ? `<div style="font-size:13px;color:#fbbf24">pen. ${um.pens.h}-${um.pens.a}</div>` : ''}` : 'VS';
                 html += `<div class="cr-vs"><div>${crestHTML(um.h, '')}<b>${esc(tTeam(um.h).name)}</b></div><div class="cr-big">${sc}</div><div>${crestHTML(um.a, '')}<b>${esc(tTeam(um.a).name)}</b></div></div>`;
@@ -3200,7 +3676,7 @@
             const st = opts.five && opts.five.includes(p);
             const tags = `${p.isGK ? '<span class="cr-tag gk">POR</span>' : ''}${st ? '<span class="cr-tag st">TITULAR</span>' : ''}${p.me ? '<span class="cr-tag me">TÚ</span>' : ''}${p.loan && p.loan.from !== club.id ? `<span class="cr-tag loan">CEDIDO POR ${esc(tTeam(p.loan.from).short)}</span>` : ''}${p.loan && p.loan.from === club.id ? '<span class="cr-tag loan">A PRÉSTAMO</span>' : ''}`;
             return `<div class="cr-p ${p.me ? 'me' : ''} ${st ? 'st' : ''}">${phHTML(p)}<div class="cr-pn"><b>${p.num ? '#' + p.num + ' ' : ''}${esc(p.name)}</b>
-                <span>${opts.showClub ? crestHTML(club.id, '') + esc(tTeam(club.id).short) + ' · ' : ''}${p.age} años ${tags}</span></div>
+                <span>${opts.showClub ? crestHTML(club.id, '') + esc(tTeam(club.id).short) + ' · ' : ''}${flagHTML(p.nat)} ${p.age} años ${tags}${p.youth && p.pot > p.stats ? ` <span class="cr-tag" style="background:#4c1d95">POT ${potText(p)}</span>` : ''}</span></div>
                 <div class="cr-pr"><span class="cr-val">${fmtMoney(playerValue(p))}</span><span class="cr-ovr">${p.stats}</span>${opts.btn || ''}</div></div>`;
         }
         function careerPlantelHTML() {
@@ -3254,7 +3730,7 @@
                 <div class="cr-bar"><i style="width:${Math.round(career.xp || 0)}%"></i></div>
                 ${photoPickerHTML(me.photo || null, '', 'me', true)}</div>
                 <div class="cr-box"><h4>Temporada ${career.season}</h4>
-                <div class="cr-stat"><span>Partidos</span><b>${S.apps}</b></div><div class="cr-stat"><span>Goles</span><b>${S.goals}</b></div>
+                <div class="cr-stat"><span>Partidos</span><b>${S.apps}</b></div><div class="cr-stat"><span>Goles</span><b>${S.goals}</b></div><div class="cr-stat"><span>Asistencias</span><b>${['liga', 'copa'].reduce((a, k) => a + Object.values(career.comps[k].pstats || {}).filter(s => s.name === me.name).reduce((x, s) => x + s.assists, 0), 0)}</b></div>
                 <div class="cr-stat"><span>Nota media</span><b>${avg}</b></div><div class="cr-stat"><span>Sueldo semanal</span><b style="color:#4ade80">${fmtMoney(weeklyWage())}</b></div>
                 <div class="cr-stat"><span>Valor de mercado</span><b>${fmtMoney(playerValue(me))}</b></div>
                 <div class="cr-stat"><span>Carrera (temporadas anteriores)</span><b>${tot.g} goles · ${tot.p} PJ</b></div></div></div>
@@ -3274,6 +3750,16 @@
 
         function setupCareer() {
             if (career && !career.deduped) { try { dedupeCareer(); saveCareer(); } catch (e) {} }
+            if (career && !career.youthV) {
+                career.clubs.forEach(c => c.roster.forEach(p => { if (!p.nat) p.nat = 'CL'; }));
+                career.scouts = career.scouts || []; career.academy = career.academy || []; career.reports = career.reports || []; career.youthV = 1; saveCareer();
+            }
+            if (career && !career.filled) {      // carreras guardadas: agregar ficticios y fotos
+                try {
+                    career.clubs.forEach(c => { c.roster.forEach(p => { if (String(p.pid).startsWith('gen') && !p.face) { const b = baseTeam(c.id); p.face = hashStr(p.name) + 1; p.faceColor = b ? b.primaryColor : '#475569'; } }); fillFictional(c); });
+                    career.filled = true; saveCareer();
+                } catch (e) {}
+            }
             document.getElementById('btn-career').addEventListener('click', () => openCareer(career ? 'home' : 'home'));
             const el = document.getElementById('menu-career');
             el.addEventListener('input', (e) => {
@@ -3335,6 +3821,7 @@
                 if (t === 'tab') { careerTab = b.dataset.k; if (careerTab === 'equipos') squadSel = null; refreshCareer(true); return; }
                 if (t === 'squad') { squadSel = b.dataset.id; refreshCareer(); return; }
                 if (t === 'sub') { careerSub = b.dataset.k; refreshCareer(); return; }
+                if (t === 'comp') { careerComp = b.dataset.k; refreshCareer(); return; }
                 if (t === 'play') { careerPlay(); return; }
                 if (t === 'simme') {
                     refreshTeamSource();
@@ -3354,6 +3841,20 @@
                 }
                 if (t === 'offer') { openOfferModal(b.dataset.id); return; }
                 if (t === 'sell') { openSellModal(b.dataset.id); return; }
+                if (t === 'schire') { openScoutHire(); return; }
+                if (t === 'scsend') { openScoutMission(b.dataset.id); return; }
+                if (t === 'scfire') { career.scouts = career.scouts.filter(s => s.id !== b.dataset.id); saveCareer(); refreshCareer(); return; }
+                if (t === 'ysign') {
+                    const p = career.reports.find(x => x.pid === b.dataset.id); if (!p) return;
+                    if (career.academy.length >= 10) { alertCareer('La academia está llena (máximo 10). Sube o libera a alguien.'); return; }
+                    if (career.money < p.fee) { alertCareer('No tienes fondos suficientes para ficharlo.'); return; }
+                    career.money -= p.fee; career.reports = career.reports.filter(x => x !== p); career.academy.push(p);
+                    addNews(`🌱 ${p.name} (${(NATIONS[p.nat] || ['?'])[0]}, ${p.age} años) se une a las fuerzas básicas.`);
+                    saveCareer(); refreshCareer(); return;
+                }
+                if (t === 'ydrop') { career.reports = career.reports.filter(x => x.pid !== b.dataset.id); saveCareer(); refreshCareer(); return; }
+                if (t === 'yup') { if (!promoteYouth(b.dataset.id)) alertCareer('Tu plantel está lleno (máximo 16). Vende, cede o libera a alguien primero.'); saveCareer(); refreshCareer(); return; }
+                if (t === 'yfree') { const p = career.academy.find(x => x.pid === b.dataset.id); career.academy = career.academy.filter(x => x !== p); if (p) addNews(`👋 ${p.name} fue liberado de la academia.`); saveCareer(); refreshCareer(); return; }
                 if (t === 'loan') { openLoanModal(b.dataset.id); return; }
                 if (t === 'loanout') { openLoanOutModal(b.dataset.id); return; }
                 if (t === 'asklo') { career.askedLoan = true; genLoanOffers(); saveCareer(); refreshCareer(); return; }
@@ -3367,6 +3868,235 @@
                     saveCareer(); refreshCareer(); return;
                 }
             });
+        }
+
+        // =====================================================================
+        // --- CONTROLES (PS4 / PS5 / Xbox / genéricos) con la Gamepad API ---
+        // =====================================================================
+        // Mapeo estándar: 0=A/✕ 1=B/◯ 2=X/□ 3=Y/△ 4=LB/L1 5=RB/R1 6=LT/L2 7=RT/R2 8=Back/Share 9=Start/Options 12-15=cruceta
+        const padStick = [{ active: false, dx: 0, dy: 0 }, { active: false, dx: 0, dy: 0 }];
+        const padPrev = [{}, {}];
+        let padNavCooldown = 0, padCount = 0;
+        const PAD_KEYS = [['Pass', 'pass'], ['Shoot', 'shoot'], ['Through', 'through'], ['Switch', 'switch'], ['Sprint', 'sprint']];
+        function padType(id) {
+            id = (id || '').toLowerCase();
+            if (/xbox|xinput|045e/.test(id)) return 'xbox';
+            if (/dualsense|dualshock|wireless controller|054c|playstation|ps4|ps5/.test(id)) return 'ps';
+            return 'gen';
+        }
+        function padList() { try { return [...(navigator.getGamepads ? navigator.getGamepads() : [])].filter(Boolean); } catch (e) { return []; } }
+        function rumble(strong, weak, ms) {
+            padList().forEach(g => { try { g.vibrationActuator && g.vibrationActuator.playEffect('dual-rumble', { duration: ms, strongMagnitude: strong, weakMagnitude: weak }); } catch (e) {} });
+        }
+        function padToast(msg) {
+            let t = document.getElementById('pad-toast');
+            if (!t) { t = document.createElement('div'); t.id = 'pad-toast'; document.body.appendChild(t); }
+            t.textContent = msg; t.classList.add('show');
+            clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 3200);
+        }
+        function padVisibleFocusables() {
+            const root = ['#tour-pens', '#tour-draw', '#career-modal', '#colors-panel', '#settings-panel', '#pause-menu', '#halftime-panel', '#modal-controls']
+                .map(s => document.querySelector(s)).find(el => el && !el.classList.contains('hidden') && getComputedStyle(el).display !== 'none')
+                || document.getElementById('ui-layer');
+            return [...root.querySelectorAll('button, select, input, [data-c], [data-t], .tr-card, .tr-team')]
+                .filter(el => !el.disabled && el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden');
+        }
+        function padMoveFocus(dir) {
+            const els = padVisibleFocusables(); if (!els.length) return;
+            const cur = document.activeElement;
+            const r0 = cur && els.includes(cur) ? cur.getBoundingClientRect() : null;
+            let best = null, bd = 1e9;
+            if (!r0) best = els[0];
+            else els.forEach(el => {
+                if (el === cur) return;
+                const r = el.getBoundingClientRect();
+                const dx = (r.left + r.width / 2) - (r0.left + r0.width / 2), dy = (r.top + r.height / 2) - (r0.top + r0.height / 2);
+                const ok = dir === 'down' ? dy > 4 : dir === 'up' ? dy < -4 : dir === 'right' ? dx > 4 : dx < -4;
+                if (!ok) return;
+                const d = (dir === 'down' || dir === 'up') ? Math.abs(dy) + Math.abs(dx) * 2.5 : Math.abs(dx) + Math.abs(dy) * 2.5;
+                if (d < bd) { bd = d; best = el; }
+            });
+            if (best) { if (!best.hasAttribute('tabindex') && !/^(BUTTON|SELECT|INPUT|A)$/.test(best.tagName)) best.setAttribute('tabindex', '-1'); best.focus({ preventScroll: false }); best.scrollIntoView({ block: 'nearest' }); document.body.classList.add('pad-nav'); }
+        }
+        function pollPads(dt) {
+            const pads = padList();
+            if (pads.length !== padCount) {
+                if (pads.length > padCount) { const g = pads[pads.length - 1]; const ty = padType(g.id); padToast(`🎮 Control conectado: ${ty === 'ps' ? 'PlayStation' : ty === 'xbox' ? 'Xbox' : 'genérico'}${pads.length > 1 ? ' (jugador ' + pads.length + ')' : ''}`); }
+                else padToast('🎮 Control desconectado');
+                padCount = pads.length;
+                document.body.classList.toggle('pad-on', padCount > 0);
+            }
+            padNavCooldown = Math.max(0, padNavCooldown - dt);
+            if (padCapture(pads)) return;                      // asignando un botón en Ajustes
+            const pm = padMap();
+            const inMatch = ['PLAYING', 'GOAL', 'REPLAY'].includes(gameState);
+            for (let i = 0; i < 2; i++) {
+                const g = pads[i];
+                const pre = 'Pad' + i;
+                const st = padStick[i];
+                if (!g) { st.active = false; PAD_KEYS.forEach(([a]) => keys[pre + a] = false); ['Up', 'Down', 'Left', 'Right'].forEach(a => keys[pre + a] = false); continue; }
+                const btn = (n) => !!(g.buttons[n] && (g.buttons[n].pressed || g.buttons[n].value > 0.5));
+                const prev = padPrev[i];
+                const edge = (n) => btn(n) && !prev[n];
+                // stick analógico con zona muerta
+                const right = settings.padMove === 'right';
+                let ax = g.axes[right ? 2 : 0] || 0, ay = g.axes[right ? 3 : 1] || 0;
+                const mag = Math.hypot(ax, ay);
+                if (mag > 0.22) { const s = Math.min(1, (mag - 0.22) / 0.7) / mag; st.active = true; st.dx = ax * s; st.dy = ay * s; }
+                else st.active = false;
+                keys[pre + 'Up'] = btn(12); keys[pre + 'Down'] = btn(13); keys[pre + 'Left'] = btn(14); keys[pre + 'Right'] = btn(15);
+                PAD_KEYS.forEach(([a, key]) => {
+                    const on = pm[key].some(n => n >= 0 && btn(n));
+                    if (on && !keys[pre + a]) keyTaps[pre + a] = true;
+                    keys[pre + a] = on;
+                });
+                // Start/Options: pausa · en pausa vuelve al partido
+                if (pm.pause.some(n => n >= 0 && edge(n))) { if (gameState === 'PAUSED') resumeGame(); else if (inMatch) openPause(); }
+                if (gameState === 'REPLAY' && (edge(1) || edge(0) || pm.pause.some(n => n >= 0 && edge(n)))) endReplay();
+                // Menús: cruceta o stick para moverse, A/✕ para elegir, B/◯ para volver
+                if (!inMatch && i === 0) {
+                    const splash = document.getElementById('splash');
+                    if (splash && splash.offsetParent !== null && pads.length && [0, 1, 2, 3, 9].some(edge)) splash.click();
+                    let dir = null;
+                    if (btn(12) || ay < -0.6) dir = 'up'; else if (btn(13) || ay > 0.6) dir = 'down'; else if (btn(14) || ax < -0.6) dir = 'left'; else if (btn(15) || ax > 0.6) dir = 'right';
+                    if (dir && padNavCooldown <= 0) { padMoveFocus(dir); padNavCooldown = 0.18; }
+                    if (!dir) padNavCooldown = Math.min(padNavCooldown, 0.02);
+                    if (edge(0)) { const el = document.activeElement; if (el && el !== document.body && padVisibleFocusables().includes(el)) el.click(); else padMoveFocus('down'); }
+                    if (edge(1)) {
+                        if (gameState === 'PAUSED') resumeGame();
+                        else {
+                            const back = padVisibleFocusables().find(el => el.matches('[data-x=close], #btn-back-main, #btn-back-setup, [data-c=home], [data-t=home], #btn-close-controls, #btn-ok-controls, #td-skip, #tp-skip'));
+                            if (back) back.click();
+                        }
+                    }
+                }
+                for (let n = 0; n < g.buttons.length; n++) prev[n] = btn(n);
+            }
+        }
+        window.addEventListener('gamepadconnected', () => pollPads(0));
+        window.addEventListener('gamepaddisconnected', () => pollPads(0));
+        // --- MOUSE en PC: apuntar con el cursor · clic izq = pase · clic der = tiro · rueda (clic) = filtrado ---
+        const mouseAim = { x: 0, y: 0, t: 0 };
+        const mouseHeld = {};
+        function mouseActive() {
+            return (!window.settings || settings.mouseAim !== false) && performance.now() - mouseAim.t < 3000 && document.body.classList.contains('in-match');
+        }
+        function mouseAngle(p) { return Math.atan2(mouseAim.y - p.y, mouseAim.x - p.x); }
+        function setupMouseAim() {
+            const fine = () => matchMedia('(pointer: fine)').matches;
+            canvas.addEventListener('mousemove', (e) => { if (!fine()) return; const w = screenToWorld(e.clientX, e.clientY); mouseAim.x = w.x; mouseAim.y = w.y; mouseAim.t = performance.now(); });
+            canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+            canvas.addEventListener('mousedown', (e) => {
+                if (!fine() || gameState !== 'PLAYING' || (window.settings && settings.mouseAim === false)) return;
+                const w = screenToWorld(e.clientX, e.clientY); mouseAim.x = w.x; mouseAim.y = w.y; mouseAim.t = performance.now();
+                const side = humanSides.home, cur = side.current;
+                if (e.button === 1) e.preventDefault();
+                const act = mouseMap()[['left', 'middle', 'right'][e.button]];
+                if (!act || act === 'none') return;
+                if (act === 'pass' && !(cur && ball.holder === cur) && !lockMe) {   // sin balón: clic sobre un compañero = elegirlo
+                    let best = null, bd = 1e9;
+                    players.forEach(q => { if (q.isHome && !q.isGK) { const d = Math.hypot(q.x - w.x, q.y - w.y); if (d < bd) { bd = d; best = q; } } });
+                    if (best && bd < 26 && best !== cur) { manualSwitch(side, best); return; }
+                }
+                const kn = 'Mouse' + act.charAt(0).toUpperCase() + act.slice(1);
+                keys[kn] = true; keyTaps[kn] = true;
+                mouseHeld[e.button] = kn;
+            });
+            window.addEventListener('mouseup', (e) => { if (mouseHeld[e.button]) { keys[mouseHeld[e.button]] = false; mouseHeld[e.button] = null; } });
+            window.addEventListener('blur', () => { Object.keys(mouseHeld).forEach(b => { if (mouseHeld[b]) keys[mouseHeld[b]] = false; mouseHeld[b] = null; }); });
+        }
+        // pase hacia el cursor: si hay un compañero cerca del puntero, va directo a él
+        function mousePassTarget(p) {
+            let best = null, bd = 1e9;
+            players.forEach(q => { if (q !== p && q.isHome === p.isHome && !q.isGK) { const d = Math.hypot(q.x - mouseAim.x, q.y - mouseAim.y); if (d < bd) { bd = d; best = q; } } });
+            return best && bd < 60 ? best : null;
+        }
+
+        // --- Botones personalizables del control y del mouse ---
+        const DEFAULT_PAD = { pass: [0, -1], shoot: [2, 1], through: [3, -1], sprint: [5, 7], switch: [4, -1], pause: [9, -1] };
+        const DEFAULT_MOUSE = { left: 'pass', right: 'shoot', middle: 'through' };
+        const PAD_ROWS = [['pass', 'Pase / Presión'], ['shoot', 'Tiro / Barrida'], ['through', 'Pase filtrado'], ['sprint', 'Correr'], ['switch', 'Cambiar jugador'], ['pause', 'Pausa']];
+        const MOUSE_OPTS = [['pass', 'Pase'], ['shoot', 'Tiro'], ['through', 'Pase filtrado'], ['sprint', 'Correr'], ['switch', 'Cambiar jugador'], ['none', 'Nada']];
+        const PS_NAMES = ['✕', '◯', '□', '△', 'L1', 'R1', 'L2', 'R2', 'Share', 'Options', 'L3', 'R3', '↑', '↓', '←', '→', 'PS'];
+        const XB_NAMES = ['A', 'B', 'X', 'Y', 'LB', 'RB', 'LT', 'RT', 'Back', 'Start', 'LS', 'RS', '↑', '↓', '←', '→', 'Xbox'];
+        let padRebind = null;
+        function padMap() {
+            const m = (window.settings && settings.padMap) || {};
+            const out = {};
+            Object.keys(DEFAULT_PAD).forEach(k => out[k] = Array.isArray(m[k]) ? m[k] : DEFAULT_PAD[k].slice());
+            return out;
+        }
+        function mouseMap() { return Object.assign({}, DEFAULT_MOUSE, (window.settings && settings.mouseMap) || {}); }
+        function padBtnLabel(i) {
+            if (i == null || i < 0) return '—';
+            const g = padList()[0], ty = g ? padType(g.id) : null;
+            if (ty === 'ps') return PS_NAMES[i] || 'Botón ' + i;
+            if (ty === 'xbox') return XB_NAMES[i] || 'Botón ' + i;
+            return (PS_NAMES[i] && XB_NAMES[i]) ? (PS_NAMES[i] === XB_NAMES[i] ? PS_NAMES[i] : `${PS_NAMES[i]} / ${XB_NAMES[i]}`) : 'Botón ' + i;
+        }
+        function renderPadTable() {
+            const tb = document.getElementById('set-pad'); if (!tb) return;
+            const m = padMap();
+            tb.innerHTML = '';
+            PAD_ROWS.forEach(([act, label]) => {
+                const row = document.createElement('div'); row.className = 'set-keyrow';
+                const name = document.createElement('span'); name.textContent = label; row.appendChild(name);
+                [0, 1].forEach(idx => {
+                    const b = document.createElement('button'); b.type = 'button'; b.className = 'set-key';
+                    const waiting = padRebind && padRebind.act === act && padRebind.idx === idx;
+                    b.textContent = waiting ? 'Presiona…' : padBtnLabel(m[act][idx]);
+                    if (waiting) b.classList.add('wait');
+                    b.addEventListener('click', () => {
+                        if (waiting) { padRebind = null; renderPadTable(); return; }
+                        padRebind = { act, idx, t: performance.now() };
+                        renderPadTable();
+                    });
+                    b.addEventListener('contextmenu', (e) => { e.preventDefault(); const mm = padMap(); mm[act][idx] = -1; settings.padMap = mm; saveSettings(); renderPadTable(); });
+                    row.appendChild(b);
+                });
+                tb.appendChild(row);
+            });
+            const mv = document.getElementById('set-padmove'); if (mv) mv.value = settings.padMove || 'left';
+            const info = document.getElementById('set-pad-info');
+            if (info) { const g = padList()[0]; info.textContent = g ? `Control detectado: ${padType(g.id) === 'ps' ? 'PlayStation' : padType(g.id) === 'xbox' ? 'Xbox' : 'genérico'}` : 'Conecta un control y presiona un botón para que lo detecte.'; }
+            const mm = mouseMap();
+            ['left', 'right', 'middle'].forEach(k => { const s = document.getElementById('set-mouse-' + k); if (s) s.value = mm[k]; });
+        }
+        function padCapture(pads) {          // en modo "Presiona…": el siguiente botón queda asignado
+            if (!padRebind) return false;
+            if (performance.now() - padRebind.t > 8000) { padRebind = null; renderPadTable(); return true; }
+            for (const g of pads) {
+                for (let n = 0; n < g.buttons.length; n++) {
+                    const on = g.buttons[n] && (g.buttons[n].pressed || g.buttons[n].value > 0.5);
+                    if (on) {
+                        if (padRebind.armed) {
+                            const m = padMap();
+                            Object.keys(m).forEach(a => m[a] = m[a].map(x => (x === n && !(a === padRebind.act)) ? -1 : x));   // no repetir botón en dos acciones
+                            m[padRebind.act][padRebind.idx] = n;
+                            settings.padMap = m; saveSettings();
+                            padRebind = null; renderPadTable();
+                            padPrev[0] = {}; padPrev[1] = {};
+                            for (let i = 0; i < 2; i++) for (let k = 0; k < 20; k++) padPrev[i][k] = true;   // que este botón no dispare nada más
+                            return true;
+                        }
+                    }
+                }
+            }
+            // espera a que se suelten todos los botones antes de escuchar (evita tomar el mismo clic)
+            if (!padRebind.armed) padRebind.armed = pads.every(g => g.buttons.every(b => !(b.pressed || b.value > 0.5)));
+            return true;
+        }
+        function setupBindings() {
+            const mv = document.getElementById('set-padmove');
+            if (mv) mv.addEventListener('change', (e) => { settings.padMove = e.target.value; saveSettings(); });
+            ['left', 'right', 'middle'].forEach(k => {
+                const s = document.getElementById('set-mouse-' + k);
+                if (s) s.addEventListener('change', (e) => { const mm = mouseMap(); mm[k] = e.target.value; settings.mouseMap = mm; saveSettings(); });
+            });
+            const rp = document.getElementById('set-reset-pad');
+            if (rp) rp.addEventListener('click', () => { settings.padMap = JSON.parse(JSON.stringify(DEFAULT_PAD)); settings.padMove = 'left'; padRebind = null; saveSettings(); renderPadTable(); });
+            const rm = document.getElementById('set-reset-mouse');
+            if (rm) rm.addEventListener('click', () => { settings.mouseMap = Object.assign({}, DEFAULT_MOUSE); saveSettings(); renderPadTable(); });
         }
 
         function initGame() {
@@ -3389,6 +4119,8 @@
             setupSettings();
             setupTournaments();
             setupCareer();
+            setupMouseAim();
+            setupBindings();
             requestAnimationFrame(gameLoop);
         }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGame);
@@ -3843,14 +4575,14 @@
                 : `<span class="${p.natGK ? 'bg-amber-600 text-white' : 'bg-slate-700 text-slate-300'} px-1.5 py-0.5 rounded text-[10px]">${p.natGK ? 'GK' : 'SUP'}</span>`;
             const right = isStarter
                 ? `<button type="button" class="lu-gk px-2 py-1 rounded text-[10px] font-bold ${p.isGK ? 'bg-amber-500/30 text-amber-300 border border-amber-500' : 'bg-slate-700 text-slate-300 hover:bg-amber-500 hover:text-slate-950'} transition" onclick="setAsGoalkeeper('${side}', ${idx})">${p.isGK ? 'Es Portero' : 'Hacer GK'}</button>`
-                : `<span class="text-slate-400 font-mono text-[11px]">${p.stats} PTS</span>`;
+                : '';
             const initials = p.name.split(' ').map(w => w[0]).slice(0, 2).join('');
             const avatar = p.photo
                 ? `<img class="lu-photo" src="${p.photo}" alt="" draggable="false">`
                 : `<span class="lu-photo lu-initials">${initials}</span>`;
             const num = `<input class="lu-num" type="number" min="1" max="99" value="${p.num || ''}" title="Dorsal" aria-label="Dorsal de ${p.name}" onchange="setPlayerNumber('${side}', ${JSON.stringify(p.name).replace(/"/g, '&quot;')}, this.value)">`;
             return `<span class="lu-handle" title="Arrastrar">⋮⋮</span>${avatar}${num}
-                <div class="flex items-center gap-2 flex-1 min-w-0">${tag}<span class="font-bold truncate">${p.name}</span></div>
+                <div class="flex items-center gap-2 flex-1 min-w-0">${tag}<span class="font-bold truncate">${p.name}</span></div><span class="lu-ovr" title="Media">${p.stats}</span>
                 <div class="flex items-center gap-2">${right}</div>`;
         }
 
@@ -4099,6 +4831,7 @@
             ball.isShot = !!isShot;
             ball.gkTried = null;
             ball.lastTouch = p;
+            if (!isShot) ball.lastPass = p;                      // para contar asistencias
             if (kickoff.active) kickoff.active = false;          // el saque se completó
             ball.shotByHome = p.isHome;
             ball.passTarget = null;
@@ -4186,6 +4919,8 @@
                 if (p.isHome) matchStats.homeSaves++; else matchStats.awaySaves++;
             }
             ball.holder = p;
+            p.assistFrom = (ball.lastPass && ball.lastPass !== p && ball.lastPass.isHome === p.isHome) ? ball.lastPass : null;
+            if (ball.lastPass && ball.lastPass.isHome !== p.isHome) ball.lastPass = null;
             ball.lastTouch = p;
             ball.vx = 0; ball.vy = 0;
             ball.isShot = false;
@@ -4457,6 +5192,7 @@
         function setupTapToSelect() {
             canvas.addEventListener('pointerdown', (e) => {
                 if (gameState !== 'PLAYING') return;
+                if (e.pointerType === 'mouse' && matchMedia('(pointer: fine)').matches && settings.mouseAim !== false) return;   // el mouse tiene su propio control
                 const w = screenToWorld(e.clientX, e.clientY);
                 const side = humanSides.home;
                 let best = null, bd = 1e9;
@@ -4520,6 +5256,8 @@
             let dx = 0, dy = 0;
             if (ck.up) dy -= 1; if (ck.down) dy += 1; if (ck.left) dx -= 1; if (ck.right) dx += 1;
             if (side.isHome && touchStick.active) { dx = touchStick.dx; dy = touchStick.dy; }
+            const pst = padStick[side.isHome ? 0 : 1];
+            if (pst && pst.active) { dx = pst.dx; dy = pst.dy; }          // stick analógico del control
             const len = Math.hypot(dx, dy);
             if (len > 1) { dx /= len; dy /= len; }
             const hasBall = ball.holder === p;
@@ -4559,6 +5297,14 @@
                     const pw = tap ? null : p.passPower / 100;
                     const kind = p.passCharging;
                     p.passCharging = null; p.passPower = 0;
+                    const mAim = side.isHome && mouseActive();
+                    if (mAim) {                                                     // apuntado con el mouse
+                        const ang = mouseAngle(p);
+                        if (kind === 'through') { throughPass(p, ang, pw); return; }
+                        const mt = mousePassTarget(p);
+                        if (mt) precisePass(p, mt, pw); else manualPass(p, ang, bestPassTarget(p, true, ang), pw);
+                        return;
+                    }
                     if (kind === 'through') { throughPass(p, p.angle, pw); return; }
                     const best = bestPassTarget(p, true, p.angle);
                     if (settings.passAssist && best) precisePass(p, best.p, pw);   // asistencia: exacto al compañero
@@ -4578,7 +5324,12 @@
                     p.isChargingShot = false; p.kickPower = 0;
                     if (side.isHome) document.getElementById('power-bar-container').classList.add('hidden');
                     const toGoal = Math.atan2(MID_Y - p.y, p.oppGoalX - p.x);
-                    if (p.isGK) {
+                    if (side.isHome && mouseActive()) {                            // tiro apuntado con el mouse
+                        const ang = mouseAngle(p);
+                        p.angle = ang;
+                        if (!p.isGK && Math.cos(toGoal - ang) > 0.1) shoot(p, power, clamp(mouseAim.y, GOAL_TOP + 6, GOAL_BOTTOM - 6) + (Math.random() - 0.5) * 14);
+                        else kickBall(p, ang, (p.isGK ? 11 : 9) + power * (p.isGK ? 9 : 11), false);
+                    } else if (p.isGK) {
                         kickBall(p, p.angle, 11 + power * 9, false);                       // portero: saque largo hacia donde mira
                     } else if (Math.cos(toGoal - p.angle) > 0.1) {
                         shoot(p, power, MID_Y + dy * 48 + (Math.random() - 0.5) * 20);   // apunta con el joystick
@@ -4818,6 +5569,7 @@
         function gameLoop(now) {
             const dt = Math.min((now - lastFrameTime) / 1000, 0.1); // evita saltos del reloj al volver a la app
             lastFrameTime = now;
+            try { pollPads(dt); } catch (e) {}
 
             if (gameState === 'PLAYING' && !isPausedForDevice()) {
                 updateGameLogic(dt);
@@ -4839,22 +5591,24 @@
         }
         function buildControls(k, held) {
             const any = (prof, act, fn) => (settings.keys[prof][act] || []).some(c => c && fn(c));
-            const read = (prof, touch) => {
-                const shootHeld = any(prof, 'shoot', held) || (touch && held('TouchShoot'));
-                const shootAny = any(prof, 'shoot', k) || (touch && k('TouchShoot'));
+            const read = (prof, touch, pi) => {
+                const P = (a, fn) => fn('Pad' + pi + a);                       // control (PS/Xbox)
+                const M = (a, fn) => touch && fn('Mouse' + a);                 // mouse (solo jugador 1)
+                const shootHeld = any(prof, 'shoot', held) || (touch && held('TouchShoot')) || P('Shoot', held) || M('Shoot', held);
+                const shootAny = any(prof, 'shoot', k) || (touch && k('TouchShoot')) || P('Shoot', k) || M('Shoot', k);
                 return {
-                    up: any(prof, 'up', k), down: any(prof, 'down', k), left: any(prof, 'left', k), right: any(prof, 'right', k),
+                    up: any(prof, 'up', k) || P('Up', held), down: any(prof, 'down', k) || P('Down', held), left: any(prof, 'left', k) || P('Left', held), right: any(prof, 'right', k) || P('Right', held),
                     shoot: shootHeld, shootTap: shootAny && !shootHeld,
-                    pass: any(prof, 'pass', k) || (touch && k('TouchPass')),
-                    passHeld: any(prof, 'pass', held) || (touch && held('TouchPass')),
-                    throughHeld: any(prof, 'through', held) || (touch && held('TouchThrough')),
-                    sprint: any(prof, 'sprint', k) || (touch && k('TouchSprint')),
-                    switch: any(prof, 'switch', k) || (touch && k('TouchSwitch')),
-                    through: any(prof, 'through', k) || (touch && k('TouchThrough'))
+                    pass: any(prof, 'pass', k) || (touch && k('TouchPass')) || P('Pass', k) || M('Pass', k),
+                    passHeld: any(prof, 'pass', held) || (touch && held('TouchPass')) || P('Pass', held) || M('Pass', held),
+                    throughHeld: any(prof, 'through', held) || (touch && held('TouchThrough')) || P('Through', held) || M('Through', held),
+                    sprint: any(prof, 'sprint', k) || (touch && k('TouchSprint')) || P('Sprint', held) || M('Sprint', held),
+                    switch: any(prof, 'switch', k) || (touch && k('TouchSwitch')) || P('Switch', k) || M('Switch', k),
+                    through: any(prof, 'through', k) || (touch && k('TouchThrough')) || P('Through', k) || M('Through', k)
                 };
             };
-            if (gameMode === '2P') return { p1: read('p1', true), p2: read('p2', false) };
-            return { p1: read('solo', true), p2: null };
+            if (gameMode === '2P') return { p1: read('p1', true, 0), p2: read('p2', false, 1) };
+            return { p1: read('solo', true, 0), p2: null };
         }
 
         function updateGameLogic(dt) {
@@ -5065,7 +5819,8 @@
             const own = !!sc && sc.isHome !== forHome;
             const elapsed = secondHalf ? matchDuration / 2 - gameTimer : matchDuration - gameTimer;
             const mm = Math.floor(Math.max(0, elapsed) / 60), ss = Math.floor(Math.max(0, elapsed) % 60).toString().padStart(2, '0');
-            const goal = { forHome, name: sc ? sc.name : 'Desconocido', num: sc ? sc.num : null, own,
+            const assist = (!own && sc && sc.assistFrom && sc.assistFrom.isHome === sc.isHome && sc.assistFrom !== sc) ? sc.assistFrom.name : null;
+            const goal = { forHome, assist, name: sc ? sc.name : 'Desconocido', num: sc ? sc.num : null, own,
                            photo: sc ? sc.photo : null, logo: (forHome ? homeTeam : awayTeam).logo || null,
                            team: (forHome ? homeTeam : awayTeam).name, minute: `${secondHalf ? '2T' : '1T'} ${mm}:${ss}` };
             matchGoals.push(goal);
@@ -5193,7 +5948,7 @@
                 list.forEach(g => {
                     const li = document.createElement('li');
                     li.className = 'text-slate-200';
-                    li.textContent = `⚽ ${g.name}${g.num ? ' #' + g.num : ''}${g.own ? ' (autogol)' : ''} · ${g.minute}`;
+                    li.textContent = `⚽ ${g.name}${g.num ? ' #' + g.num : ''}${g.own ? ' (autogol)' : ''}${g.assist ? ' (asist. ' + g.assist + ')' : ''} · ${g.minute}`;
                     ul.appendChild(li);
                 });
             };
@@ -5343,6 +6098,13 @@
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(-22 + 44 * ideal - 0.75, p.radius + 7, 1.5, 10);
             }
+            // Mira del mouse (PC)
+            if (p.controlled && p.isHome && mouseActive()) {
+                const cx = mouseAim.x - p.x, cy = mouseAim.y - p.y;
+                ctx.strokeStyle = 'rgba(253,224,71,.9)'; ctx.lineWidth = 1.8;
+                ctx.beginPath(); ctx.arc(cx, cy, 9, 0, Math.PI * 2); ctx.moveTo(cx - 14, cy); ctx.lineTo(cx - 4, cy); ctx.moveTo(cx + 4, cy); ctx.lineTo(cx + 14, cy);
+                ctx.moveTo(cx, cy - 14); ctx.lineTo(cx, cy - 4); ctx.moveTo(cx, cy + 4); ctx.lineTo(cx, cy + 14); ctx.stroke();
+            }
             // Flecha de apuntado (Ajustes): muestra hacia dónde irá el tiro o el pase
             if (p.controlled && ball.holder === p && window.settings && settings.aimArrow) {
                 let tx, ty, col;
@@ -5355,6 +6117,11 @@
                     const best = bestPassTarget(p, true, p.angle);
                     if (best && settings.passAssist) { tx = best.p.x; ty = best.p.y; col = '#34d399'; }   // asistido: apunta al compañero
                     else { tx = p.x + Math.cos(p.angle) * 110; ty = p.y + Math.sin(p.angle) * 110; col = best ? '#34d399' : '#fde047'; }
+                }
+                if (p.isHome && mouseActive()) {
+                    const mt = !p.isChargingShot && mousePassTarget(p);
+                    tx = mt ? mt.x : mouseAim.x; ty = mt ? mt.y : mouseAim.y;
+                    if (!p.isChargingShot && !mt) col = '#fde047';
                 }
                 const ang = Math.atan2(ty - p.y, tx - p.x);
                 const full = Math.hypot(tx - p.x, ty - p.y);
