@@ -262,15 +262,30 @@
         .kit-pick { display: flex; align-items: center; gap: 6px; font: 700 10px Inter, sans-serif; color: #94a3b8; text-transform: uppercase; letter-spacing: .05em; cursor: pointer; }
         .kit-pick input { width: 30px; height: 22px; border: 1px solid #475569; border-radius: 6px; background: none; padding: 0; cursor: pointer; }
         .lu-ovr { flex-shrink: 0; min-width: 30px; text-align: center; font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; color: #fde047; background: rgba(250,204,21,.1); border: 1px solid rgba(250,204,21,.35); border-radius: 7px; padding: 2px 4px 0; }
-        @media (max-width: 560px) {
-            .lu-row { flex-wrap: wrap; row-gap: 4px; }
-            .lu-row > div.flex-1 { min-width: 0; flex: 1 1 0; }
-            .lu-row > div:last-child { flex-basis: 100%; justify-content: flex-end; }
+        /* Alineación compacta para celulares (horizontal y vertical) y tablets: nombre completo + media siempre visibles */
+        @media (max-width: 1024px), (max-height: 520px) {
+            #menu-lineup { padding: 14px !important; }
+            #menu-lineup > div:first-child h2 { font-size: 24px; }
+            #menu-lineup .grid { gap: 12px !important; }
+            #menu-lineup .grid > div { padding: 10px !important; }
+            #menu-lineup .grid > div > div:first-child { flex-wrap: wrap; row-gap: 6px; }
+            #lineup-home-title, #lineup-away-title { font-size: 20px !important; line-height: 1; }
+            #menu-lineup .text-\[11px\] { font-size: 10px; }
+            .lu-row { flex-wrap: nowrap !important; gap: 6px !important; padding: 6px 7px !important; min-width: 0; overflow: hidden; }
+            .lu-row > div.flex-1 { min-width: 0; flex: 1 1 auto; gap: 4px !important; }
+            .lu-row .truncate { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; line-height: 1.12; font-size: 12.5px; word-break: break-word; }
+            .lu-row > div.flex-1 > span:first-child { display: none; }                         /* CAMPO / SUP fuera */
+            .lu-row > div.flex-1 > span.bg-amber-500, .lu-row > div.flex-1 > span.bg-amber-600 { display: inline-flex; font-size: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; }
+            .lu-row > div.flex-1 > span.bg-amber-500::before, .lu-row > div.flex-1 > span.bg-amber-600::before { content: '🧤'; font-size: 14px; }
+            .lu-handle { padding: 2px 0; font-size: 12px; }
+            .lu-photo { width: 24px; height: 24px; }
+            .lu-num { width: 28px; font-size: 10px; padding: 2px 0; }
+            .lu-ovr { font-size: 19px; min-width: 28px; padding: 1px 3px 0; }
+            .lu-row > div:last-child { flex: 0 0 auto; gap: 0 !important; }
             .lu-row > div:last-child:empty { display: none; }
-            .lu-row .lu-gk { padding: 3px 8px !important; font-size: 10px !important; }
-            .lu-row > div.flex-1 > span:first-child { display: none; }   /* etiquetas fuera en celular: el botón ya indica quién es portero */
-            .lu-num { width: 28px; }
-            .lu-ovr { font-size: 20px; min-width: 28px; }
+            .lu-row .lu-gk { font-size: 0 !important; padding: 4px 6px !important; min-width: 30px; line-height: 1; }
+            .lu-row .lu-gk::before { content: '🧤'; font-size: 14px; }
+            .lu-row .lu-gk.bg-amber-500\/30::before { content: '🧤✓'; font-size: 12px; }
         }
         .lu-photo { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 1px solid rgba(255,255,255,.25); background: #1e293b; }
         .lu-initials { display: inline-flex; align-items: center; justify-content: center; font: 800 9px Inter, sans-serif; color: #cbd5e1; }
@@ -615,6 +630,11 @@
         .cal-res.G { background: #16a34a; } .cal-res.E { background: #64748b; } .cal-res.P { background: #dc2626; }
         .cal-win { font-size: 11px; color: #86efac; font-weight: 700; margin-top: 3px; }
         .set-select { background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 8px; padding: 6px 8px; font-size: 13px; font-weight: 700; }
+        .cm-pick { display: flex; align-items: center; gap: 8px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 6px 10px; margin: 4px 0 8px; }
+        .cm-pick span { font-family: 'Teko', sans-serif; font-size: 26px; color: #4ade80; line-height: 1; }
+        .cm-pick input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: #fff; font-size: 20px; font-weight: 800; }
+        .cm-pick small { font-size: 10px; color: #64748b; white-space: nowrap; }
+        .cm-range { width: 100%; accent-color: #10b981; }
     </style>
 </head>
 <body class="w-screen h-screen relative flex items-center justify-center bg-slate-950 overflow-hidden">
@@ -869,7 +889,7 @@
                     <div>
                         <div class="text-[11px] font-extrabold text-emerald-400 uppercase tracking-wider mb-1.5 flex justify-between items-center">
                             <span>Titulares · arrastra ⋮⋮ o toca dos jugadores para cambiarlos</span>
-                            <span class="text-[10px] text-amber-400 font-normal"><span class="ic" aria-hidden="true">✋</span> GK = Portero</span>
+                            <span class="text-[10px] text-amber-400 font-normal">🧤 = portero (toca 🧤 para cambiarlo)</span>
                         </div>
                         <div id="home-starters-list" class="space-y-1.5">
                             <!-- JS Inyectado -->
@@ -906,7 +926,7 @@
                     <div>
                         <div class="text-[11px] font-extrabold text-blue-400 uppercase tracking-wider mb-1.5 flex justify-between items-center">
                             <span>Titulares · arrastra ⋮⋮ o toca dos jugadores para cambiarlos</span>
-                            <span class="text-[10px] text-amber-400 font-normal"><span class="ic" aria-hidden="true">✋</span> GK = Portero</span>
+                            <span class="text-[10px] text-amber-400 font-normal">🧤 = portero (toca 🧤 para cambiarlo)</span>
                         </div>
                         <div id="away-starters-list" class="space-y-1.5">
                             <!-- JS Inyectado -->
@@ -1318,7 +1338,7 @@
                     { name: 'Max Armijo', isGK: true, stats: 82, num: 10, photo: PHOTOS.valpo9 },
                     { name: 'Benjamín Salgado', isGK: false, stats: 82, num: 3 },
                     { name: 'Cristóbal Martínez', isGK: false, stats: 82, num: 4, photo: PHOTOS.valpo3 },
-                    { name: 'Francisco Bahamondes', isGK: false, stats: 85, num: 5, photo: PHOTOS.valpo4 },
+                    { name: 'Francisco Bahamondes', isGK: false, stats: 86, num: 5, photo: PHOTOS.valpo4 },
                     { name: 'Félix López', isGK: false, stats: 82, num: 6 },
                     { name: 'Giovanni Cruz', isGK: false, stats: 81, num: 7, photo: PHOTOS.valpo6 },
                     { name: 'Martín Castro', isGK: false, stats: 85, num: 8, photo: PHOTOS.valpo7 },
@@ -1371,7 +1391,7 @@
                 formation: '3-0',
                 roster: [
                     { name: 'Martín Villalobos', isGK: true, stats: 89, num: 1, photo: PHOTOS.mapuche0 },
-                    { name: 'Benjamin Sepúlveda', isGK: false, stats: 86, num: 2, photo: PHOTOS.mapuche1 },
+                    { name: 'Benjamin Sepúlveda', isGK: false, stats: 87, num: 2, photo: PHOTOS.mapuche1 },
                     { name: 'Mateo Roblero', isGK: false, stats: 86, num: 13, photo: PHOTOS.mapuche2, locked: true },
                     { name: 'Pablo Madariaga', isGK: false, stats: 87, num: 4, photo: PHOTOS.mapuche3 },
                     { name: 'Sebastián Echevarrieta', isGK: false, stats: 84, num: 5, photo: PHOTOS.mapuche4 },
@@ -1413,7 +1433,7 @@
                     { name: 'Matías Vidal', isGK: true, stats: 81, num: 1, photo: PHOTOS.sharky0 },
                     { name: 'Benjhamin Allendes', isGK: false, stats: 84, num: 2, photo: PHOTOS.sharky1 },
                     { name: 'Daniel Ramirez', isGK: false, stats: 81, num: 3 },
-                    { name: 'Máximo Peña', isGK: false, stats: 85, num: 4, photo: PHOTOS.sharky3 },
+                    { name: 'Máximo Peña', isGK: false, stats: 87, num: 4, photo: PHOTOS.sharky3 },
                     { name: 'Nicolás Oyarzun', isGK: false, stats: 81, num: 5, photo: PHOTOS.sharky4 },
                     { name: 'Osvaldo Saavedra', isGK: false, stats: 82, num: 6, photo: PHOTOS.sharky5 },
                     { name: 'Raúl Reyes', isGK: false, stats: 84, num: 7 },
@@ -1472,11 +1492,11 @@
                 stats: { att: 87, def: 87, spd: 87 },
                 formation: '2-2',
                 roster: [
-                    { name: 'Francisco Bahamondes', isGK: true, stats: 88, num: 5, photo: PHOTOS.lmj4 },
+                    { name: 'Francisco Bahamondes', isGK: true, stats: 86, num: 5, photo: PHOTOS.lmj4 },
                     { name: 'Sebasthian Contreras', isGK: false, stats: 89, num: 1, photo: PHOTOS.lmj0 },
                     { name: 'Alonso Fuentes', isGK: false, stats: 86, num: 2, photo: PHOTOS.lmj1 },
                     { name: 'Santiago Hidalgo', isGK: false, stats: 86, num: 8, photo: PHOTOS.lmj7 },
-                    { name: 'Cesar Rodriguez', isGK: false, stats: 86, num: 4, photo: PHOTOS.lmj3 },
+                    { name: 'Cesar Rodriguez', isGK: false, stats: 88, num: 4, photo: PHOTOS.lmj3 },
                     { name: 'Andrés Pérez', isGK: false, stats: 79, num: 3, photo: PHOTOS.lmj2 }
                 ]
             }
@@ -1532,8 +1552,15 @@
                     this.master.gain.value = (window.settings ? settings.sfxVol : 0.8);
                     this.master.connect(this.ctx.destination);
                 }
-                if (this.ctx.state === 'suspended') this.ctx.resume().catch(() => {});
+                if (this.ctx.state === 'suspended' || this.ctx.state === 'interrupted') this.ctx.resume().catch(() => {});
                 return true;
+            }
+            // iPhone (app en pantalla de inicio): al volver de segundo plano el audio puede quedar mudo.
+            // Se crea un contexto de audio nuevo dentro de un toque del usuario y se vuelven a cargar los sonidos.
+            rebuild() {
+                try { if (this.ctx && this.ctx.close) this.ctx.close().catch(() => {}); } catch (e) {}
+                this.ctx = null; this.master = null; this.buffers = {}; this.loading = {};
+                this.unlock();
             }
             setVolume(v) { if (this.master) this.master.gain.value = v; }
             unlock() {
@@ -3238,19 +3265,21 @@
                     <div class="cr-p" style="margin-bottom:8px">${phHTML(p)}<div class="cr-pn"><b>${esc(p.name)}</b><span>${crestHTML(seller.id, '')}${esc(tTeam(seller.id).name)} · ${p.isGK ? 'Portero' : 'Jugador de campo'} · ${p.age} años</span></div><div class="cr-pr"><span class="cr-ovr">${p.stats}</span></div></div>
                     <div class="cr-stat"><span>Valor de mercado</span><b>${fmtMoney(value)}</b></div>
                     <div class="cr-stat"><span>Tus fondos</span><b style="color:#4ade80">${fmtMoney(career.money)}</b></div>
-                    <div class="cm-amount">${fmtMoney(amount)}</div>
-                    <div class="cm-row"><button class="tr-btn" data-d="-50000">−50 mil</button><button class="tr-btn" data-d="-10000">−10 mil</button><button class="tr-btn" data-d="10000">+10 mil</button><button class="tr-btn" data-d="50000">+50 mil</button></div>
+                    <div class="tr-label" style="margin:8px 0 2px">¿Cuánto ofreces?</div>
+                    ${moneyPickerHTML('of', amount, 0, Math.max(100000, Math.round(value * 2.5 / 5000) * 5000))}
                     <div class="cm-msg ${cls}">${msg}</div>
                     <div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button><button class="tr-btn pri" data-x="send" ${blocked ? 'disabled style="opacity:.5"' : ''}>📨 Enviar oferta</button></div></div>`;
+                wireMoney(box, 'of', () => amount, (v) => { amount = v; });
             };
             draw();
             box.classList.remove('hidden');
             box.onclick = (e) => {
                 const b = e.target.closest('button'); if (!b) { if (e.target === box) box.classList.add('hidden'); return; }
-                if (b.dataset.d) { amount = Math.max(5000, amount + parseInt(b.dataset.d, 10)); draw(); return; }
+                if (b.dataset.d) { amount = Math.max(0, amount + parseInt(b.dataset.d, 10)); draw(); return; }
                 if (b.dataset.x === 'close') { box.classList.add('hidden'); refreshCareer(); return; }
                 if (b.dataset.x === 'send') {
                     if ((career.negot[pid] || 0) >= 3) return draw(`${tTeam(seller.id).name} rompió las negociaciones.`, 'bad');
+                    if (amount <= 0) return draw('Escribe un monto para la oferta.', 'bad');
                     if (amount > career.money) return draw('No tienes fondos suficientes.', 'bad');
                     if (myClub().roster.length >= 16) return draw('Tu plantel está lleno (máximo 16). Vende a alguien primero.', 'bad');
                     if (seller.roster.length <= 7) return draw(`${tTeam(seller.id).name} no vende: tiene el plantel muy corto.`, 'bad');
@@ -3273,62 +3302,129 @@
             };
         }
         const loanFee = (p) => Math.max(5000, Math.round(playerValue(p) * 0.15 / 5000) * 5000);
-        function openLoanModal(pid) {          // pedir un jugador a préstamo (DT)
+        // --- Monto personalizable en ofertas, ventas y préstamos ---
+        function moneyPickerHTML(id, amount, min, max) {
+            return `<div class="cm-amount" id="${id}-show">${fmtMoney(amount)}</div>
+                <div class="cm-pick"><span>$</span><input type="number" inputmode="numeric" id="${id}-in" min="0" step="1000" value="${amount}" aria-label="Monto"><small>escribe el monto</small></div>
+                <input type="range" class="cm-range" id="${id}-rng" min="${min}" max="${max}" step="5000" value="${clamp(amount, min, max)}" aria-label="Ajustar monto">
+                <div class="cm-row"><button class="tr-btn" data-d="-50000">−50 mil</button><button class="tr-btn" data-d="-10000">−10 mil</button><button class="tr-btn" data-d="10000">+10 mil</button><button class="tr-btn" data-d="50000">+50 mil</button></div>`;
+        }
+        function wireMoney(box, id, get, set) {
+            const sync = (from) => {
+                const v = get();
+                const show = document.getElementById(id + '-show'); if (show) show.textContent = fmtMoney(v);
+                const inp = document.getElementById(id + '-in'); if (inp && from !== 'in') inp.value = v;
+                const rng = document.getElementById(id + '-rng'); if (rng && from !== 'rng') rng.value = v;
+            };
+            box.oninput = (e) => {
+                if (e.target.id === id + '-in') { set(Math.max(0, Math.round(+e.target.value || 0))); sync('in'); }
+                if (e.target.id === id + '-rng') { set(Math.max(0, Math.round(+e.target.value || 0))); sync('rng'); }
+            };
+            return sync;
+        }
+        function openLoanModal(pid) {          // pedir un jugador a préstamo (DT) · tú eliges cuánto pagar
             refreshTeamSource();
             const seller = career.clubs.find(c => c.roster.some(p => p.pid === pid));
             const p = seller.roster.find(q => q.pid === pid);
-            const fee = loanFee(p);
+            const value = playerValue(p);
+            const starter = bestFive(seller.roster).includes(p);
+            const need = Math.max(5000, Math.round(value * (starter ? 0.35 : 0.12) / 5000) * 5000);
+            let fee = loanFee(p);
             const box = document.getElementById('career-modal');
             const draw = (msg = '', cls = '') => {
                 box.innerHTML = `<div class="cm-card"><h3>PRÉSTAMO</h3>
-                    <div class="cr-p" style="margin-bottom:8px">${phHTML(p)}<div class="cr-pn"><b>${esc(p.name)}</b><span>${crestHTML(seller.id, '')}${esc(tTeam(seller.id).name)} · ${p.age} años</span></div><div class="cr-pr"><span class="cr-ovr">${p.stats}</span></div></div>
+                    <div class="cr-p" style="margin-bottom:8px">${phHTML(p)}<div class="cr-pn"><b>${esc(p.name)}</b><span>${crestHTML(seller.id, '')}${esc(tTeam(seller.id).name)} · ${p.age} años${starter ? ' · <b style="color:#fbbf24">titular</b>' : ''}</span></div><div class="cr-pr"><span class="cr-ovr">${p.stats}</span></div></div>
                     <p style="font-size:13px;color:#cbd5e1">Juega en tu equipo hasta el final de la temporada ${career.season} y después vuelve a ${esc(tTeam(seller.id).name)}. No lo puedes vender.</p>
-                    <div class="cr-stat"><span>Costo del préstamo</span><b style="color:#4ade80">${fmtMoney(fee)}</b></div>
-                    <div class="cr-stat"><span>Tus fondos</span><b>${fmtMoney(career.money)}</b></div>
+                    <div class="cr-stat"><span>Valor de mercado</span><b>${fmtMoney(value)}</b></div>
+                    <div class="cr-stat"><span>Tus fondos</span><b style="color:#4ade80">${fmtMoney(career.money)}</b></div>
+                    <div class="tr-label" style="margin:8px 0 2px">¿Cuánto ofreces por el préstamo?</div>
+                    ${moneyPickerHTML('ln', fee, 0, Math.max(50000, Math.round(value * 0.6 / 5000) * 5000))}
                     <div class="cm-msg ${cls}">${msg}</div>
                     <div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button><button class="tr-btn pri" data-x="send">🔁 Pedir préstamo</button></div></div>`;
+                wireMoney(box, 'ln', () => fee, (v) => fee = v);
             };
             draw(); box.classList.remove('hidden');
             box.onclick = (e) => {
                 const b = e.target.closest('button'); if (!b) { if (e.target === box) box.classList.add('hidden'); return; }
+                if (b.dataset.d) { fee = Math.max(0, fee + parseInt(b.dataset.d, 10)); draw(); return; }
                 if (b.dataset.x === 'close') { box.classList.add('hidden'); refreshCareer(); return; }
                 if (b.dataset.x === 'send') {
                     if (fee > career.money) return draw('No tienes fondos suficientes.', 'bad');
                     if (myClub().roster.length >= 16) return draw('Tu plantel está lleno (máximo 16).', 'bad');
                     if (seller.roster.length <= 7) return draw(`${tTeam(seller.id).name} no lo cede: tiene el plantel muy corto.`, 'bad');
-                    if (bestFive(seller.roster).includes(p)) return draw(`Es titular en ${tTeam(seller.id).name}: no lo ceden. Prueba con un suplente o haz una oferta de compra.`, 'bad');
+                    if (fee < need) {
+                        if (fee >= need * 0.75) { fee = need; return draw(`Piden ${fmtMoney(need)} para cederlo${starter ? ' (es titular)' : ''}. Puedes aceptar enviándola.`, 'mid'); }
+                        return draw(`Rechazado: es muy poco${starter ? ' para un titular' : ''}. Sube el monto.`, 'bad');
+                    }
                     p.loan = { from: seller.id, season: career.season };
                     movePlayer(p, seller, myClub());
                     career.money -= fee; seller.budget += fee; career.seasonStats.spent += fee;
                     addNews(`🔁 ${p.name} llega a préstamo desde ${tTeam(seller.id).name} (${fmtMoney(fee)}).`);
                     saveCareer(); refreshTeamSource();
                     box.innerHTML = `<div class="cm-card" style="text-align:center"><h3>¡PRÉSTAMO CERRADO!</h3>${phHTML(p, 'width:80px;height:80px;margin:8px auto')}<div style="font-size:18px;font-weight:800">${esc(p.name)}</div>
-                        <div style="color:#94a3b8;font-size:13px;margin:4px 0 12px">Cedido hasta el final de la temporada ${career.season}</div><button class="tr-btn pri big" data-x="close">¡Bienvenido!</button></div>`;
+                        <div style="color:#94a3b8;font-size:13px;margin:4px 0 12px">Cedido hasta el final de la temporada ${career.season} · ${fmtMoney(fee)}</div><button class="tr-btn pri big" data-x="close">¡Bienvenido!</button></div>`;
                 }
             };
         }
-        function openLoanOutModal(pid) {       // ceder un jugador tuyo a otro club (DT)
+        // Ventas y cesiones: tú pones el precio y los clubes responden (aceptan, contraofertan o no les interesa)
+        function clubResponses(asking, maxFor) {
+            return asking.clubs.map(c => {
+                const max = maxFor[c.id];
+                if (asking.amount <= max) return { club: c.id, amount: asking.amount, kind: 'ok' };
+                if (max >= asking.amount * 0.7) return { club: c.id, amount: max, kind: 'counter' };
+                return { club: c.id, amount: 0, kind: 'no' };
+            });
+        }
+        function openPriceModal(pid, mode) {   // mode: 'sell' (vender) | 'loan' (ceder)
             const club = myClub(); const p = club.roster.find(q => q.pid === pid);
             const box = document.getElementById('career-modal');
-            const fee = Math.max(5000, Math.round(playerValue(p) * 0.1 / 5000) * 5000);
-            const offers = club.roster.length <= 7 ? [] : shuffle(career.clubs.filter(c => c.id !== career.clubId && c.roster.length < 16)).slice(0, 2);
-            box.innerHTML = `<div class="cm-card"><h3>CEDER A ${esc(p.name.toUpperCase())}</h3>
-                <p style="font-size:13px;color:#cbd5e1">Se va a préstamo hasta el final de la temporada y luego vuelve a tu club.</p>
-                ${club.roster.length <= 7 ? '<p class="cm-msg bad">Necesitas al menos 7 jugadores en el plantel.</p>' : offers.map(c => `<div class="cm-offer">${crestHTML(c.id, '')}<div><b>${esc(tTeam(c.id).name)}</b><br><span style="color:#4ade80;font-weight:800">Paga ${fmtMoney(fee)}</span></div><button class="tr-btn pri" data-lo="${c.id}">Ceder</button></div>`).join('')}
-                <div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button></div></div>`;
-            box.classList.remove('hidden');
+            const sell = mode === 'sell';
+            if (club.roster.length <= 7) {
+                box.innerHTML = `<div class="cm-card"><h3>NO SE PUEDE ${sell ? 'VENDER' : 'CEDER'}</h3><p style="font-size:13px;color:#cbd5e1">Necesitas al menos 7 jugadores en el plantel.</p><div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button></div></div>`;
+                box.classList.remove('hidden');
+                box.onclick = (e) => { if (e.target === box || e.target.closest('[data-x]')) box.classList.add('hidden'); };
+                return;
+            }
+            const v = playerValue(p);
+            const clubs = shuffle(career.clubs.filter(c => c.id !== career.clubId && c.roster.length < 16)).slice(0, 3);
+            const maxFor = {};       // lo máximo que paga cada club (fijo mientras esté abierta la ventana)
+            clubs.forEach(c => {
+                const top = sell ? v * rnd(0.8, 1.25) : v * rnd(0.07, 0.2);
+                maxFor[c.id] = Math.max(0, Math.min(c.budget, Math.round(top / 5000) * 5000));
+            });
+            let amount = sell ? v : Math.max(5000, Math.round(v * 0.1 / 5000) * 5000);
+            let replies = null;
+            const draw = () => {
+                box.innerHTML = `<div class="cm-card"><h3>${sell ? 'VENDER' : 'CEDER'} A ${esc(p.name.toUpperCase())}</h3>
+                    ${sell ? '' : '<p style="font-size:13px;color:#cbd5e1">Se va a préstamo hasta el final de la temporada y luego vuelve a tu club.</p>'}
+                    <div class="cr-stat"><span>Valor de mercado</span><b>${fmtMoney(v)}</b></div>
+                    <div class="tr-label" style="margin:8px 0 2px">${sell ? '¿Cuánto pides por él?' : '¿Cuánto pides por cederlo?'}</div>
+                    ${moneyPickerHTML('pr', amount, 0, Math.max(50000, Math.round(v * (sell ? 2.5 : 0.6) / 5000) * 5000))}
+                    <div class="cm-row"><button class="tr-btn gold" data-x="ask">📣 Ofrecerlo a los clubes</button></div>
+                    ${replies ? replies.map((o, i) => `<div class="cm-offer">${crestHTML(o.club, '')}<div><b>${esc(tTeam(o.club).name)}</b><br>
+                        ${o.kind === 'ok' ? `<span style="color:#4ade80;font-weight:800">Acepta ${fmtMoney(o.amount)}</span>` : o.kind === 'counter' ? `<span style="color:#fbbf24;font-weight:800">Contraoferta: ${fmtMoney(o.amount)}</span>` : '<span style="color:#f87171;font-weight:700">No le interesa a ese precio</span>'}</div>
+                        ${o.kind !== 'no' ? `<button class="tr-btn pri" data-deal="${i}">Aceptar</button>` : ''}</div>`).join('') : ''}
+                    ${replies && !replies.length ? '<p class="cm-msg mid">Ningún club tiene cupo ahora mismo.</p>' : ''}
+                    <div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button></div></div>`;
+                wireMoney(box, 'pr', () => amount, (val) => { amount = val; });
+            };
+            draw(); box.classList.remove('hidden');
             box.onclick = (e) => {
                 const b = e.target.closest('button'); if (!b) { if (e.target === box) box.classList.add('hidden'); return; }
+                if (b.dataset.d) { amount = Math.max(0, amount + parseInt(b.dataset.d, 10)); draw(); return; }
                 if (b.dataset.x === 'close') { box.classList.add('hidden'); refreshCareer(); return; }
-                if (b.dataset.lo) {
-                    const to = careerClub(b.dataset.lo);
-                    p.loan = { from: club.id, season: career.season };
-                    movePlayer(p, club, to); to.budget -= fee; career.money += fee; career.seasonStats.income += fee;
-                    addNews(`🔁 ${p.name} se va cedido a ${tTeam(to.id).name} hasta fin de temporada.`);
+                if (b.dataset.x === 'ask') { replies = clubResponses({ clubs, amount }, maxFor); draw(); return; }
+                if (b.dataset.deal !== undefined) {
+                    const o = replies[+b.dataset.deal]; const to = careerClub(o.club);
+                    if (!sell) p.loan = { from: club.id, season: career.season };
+                    movePlayer(p, club, to); to.budget -= o.amount; career.money += o.amount; career.seasonStats.income += o.amount;
+                    addNews(sell ? `💰 Venta: ${p.name} se va a ${tTeam(o.club).name} por ${fmtMoney(o.amount)}.` : `🔁 ${p.name} se va cedido a ${tTeam(o.club).name} (${fmtMoney(o.amount)}) hasta fin de temporada.`);
                     saveCareer(); box.classList.add('hidden'); refreshCareer();
                 }
             };
         }
+        function openSellModal(pid) { openPriceModal(pid, 'sell'); }
+        function openLoanOutModal(pid) { openPriceModal(pid, 'loan'); }
         function returnLoans() {               // fin de temporada: los cedidos vuelven a su club
             career.clubs.forEach(c => c.roster.slice().forEach(p => {
                 if (!p.loan) return;
@@ -3339,36 +3435,6 @@
                 if (home.id === career.clubId || c.id === career.clubId) addNews(`↩️ ${p.name} vuelve de préstamo a ${tTeam(home.id).name}.`);
             }));
         }
-        function openSellModal(pid) {
-            const club = myClub(); const p = club.roster.find(q => q.pid === pid);
-            const box = document.getElementById('career-modal');
-            if (club.roster.length <= 7) {
-                box.innerHTML = `<div class="cm-card"><h3>NO SE PUEDE VENDER</h3><p style="font-size:13px;color:#cbd5e1">Necesitas al menos 7 jugadores en el plantel.</p><div class="cm-row"><button class="tr-btn" data-x="close">Cerrar</button></div></div>`;
-            } else {
-                const v = playerValue(p);
-                const offers = shuffle(career.clubs.filter(c => c.id !== career.clubId && c.roster.length < 16))
-                    .map(c => ({ club: c.id, amount: Math.round(v * rnd(0.75, 1.12) / 5000) * 5000 }))
-                    .filter(o => careerClub(o.club).budget >= o.amount).slice(0, 3);
-                box.innerHTML = `<div class="cm-card"><h3>VENDER A ${esc(p.name.toUpperCase())}</h3>
-                    <div class="cr-stat"><span>Valor de mercado</span><b>${fmtMoney(v)}</b></div>
-                    ${offers.length ? offers.map((o, i) => `<div class="cm-offer">${crestHTML(o.club, '')}<div><b>${esc(tTeam(o.club).name)}</b><br><span style="color:#4ade80;font-weight:800">${fmtMoney(o.amount)}</span></div><button class="tr-btn pri" data-sell="${i}">Aceptar</button></div>`).join('')
-                        : '<p class="cm-msg mid">Ningún club ofrece por él ahora mismo.</p>'}
-                    <div class="cm-row"><button class="tr-btn" data-x="close">Rechazar todas</button></div></div>`;
-                box._offers = offers; box._pid = pid;
-            }
-            box.classList.remove('hidden');
-            box.onclick = (e) => {
-                const b = e.target.closest('button'); if (!b) { if (e.target === box) box.classList.add('hidden'); return; }
-                if (b.dataset.x === 'close') { box.classList.add('hidden'); refreshCareer(); return; }
-                if (b.dataset.sell !== undefined) {
-                    const o = box._offers[+b.dataset.sell]; const to = careerClub(o.club);
-                    movePlayer(p, myClub(), to); to.budget -= o.amount; career.money += o.amount; career.seasonStats.income += o.amount;
-                    addNews(`💰 Venta: ${p.name} se va a ${tTeam(o.club).name} por ${fmtMoney(o.amount)}.`);
-                    saveCareer(); box.classList.add('hidden'); refreshCareer();
-                }
-            };
-        }
-
         // --- Jugar tu partido con el motor del juego ---
         function careerPlay() {
             const c = career.comps[career.cur];
@@ -4146,11 +4212,17 @@
             // Respaldo: si la música no partió, el siguiente toque en un menú la inicia
             const retry = () => {
                 if (!window.__cdnEntered) return;
-                if (!audio.ctx || audio.ctx.state !== 'running') audio.unlock(); // efectos de sonido listos en iPhone
+                if (window.__audioNeedsRebuild) { window.__audioNeedsRebuild = false; audio.rebuild(); }   // volvió de segundo plano
+                else if (!audio.ctx || audio.ctx.state !== 'running') audio.unlock(); // efectos de sonido listos en iPhone
                 if (!bgMusic.paused) return;
-                if (gameState === 'MENU' || gameState === 'ENDED') playMenuMusic();
+                if (gameState === 'MENU' || gameState === 'ENDED' || gameState === 'PAUSED') {
+                    if (gameState === 'PAUSED' && pausedFrom !== null && pausedFrom !== 'MENU') return;
+                    if (!isAudioEnabled || document.hidden) return;
+                    const p = bgMusic.play();
+                    if (p && p.catch) p.catch(() => { try { bgMusic.load(); const q = bgMusic.play(); if (q && q.catch) q.catch(() => {}); } catch (e) {} });
+                }
             };
-            ['touchend', 'click', 'keydown'].forEach(ev => window.addEventListener(ev, retry, true));
+            ['touchstart', 'touchend', 'pointerdown', 'click', 'keydown'].forEach(ev => window.addEventListener(ev, retry, true));
         }
 
         // --- FONDO DE FOTOS: cambia cada 5 segundos con transición ---
@@ -4200,11 +4272,23 @@
                 if (document.body.classList.contains('in-match') && !e.target.closest('#ui-layer')) e.preventDefault();
             }, { passive: false });
             // Al salir de la app: pausar música; al volver: reanudar si está en un menú
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) bgMusic.pause();
-                else if (gameState === 'MENU' || gameState === 'ENDED') playMenuMusic();
+            let hiddenAt = 0;
+            const onBack = () => {          // la app vuelve a primer plano
+                if (hiddenAt && performance.now() - hiddenAt > 400) window.__audioNeedsRebuild = true;   // el próximo toque reactiva el audio
+                hiddenAt = 0;
+                try { if (audio.ctx && audio.ctx.state !== 'running') audio.ctx.resume().catch(() => {}); } catch (e) {}
+                if (gameState === 'MENU' || gameState === 'ENDED') playMenuMusic();
                 lastFrameTime = performance.now();
+            };
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    hiddenAt = performance.now();
+                    bgMusic.pause();
+                    try { if (audio.ctx && audio.ctx.state === 'running') audio.ctx.suspend().catch(() => {}); } catch (e) {}
+                } else onBack();
             });
+            window.addEventListener('pageshow', (e) => { if (e.persisted) { hiddenAt = hiddenAt || 1; onBack(); } });
+            window.addEventListener('focus', () => { if (!document.hidden && audio.ctx && audio.ctx.state !== 'running') audio.ctx.resume().catch(() => {}); });
             const onResize = () => { resizeCanvas(); updateRotateHint(); };
             window.addEventListener('orientationchange', () => setTimeout(onResize, 250));
             window.addEventListener('resize', onResize);
@@ -4574,7 +4658,7 @@
                 ? `<span class="${p.isGK ? 'bg-amber-500 text-slate-950 font-black' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'} px-2 py-0.5 rounded text-[10px]">${p.isGK ? 'PORTERO' : 'CAMPO'}</span>`
                 : `<span class="${p.natGK ? 'bg-amber-600 text-white' : 'bg-slate-700 text-slate-300'} px-1.5 py-0.5 rounded text-[10px]">${p.natGK ? 'GK' : 'SUP'}</span>`;
             const right = isStarter
-                ? `<button type="button" class="lu-gk px-2 py-1 rounded text-[10px] font-bold ${p.isGK ? 'bg-amber-500/30 text-amber-300 border border-amber-500' : 'bg-slate-700 text-slate-300 hover:bg-amber-500 hover:text-slate-950'} transition" onclick="setAsGoalkeeper('${side}', ${idx})">${p.isGK ? 'Es Portero' : 'Hacer GK'}</button>`
+                ? `<button type="button" title="${p.isGK ? 'Es el portero' : 'Hacer portero'}" class="lu-gk px-2 py-1 rounded text-[10px] font-bold ${p.isGK ? 'bg-amber-500/30 text-amber-300 border border-amber-500' : 'bg-slate-700 text-slate-300 hover:bg-amber-500 hover:text-slate-950'} transition" onclick="setAsGoalkeeper('${side}', ${idx})">${p.isGK ? 'Es Portero' : 'Hacer GK'}</button>`
                 : '';
             const initials = p.name.split(' ').map(w => w[0]).slice(0, 2).join('');
             const avatar = p.photo
