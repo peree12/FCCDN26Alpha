@@ -725,6 +725,149 @@
         @keyframes iaShirt { from { transform: rotateY(90deg) scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
         @keyframes iaDraw { to { stroke-dashoffset: 0; } }
         @media (max-height: 460px) { .ia-av { width: 84px; height: 84px; } .ia-shirt { width: 120px; } .ia-scene { gap: 8px; } .ia-bubble { font-size: 13px; } }
+        /* Cuenta CDN Sports */
+        .ac-chip { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(15,23,42,.85); border: 1px solid #334155; color: #e2e8f0; font-weight: 800; font-size: 13px; margin-bottom: 2px; }
+        .ac-chip:hover { border-color: #6366f1; } .ac-av { font-size: 18px; } .ac-st { font-size: 13px; opacity: .6; } .ac-st.on { opacity: 1; }
+        #account-panel { position: fixed; inset: 0; z-index: 86; display: flex; justify-content: center; background: rgba(2,6,23,.86); }
+        #account-panel.hidden { display: none !important; }
+        .ac-card { width: min(520px, 100%); background: rgba(15,23,42,.98); border: 1px solid #6366f1; border-radius: 20px; padding: 16px; color: #e2e8f0; }
+        .ac-logo { font: 700 30px/1 'Teko', sans-serif; letter-spacing: .12em; color: #fff; text-align: center; } .ac-logo b { color: #fbbf24; }
+        .ac-h { text-align: center; font-weight: 800; margin: 2px 0 10px; color: #c7d2fe; }
+        .ac-cloud { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; background: #0b1220; border: 1px solid #334155; border-radius: 12px; padding: 8px 10px; font-size: 13px; margin: 8px 0; }
+        .ac-cloud.on { border-color: #10b981; } .ac-cloud span { font-size: 11px; color: #94a3b8; width: 100%; }
+        .ac-lbl { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #94a3b8; text-transform: uppercase; margin: 10px 0 4px; }
+        #ac-nick, #ac-fav { width: 100%; background: #0b1220; border: 1px solid #334155; border-radius: 10px; color: #fff; padding: 10px; font-size: 16px; }
+        .ac-avs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; } .ac-avs button { font-size: 22px; padding: 6px 0; border-radius: 10px; background: #1e293b; border: 2px solid transparent; } .ac-avs button.sel { border-color: #fbbf24; background: #312e81; }
+        .ac-row { display: flex; gap: 8px; margin-top: 12px; } .ac-row .tr-btn { flex: 1; } .ac-row.wrap { flex-wrap: wrap; } .ac-row.wrap .tr-btn { min-width: 130px; }
+        .ac-msg { font-size: 12px; color: #fbbf24; min-height: 16px; margin-top: 8px; }
+        .ac-prof { display: flex; align-items: center; gap: 12px; margin: 10px 0 4px; } .ac-prof > div { flex: 1; } .ac-prof b { display: block; font-size: 18px; color: #fff; }
+        .ac-prof span:not(.ac-big) { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #94a3b8; } .ac-prof img, .ac-prof .tr-ini { width: 18px; height: 18px; object-fit: contain; }
+        .ac-big { font-size: 34px; width: 56px; height: 56px; border-radius: 50%; background: #312e81; display: flex; align-items: center; justify-content: center; border: 2px solid #a78bfa; }
+        .ac-sec { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #a78bfa; margin: 14px 0 6px; }
+        .ac-cur { font-size: 13px; color: #cbd5e1; }
+        .ac-save { display: flex; align-items: center; gap: 8px; background: #0b1220; border: 1px solid #1e293b; border-radius: 12px; padding: 8px 10px; margin-top: 6px; }
+        .ac-save > div:first-child { flex: 1; min-width: 0; } .ac-save b { display: block; font-size: 13px; color: #fff; } .ac-save span { display: block; font-size: 12px; color: #cbd5e1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ac-save small { font-size: 11px; color: #64748b; }
+        .ac-sbtn { display: flex; gap: 6px; } .ac-check { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-top: 10px; }
+        /* Campeón en carrera: levantando la copa */
+        #trophy-anim { position: fixed; inset: 0; z-index: 88; overflow: hidden; color: #fff; }
+        #trophy-anim.hidden { display: none !important; }
+        .tw-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 85%, color-mix(in srgb, var(--c) 60%, #0b1424), #020617 72%); }
+        .tw-lights i { position: absolute; top: -10%; width: 34vw; height: 120%; background: linear-gradient(rgba(255,255,255,.22), transparent 70%); filter: blur(6px); transform-origin: top center; animation: twSweep 3.5s ease-in-out infinite alternate; }
+        .tw-lights i:first-child { left: 8%; transform: rotate(-22deg); } .tw-lights i:last-child { right: 8%; transform: rotate(22deg); animation-delay: -1.7s; }
+        @keyframes twSweep { from { opacity: .35; } to { opacity: .9; } }
+        .tw-wrap { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: max(12px, env(safe-area-inset-top)) 14px max(12px, env(safe-area-inset-bottom)); }
+        .tw-top { display: flex; align-items: center; gap: 12px; animation: iaFade .8s both; }
+        .tw-logo { height: clamp(44px, 12vh, 84px); width: auto; filter: drop-shadow(0 6px 16px rgba(0,0,0,.6)); }
+        .tw-title { font: 700 clamp(34px, 9vh, 64px)/0.9 'Teko', sans-serif; color: #fde047; text-shadow: 0 4px 16px rgba(0,0,0,.6); letter-spacing: .04em; animation: iaPop .7s cubic-bezier(.2,1.6,.4,1) .3s both; }
+        .tw-sub { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: #e2e8f0; } .tw-sub img, .tw-sub .tr-ini { width: 22px; height: 22px; object-fit: contain; }
+        .tw-stage { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: clamp(4px, 2vw, 18px); flex: 1; width: 100%; padding-top: clamp(70px, 22vh, 150px); }
+        .tw-fig { position: relative; display: flex; flex-direction: column; align-items: center; width: clamp(54px, 14vw, 96px); animation: twIn .7s cubic-bezier(.3,1.2,.5,1) both, twJump .5s ease-in-out infinite alternate; }
+        .tw-fig:nth-child(1) { animation-delay: .1s, 1.0s; } .tw-fig:nth-child(2) { animation-delay: .2s, 1.25s; } .tw-fig:nth-child(4) { animation-delay: .3s, 1.1s; } .tw-fig:nth-child(5) { animation-delay: .4s, 1.35s; }
+        .tw-cap { width: clamp(64px, 17vw, 116px); animation: twIn .7s cubic-bezier(.3,1.2,.5,1) both, twJump .6s ease-in-out 2.4s infinite alternate; z-index: 2; }
+        .tw-head { width: 64%; aspect-ratio: 1; border-radius: 50%; border: 3px solid #fff; overflow: hidden; background: #1e293b; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+        .tw-head .cr-ph { width: 100% !important; height: 100% !important; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+        .tw-body { width: 100%; height: auto; margin-top: -4px; }
+        .tw-fig b { font-size: 11px; font-weight: 800; text-shadow: 0 2px 4px #000; white-space: nowrap; }
+        .tw-arm { position: absolute; top: 46%; width: 12%; height: 34%; background: #f1c9a5; border: 2px solid #0f172a; border-radius: 8px; transform-origin: 50% 100%; z-index: 0; }
+        .tw-arm.l { left: 14%; } .tw-arm.r { right: 14%; }
+        .tw-arm.up.l { transform: rotate(-35deg) translateY(-30%); animation: twWave .4s ease-in-out infinite alternate; } .tw-arm.up.r { transform: rotate(35deg) translateY(-30%); animation: twWaveR .4s ease-in-out infinite alternate; }
+        .tw-cap .tw-arm { top: -4%; height: 48%; animation: twLift 1.6s cubic-bezier(.3,1.3,.5,1) 1.2s both; }
+        .tw-cap .tw-arm.l { left: 12%; } .tw-cap .tw-arm.r { right: 12%; }
+        .tw-cup { position: absolute; left: 50%; bottom: 97%; width: 92%; transform: translate(-50%, 0); z-index: 3; filter: drop-shadow(0 0 18px rgba(253,224,71,.7)); animation: twCup 1.6s cubic-bezier(.3,1.3,.5,1) 1.2s both, twShine 1.2s ease-in-out 2.8s infinite alternate; }
+        .tw-cup-svg { width: 100%; height: auto; display: block; }
+        @keyframes twCup { from { transform: translate(-50%, 90%) scale(.5); opacity: 0; } 60% { opacity: 1; } to { transform: translate(-50%, 0) scale(1); opacity: 1; } }
+        @keyframes twShine { from { transform: translate(-50%, 0) rotate(-4deg); filter: drop-shadow(0 0 12px rgba(253,224,71,.5)); } to { transform: translate(-50%, -6px) rotate(4deg); filter: drop-shadow(0 0 28px rgba(253,224,71,.95)); } }
+        @keyframes twLift { from { transform: translateY(40%) rotate(0); } to { transform: translateY(0); } }
+        @keyframes twIn { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+        @keyframes twJump { from { margin-bottom: 0; } to { margin-bottom: 12px; } }
+        @keyframes twWave { from { transform: rotate(-25deg) translateY(-30%); } to { transform: rotate(-50deg) translateY(-30%); } }
+        @keyframes twWaveR { from { transform: rotate(25deg) translateY(-30%); } to { transform: rotate(50deg) translateY(-30%); } }
+        .tw-fw { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--fc); box-shadow: 0 0 0 0 var(--fc); opacity: 0; animation: twFw 1.6s ease-out infinite; }
+        @keyframes twFw { 0% { opacity: 1; box-shadow: 0 0 0 0 var(--fc), 0 0 0 0 var(--fc); } 100% { opacity: 0; box-shadow: 0 0 0 40px transparent, 0 0 0 70px transparent; transform: scale(1.6); } }
+        .tw-conf { position: absolute; inset: 0; overflow: hidden; pointer-events: none; } .tw-conf i { position: absolute; top: -14px; width: 8px; height: 14px; border-radius: 2px; animation: tdFall linear infinite; }
+        .tw-foot { position: relative; z-index: 5; }
+        @media (max-height: 520px) {
+            .tw-title { font-size: 30px; } .tw-logo { height: 40px; } .tw-sub { font-size: 11px; }
+            .tw-fig { width: clamp(46px, min(12vw, 17vh), 96px); } .tw-cap { width: clamp(54px, min(15vw, 21vh), 116px); }
+            .tw-cup { width: 78%; } .tw-fig b { font-size: 10px; } .tw-stage { padding-top: 0; }
+            .tw-foot .tr-btn.big { padding: 8px 18px; font-size: 16px; }
+            #menu-results { padding: 14px !important; } #menu-results > * + * { margin-top: 10px !important; }
+            #menu-results .w-56 { width: 92px !important; } #results-title { font-size: 28px !important; line-height: 1; }
+            #menu-results .text-6xl { font-size: 40px !important; line-height: 1; }
+        }
+        /* Penales interactivos */
+        .pk-card { width: min(760px, 100%) !important; display: grid; grid-template-columns: 1fr; gap: 10px; padding: 14px !important; }
+        .pk-sub { font-size: 12px; color: #94a3b8; }
+        .pk-sum { font: 800 22px 'Teko', sans-serif; color: #fff; min-width: 18px; text-align: right; }
+        .pk-info { font-size: 13px; color: #e2e8f0; margin-top: 8px; min-height: 36px; line-height: 1.35; } .pk-info span { color: #fbbf24; font-weight: 700; }
+        .pk-btns { display: flex; gap: 8px; } .pk-btns .tr-btn { flex: 1; }
+        .pk-right { position: relative; padding-bottom: 46px; }
+        .pk-goal { position: relative; width: 100%; aspect-ratio: 2.6 / 1; border: 6px solid #f8fafc; border-bottom: none; border-radius: 6px 6px 0 0; background: linear-gradient(#0f2a1a, #14532d); overflow: visible; box-shadow: inset 0 0 30px rgba(0,0,0,.5); }
+        .pk-net { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px); background-size: 14px 14px; transition: transform .2s; }
+        .pk-goal.net-hit .pk-net { transform: scale(1.04); background-color: rgba(16,185,129,.18); }
+        .pk-goal::after { content: ''; position: absolute; left: -40px; right: -40px; bottom: -4px; height: 4px; background: #f8fafc; }
+        .pk-keeper { position: absolute; left: 50%; top: 62%; width: 17%; height: 74%; transform: translate(-50%,-50%); transition: left .45s cubic-bezier(.3,1.2,.5,1), top .45s, transform .45s; pointer-events: none; z-index: 2; }
+        .pk-zones { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); z-index: 3; }
+        .pk-z { border: 1px dashed rgba(253,224,71,.45); background: rgba(253,224,71,.06); color: #fde047; font-size: 22px; font-weight: 900; display: flex; align-items: center; justify-content: center; touch-action: manipulation; }
+        .pk-z:hover, .pk-z:active { background: rgba(253,224,71,.28); }
+        .pk-zones.dive .pk-z { border-color: rgba(96,165,250,.55); background: rgba(96,165,250,.07); color: #93c5fd; }
+        .pk-zones.dive .pk-z:hover, .pk-zones.dive .pk-z:active { background: rgba(96,165,250,.3); }
+        .pk-zones.off { pointer-events: none; } .pk-zones.off .pk-z { opacity: 0; }
+        .pk-ball { position: absolute; left: 50%; top: 118%; width: 10%; aspect-ratio: 1; height: auto !important; border-radius: 50%; transform: translate(-50%,-50%); z-index: 4; pointer-events: none;
+            background: radial-gradient(circle at 35% 30%, #fff 0 40%, #cbd5e1 70%), #fff; box-shadow: 0 4px 8px rgba(0,0,0,.5); transition: left .45s ease-out, top .45s ease-out, width .45s; max-width: 34px; }
+        .pk-spot { position: absolute; left: 50%; bottom: 6px; width: 10px; height: 6px; border-radius: 50%; background: #f8fafc; transform: translateX(-50%); }
+        @media (min-width: 640px) { .pk-card { grid-template-columns: 1fr 1.25fr; align-items: center; } }
+        @media (max-height: 520px) { .pk-card h3 { font-size: 24px !important; } .tp-row { margin-top: 4px !important; } .pk-info { margin-top: 4px; font-size: 12px; } .tp-res { margin: 4px 0 !important; font-size: 22px !important; } .pk-goal { max-height: 46vh; } }
+        /* Nota del partido + comentario del DT */
+        .rp-card { background: linear-gradient(135deg, rgba(30,41,59,.95), rgba(15,23,42,.95)); border: 1px solid #6366f1; border-radius: 16px; padding: 12px; margin: 10px 0; color: #fff; text-align: left; }
+        .rp-top { display: flex; gap: 12px; align-items: center; }
+        .rp-rate { width: 74px; height: 74px; border-radius: 16px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: color-mix(in srgb, var(--rc) 18%, #0f172a); border: 3px solid var(--rc); animation: rpPop .6s cubic-bezier(.2,1.6,.4,1) both; }
+        .rp-rate b { font: 900 34px/1 'Teko', sans-serif; color: var(--rc); } .rp-rate small { font-size: 9px; font-weight: 800; color: #cbd5e1; letter-spacing: .06em; }
+        @keyframes rpPop { from { transform: scale(.3); opacity: 0; } to { transform: none; opacity: 1; } }
+        .rp-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .rp-chip { background: #1e293b; border: 1px solid #334155; border-radius: 999px; padding: 4px 9px; font-size: 12px; color: #cbd5e1; white-space: nowrap; } .rp-chip b { color: #fff; }
+        .rp-coach { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; background: rgba(2,6,23,.5); border-radius: 12px; padding: 8px 10px; }
+        .rp-coach img { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #a78bfa; flex-shrink: 0; background: #1e293b; }
+        .rp-coach small { color: #a78bfa; font-weight: 800; font-size: 11px; } .rp-coach p { margin: 2px 0 0; font-size: 13px; line-height: 1.35; color: #e2e8f0; font-style: italic; }
+        #res-career-card.hidden { display: none; }
+        /* === Soporte app web móvil (iPhone / Android): todas las ventanas se desplazan y nada queda cortado arriba === */
+        #pause-menu, #settings-panel, #halftime-panel, #colors-panel, #tour-pens, #career-modal, #subs-panel, #sim-modal, #modal-controls, #account-panel {
+            align-items: flex-start !important; overflow-y: auto !important; overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y;
+            padding-top: max(12px, env(safe-area-inset-top)) !important; padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+            padding-left: max(12px, env(safe-area-inset-left)) !important; padding-right: max(12px, env(safe-area-inset-right)) !important;
+        }
+        #account-panel > *, #pause-menu > *, #settings-panel > *, #halftime-panel > *, #colors-panel > *, #tour-pens > *, #career-modal > *, #subs-panel > *, #sim-modal > *, #modal-controls > * { margin: auto !important; flex-shrink: 0; }
+        .cm-card, .sm-card, .subs-card, .set-card { max-height: none !important; overflow: visible !important; }
+        #ui-layer, #ui-layer * { -webkit-user-drag: none; }
+        input, textarea, select { user-select: text; -webkit-user-select: text; font-size: 16px; }
+        input[type=range] { touch-action: pan-x; }
+        /* Sorteo: en horizontal todo cabe en una pantalla (columna izquierda: bombo · derecha: grupos) */
+        #tour-draw { padding: max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); -webkit-overflow-scrolling: touch; touch-action: pan-y; }
+        @media (max-height: 560px) and (orientation: landscape) {
+            #tour-draw.drawing { display: grid; grid-template-columns: minmax(180px, 32%) 1fr; grid-auto-rows: min-content; column-gap: 16px; row-gap: 4px; align-content: center; justify-items: center; }
+            #tour-draw.drawing > * { grid-column: 1; }
+            #tour-draw.drawing .td-logo { height: 44px; }
+            #tour-draw.drawing .td-title { font-size: 20px; letter-spacing: .06em; text-align: center; }
+            #tour-draw.drawing .td-stage { height: 104px; }
+            #tour-draw.drawing .td-bowl { width: 78px; height: 78px; }
+            #tour-draw.drawing .td-pick { padding: 6px 10px; }
+            #tour-draw.drawing .td-pick img, #tour-draw.drawing .td-pick .tr-ini { width: 38px; height: 38px; }
+            #tour-draw.drawing .td-pick b { font-size: 18px; }
+            #tour-draw.drawing #td-info { font-size: 11px; line-height: 1.3; margin: 0; }
+            #tour-draw.drawing .td-foot { margin-top: 2px; }
+            #tour-draw.drawing .td-foot .tr-btn { padding: 8px 12px; font-size: 13px; }
+            #tour-draw.drawing .td-groups { grid-column: 2; grid-row: 1 / span 6; align-self: center; max-width: none; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); }
+            #tour-draw.drawing .td-group { padding: 5px 6px; border-radius: 10px; }
+            #tour-draw.drawing .td-group h4 { font-size: 17px; margin-bottom: 0; }
+            #tour-draw.drawing .td-slot { height: 25px; margin-top: 3px; font-size: 11px; gap: 5px; padding: 0 6px; }
+            #tour-draw.drawing .td-slot span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            #tour-draw.drawing .td-slot img, #tour-draw.drawing .td-slot .tr-ini { width: 18px; height: 18px; }
+            #tour-draw:not(.drawing) { justify-content: center; gap: 6px; }
+            #tour-draw:not(.drawing) .td-logo { height: 50px; }
+            #tour-draw:not(.drawing) .td-title { font-size: 24px; text-align: center; }
+            .td-champ img, .td-champ .tr-ini { width: 70px !important; height: 70px !important; }
+        }
     </style>
 </head>
 <body class="w-screen h-screen relative flex items-center justify-center bg-slate-950 overflow-hidden">
@@ -821,6 +964,7 @@
                 <button id="btn-quick-match" class="w-full py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-2xl font-teko tracking-wider uppercase transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-3">
                     <span class="ic ic-lg" aria-hidden="true">▶</span> Partida Rápida F5
                 </button>
+                <button id="btn-account" class="ac-chip" type="button"></button>
                 <button id="btn-tournaments" class="tr-menu-btn"><span aria-hidden="true">🏆</span> Torneos <small>Liga CDA · Copa CDA</small></button>
                 <button id="btn-career" class="cr-menu-btn"><span aria-hidden="true">⭐</span> Modo Carrera <small>DT · Jugador · Fichajes</small></button>
 
@@ -1214,6 +1358,7 @@
     <!-- SORTEO / INTRO DE TORNEO Y PENALES -->
     <div id="tour-draw" class="hidden"></div>
     <div id="tour-pens" class="hidden"></div>
+    <div id="account-panel" class="hidden"><div class="ac-card" id="account-body"></div></div>
     <div id="career-modal" class="hidden"></div>
     <div id="intro-anim" class="hidden"></div>
 
@@ -1977,6 +2122,7 @@
             document.getElementById('halftime-panel').classList.add('hidden');
             document.getElementById('settings-panel').classList.add('hidden');
             document.getElementById('subs-panel').classList.add('hidden');
+            if (penaltyPending) { penaltyPending = null; document.getElementById('tour-pens').classList.add('hidden'); }
             stopCelebration();
             pausedFrom = null;
             if (toMenu && careerCtx) exitCareerMatch();
@@ -2345,7 +2491,9 @@
         }
 
         // --- Tanda de penales animada ---
-        function showPens(m, cb) {
+        function showPens(m, cb, userId) {
+            userId = userId || (tour && tour.userTeam);
+            if (userId && (m.h === userId || m.a === userId)) return showPensInteractive(m, userId, cb);
             const seq = pensSequence();
             const box = document.getElementById('tour-pens');
             const row = (id, side) => `<div class="tp-row">${crestHTML(id, '')}<span>${esc(tTeam(id).short)}</span><div class="tp-dots" id="tp-${side}"></div></div>`;
@@ -2384,7 +2532,8 @@
                 <div class="td-groups">${boxes.map((b, i) => `<div class="td-group"><h4>${b}</h4>${'<div class="td-slot"></div>'.repeat(counts[i])}</div>`).join('')}</div>
                 <div class="tr-note" id="td-info" style="text-align:center">${liga ? 'Los equipos se ordenan en bombos por nivel. Cada uno jugará ' + tour.rounds.length + ' partidos contra rivales distintos.' : 'Un equipo de cada bombo va a cada grupo.'}</div>
                 <div class="td-foot"><button class="tr-btn" id="td-skip">Saltar sorteo ⏭</button><button class="tr-btn gold hidden" id="td-go">▶ Ir al torneo</button></div>`;
-            ov.querySelectorAll('.td-bowl i').forEach((b, k) => { b.style.left = '38px'; b.style.top = '38px'; b.style.animationDelay = (-k * 0.24) + 's'; b.style.animationDuration = (1 + k * 0.17) + 's'; });
+            ov.classList.add('drawing');
+            ov.querySelectorAll('.td-bowl i').forEach((b, k) => { b.style.left = 'calc(50% - 10px)'; b.style.top = 'calc(50% - 10px)'; b.style.animationDelay = (-k * 0.24) + 's'; b.style.animationDuration = (1 + k * 0.17) + 's'; });
             ov.classList.remove('hidden');
             const groupEls = [...ov.querySelectorAll('.td-group')];
             const fill = (d) => {
@@ -2422,6 +2571,7 @@
             const colors = ['#fbbf24', '#10b981', '#3b82f6', '#ef4444', '#f8fafc', c.primaryColor];
             let conf = '';
             for (let k = 0; k < 70; k++) conf += `<i style="left:${Math.random() * 100}%;background:${colors[k % colors.length]};animation-duration:${2.5 + Math.random() * 3}s;animation-delay:${Math.random() * 2}s"></i>`;
+            ov.classList.remove('drawing');
             ov.innerHTML = `<div class="td-confetti">${conf}</div><img class="td-logo" src="${TOUR_LOGOS[tour.type]}" alt="">
                 <div class="td-title">¡CAMPEÓN DE LA ${TOUR_NAMES[tour.type].toUpperCase()}!</div>
                 <div class="td-pick td-champ" style="position:relative;left:auto;top:auto;transform:none;animation:none">${crestHTML(c.id, '')}<b style="font-size:34px">${esc(c.name)}</b>
@@ -2514,7 +2664,7 @@
             });
         }
         // Detalle de un partido (jugado o simulado): marcador, goles y asistencias
-        function showMatchDetail(m, title) {
+        function showMatchDetail(m, title, extraHTML = '') {
             let box = document.getElementById('sim-modal');
             if (!box) { box = document.createElement('div'); box.id = 'sim-modal'; box.className = 'hidden'; document.body.appendChild(box); }
             const ev = (m.ev || []).slice().sort((a, b) => a.min - b.min);
@@ -2526,6 +2676,7 @@
                     <div class="${w === m.a ? 'w' : ''}">${crestHTML(m.a, '')}<b>${esc(tTeam(m.a).name)}</b></div></div>
                 <div class="sm-goals"><ul>${col(m.h)}</ul><ul class="r">${col(m.a)}</ul></div>
                 ${m.sim ? '<div class="sm-note">Partido simulado</div>' : ''}
+                ${extraHTML}
                 <button class="tr-btn pri big" data-smclose="1">Continuar</button></div>`;
             box.classList.remove('hidden');
             box.onclick = (e) => { if (e.target === box || e.target.closest('[data-smclose]')) box.classList.add('hidden'); };
@@ -2778,7 +2929,7 @@
             return faceCache[key] = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
         }
 
-        function saveCareer() { try { if (career) localStorage.setItem(CAREER_KEY, JSON.stringify(career)); else localStorage.removeItem(CAREER_KEY); } catch (e) {} }
+        function saveCareer() { try { if (career) localStorage.setItem(CAREER_KEY, JSON.stringify(career)); else localStorage.removeItem(CAREER_KEY); } catch (e) {} try { if (typeof scheduleCloudAuto === 'function') scheduleCloudAuto(); } catch (e) {} }
         function hashStr(s) { let h = 7; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) | 0; return Math.abs(h); }
         function fmtMoney(n) {
             const a = Math.abs(n);
@@ -3440,7 +3591,13 @@
                 gainXP(3);                                   // no convocado: sin nota, solo un poco de experiencia por entrenar
             } else {
                 const me = myPlayer();
-                const rating = clamp(6 + meGoals * 1.1 + (res === 'W' ? 0.7 : res === 'D' ? 0.1 : -0.5) + rnd(-0.4, 0.6) + (live ? 0.3 : 0), 4, 10);
+                const liveRep = live && careerCtx && careerCtx.rep;
+                const rating = liveRep ? liveRep.rating : clamp(6 + meGoals * 1.1 + (res === 'W' ? 0.7 : res === 'D' ? 0.1 : -0.5) + rnd(-0.4, 0.6), 4, 10);
+                if (!liveRep) {
+                    const rep = { rating: Math.round(rating * 10) / 10, goals: meGoals, assists: Math.random() < 0.25 ? 1 : 0, isGK: !!me.isGK, ga, live: false };
+                    rep.comment = coachComment(rep, res);
+                    career.lastReport = rep;
+                }
                 S.apps++; S.goals += meGoals; S.ratings.push(Math.round(rating * 10) / 10);
                 career.money += meGoals * 3000;
                 gainXP(Math.max(0, rating - 5.5) * 14 + meGoals * 8);
@@ -3855,6 +4012,14 @@
             const me = myPlayer();
             careerCtx.meGoals = me ? matchGoals.filter(g => g.forHome && !g.own && g.name === me.name).length : 0;
             careerCtx.done = true;
+            if (career.mode === 'player' && me) {
+                const res = u > o ? 'W' : u < o ? 'L' : 'D';
+                careerCtx.rep = liveRatingFor(me.name, !!me.isGK, res, u, o, !!careerCtx.sub);
+                careerCtx.rep.sub = !!careerCtx.sub;
+                careerCtx.rep.comment = coachComment(careerCtx.rep, res);
+                career.lastReport = careerCtx.rep;
+                showLiveReport();
+            }
             careerCtx.needPens = isKO(m) && m.hg === m.ag;
             if (!careerCtx.needPens) { onUserResult(m, true, careerCtx.meGoals); careerCtx.recorded = true; }
             saveCareer();
@@ -3874,7 +4039,7 @@
                 withTour(c, () => simRest(curRound()));
                 saveCareer(); restore(); cb && cb();
             };
-            if (ctx.needPens && m && !m.pens) { refreshTeamSource(); showPens(m, done); } else done();
+            if (ctx.needPens && m && !m.pens) { refreshTeamSource(); showPens(m, done, career.clubId); } else done();
         }
         function exitCareerMatch() { if (careerCtx) matchDuration = careerCtx.prevDuration; careerCtx = null; lockMe = false; openCareer(); }
 
@@ -3965,6 +4130,7 @@
             if (career) refreshTeamSource();
             el.innerHTML = careerView === 'setup' ? careerSetupHTML() : careerView === 'hub' && career ? careerHubHTML() : careerHomeHTML();
             ui.scrollTop = top ? 0 : y;
+            if (careerView === 'hub') checkCareerTrophies();
         }
         function careerHomeHTML() {
             const saved = career ? `<div class="tr-saved">${crestHTML(career.clubId, '')}
@@ -4270,7 +4436,9 @@
                     simUserMatch(c, um);
                     withTour(c, () => simRest(curRound()));
                     saveCareer(); refreshCareer();
-                    if (um) withTour(c, () => showMatchDetail(um, `${TOUR_NAMES[c.type].toUpperCase()} · ${roundTitle().toUpperCase()}`));
+                    const dec0 = career.decision;
+                    const extra = career.mode === 'player' && career.lastReport && !(dec0 && dec0.status === 'fuera') ? reportHTML(career.lastReport) : '';
+                    if (um) withTour(c, () => showMatchDetail(um, `${TOUR_NAMES[c.type].toUpperCase()} · ${roundTitle().toUpperCase()}`, extra));
                     return;
                 }
                 if (t === 'continue2') { careerContinue(); refreshCareer(true); return; }
@@ -4339,7 +4507,7 @@
             clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 3200);
         }
         function padVisibleFocusables() {
-            const root = ['#tour-pens', '#tour-draw', '#career-modal', '#colors-panel', '#settings-panel', '#pause-menu', '#halftime-panel', '#modal-controls']
+            const root = ['#account-panel', '#tour-pens', '#tour-draw', '#career-modal', '#colors-panel', '#settings-panel', '#pause-menu', '#halftime-panel', '#modal-controls']
                 .map(s => document.querySelector(s)).find(el => el && !el.classList.contains('hidden') && getComputedStyle(el).display !== 'none')
                 || document.getElementById('ui-layer');
             return [...root.querySelectorAll('button, select, input, [data-c], [data-t], .tr-card, .tr-team')]
@@ -4544,6 +4712,560 @@
         }
 
         // =====================================================================
+        // --- CUENTA CDN SPORTS: perfil + partidas de carrera guardadas en la nube ---
+        // =====================================================================
+        const ACC_KEY = 'cdn26_account';
+        const AVATARS = ['⚽', '🦈', '🦁', '🐺', '🦅', '🐉', '🔥', '⚡', '👑', '🧤', '🎯', '🌟'];
+        let account = (() => { try { return JSON.parse(localStorage.getItem(ACC_KEY) || 'null'); } catch (e) { return null; } })();
+        const cloud = { db: null, user: null, uid: null, name: '', status: 'checking', saves: [], busy: false, msg: '', autoTimer: null, lastAuto: 0 };
+        function saveAccount() { try { if (account) localStorage.setItem(ACC_KEY, JSON.stringify(account)); else localStorage.removeItem(ACC_KEY); } catch (e) {} }
+        const cloudBase = () => 'data/users/' + cloud.uid;
+        const profRef = () => cloud.db.doc(cloudBase() + '/profile');
+        async function initCloud() {
+            try {
+                if (!window.claude || typeof window.claude.use !== 'function') { cloud.status = 'offline'; renderAccountChip(); return; }
+                const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+                const uid = user ? await user.id() : null;
+                if (!db || !uid) { cloud.status = 'offline'; renderAccountChip(); return; }
+                cloud.db = db; cloud.user = user; cloud.uid = uid;
+                try { const me = await user.me(); cloud.name = (me && me.name) || ''; } catch (e) {}
+                cloud.status = 'online';
+                try {
+                    const prof = await profRef().get();
+                    if (prof.exists) {
+                        const d = prof.data() || {};
+                        if (!account || !account.nick) { account = { nick: d.nick || '', avatar: d.avatar || '⚽', fav: d.fav || 'valpo', created: d.created || Date.now() }; saveAccount(); }
+                    }
+                } catch (e) {}
+                await refreshCloudSaves();
+            } catch (e) { cloud.status = 'offline'; }
+            renderAccountChip();
+            if (!document.getElementById('account-panel').classList.contains('hidden')) renderAccount();
+        }
+        async function refreshCloudSaves() {
+            if (cloud.status !== 'online') return;
+            try { const q = await profRef().collection('saves').get(); cloud.saves = q.docs.map(d => d.data()).filter(Boolean).sort((a, b) => (b.updated || 0) - (a.updated || 0)); }
+            catch (e) { cloud.saves = []; }
+        }
+        function careerMeta(c) {
+            const club = c.clubs && c.clubs.find(x => x.id === c.clubId);
+            let me = null; (c.clubs || []).forEach(cl => cl.roster.forEach(p => { if (p.me) me = p; }));
+            const t = (teamSource || TEAMS).find(x => x.id === c.clubId) || (c.custom && c.custom.id === c.clubId ? c.custom : null);
+            return { club: c.clubId, clubName: (t && t.name) || (club && club.name) || c.clubId, mode: c.mode, season: c.season, week: c.week, player: me ? me.name : '', ovr: me ? me.stats : null };
+        }
+        async function cloudWriteSave(slot, data, quiet) {
+            if (cloud.status !== 'online' || !data) throw { code: 'offline' };
+            const json = JSON.stringify(data), CH = 180000, n = Math.max(1, Math.ceil(json.length / CH));
+            const pr = profRef();
+            await pr.set({ nick: (account && account.nick) || '', avatar: (account && account.avatar) || '⚽', fav: (account && account.fav) || '', created: (account && account.created) || Date.now(), updated: Date.now() });
+            for (let i = 0; i < n; i++) await pr.collection('chunks').doc(slot + '_' + i).set({ d: json.slice(i * CH, (i + 1) * CH) });
+            const meta = { slot, n, updated: Date.now(), size: json.length, ...careerMeta(data) };
+            await pr.collection('saves').doc(slot).set(meta);
+            await refreshCloudSaves();
+            return meta;
+        }
+        async function cloudReadSave(slot) {
+            const pr = profRef();
+            const m = await pr.collection('saves').doc(slot).get();
+            if (!m.exists) throw { code: 'missing' };
+            const meta = m.data(); let json = '';
+            for (let i = 0; i < meta.n; i++) { const c = await pr.collection('chunks').doc(slot + '_' + i).get(); if (!c.exists) throw { code: 'broken' }; json += c.data().d; }
+            return JSON.parse(json);
+        }
+        async function cloudDeleteSave(slot) {
+            const pr = profRef();
+            const m = await pr.collection('saves').doc(slot).get();
+            const n = m.exists ? (m.data().n || 1) : 1;
+            await pr.collection('saves').doc(slot).delete();
+            for (let i = 0; i < n; i++) { try { await pr.collection('chunks').doc(slot + '_' + i).delete(); } catch (e) {} }
+            await refreshCloudSaves();
+        }
+        // Guardado automático: cada vez que la carrera se guarda, se respalda en la nube (como máximo cada 20 s)
+        function scheduleCloudAuto() {
+            if (cloud.status !== 'online' || !account || !account.nick || account.autoCloud === false || !career) return;
+            clearTimeout(cloud.autoTimer);
+            const wait = Math.max(3000, 20000 - (Date.now() - cloud.lastAuto));
+            cloud.autoTimer = setTimeout(async () => {
+                if (!career) return;
+                try { cloud.lastAuto = Date.now(); await cloudWriteSave('auto', career, true); renderAccountChip(); } catch (e) {}
+            }, wait);
+        }
+        function cloudErr(e) {
+            const c = e && e.code;
+            if (c === 'invalid_argument' || c === 'not_granted') return 'Tu acceso a este juego no permite guardar en la nube (pide al dueño que te dé permiso de colaborador) — usa “Descargar respaldo”.';
+            if (c === 'quota_exceeded') return 'La nube está llena. Borra alguna partida guardada.';
+            if (c === 'offline') return 'Sin conexión con la nube.';
+            return 'No se pudo completar. Inténtalo de nuevo.';
+        }
+        // --- Respaldo en archivo (funciona en cualquier dispositivo, con o sin nube) ---
+        async function downloadBackup() {
+            if (!career) { cloud.msg = 'No tienes una carrera para respaldar.'; renderAccount(); return; }
+            const meta = careerMeta(career);
+            const data = JSON.stringify({ app: 'CDN26', v: 1, account: account || null, career, savedAt: new Date().toISOString() });
+            const filename = `CDN26_carrera_${String(meta.clubName).replace(/[^\w]+/g, '_')}_T${meta.season}.json`;
+            try {
+                const dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null;
+                if (dl) { await dl.save({ filename, data }); cloud.msg = '✅ Respaldo descargado.'; }
+                else {
+                    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' })); a.download = filename;
+                    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+                    cloud.msg = '✅ Respaldo descargado.';
+                }
+            } catch (e) { cloud.msg = e && e.code === 'declined' ? 'Descarga cancelada.' : 'No se pudo descargar el respaldo.'; }
+            renderAccount();
+        }
+        function importBackup(file) {
+            const fr = new FileReader();
+            fr.onload = () => {
+                try {
+                    const o = JSON.parse(fr.result);
+                    const c = o && o.career ? o.career : o;
+                    if (!c || !c.clubs || !c.comps) throw 0;
+                    career = c; saveCareer();
+                    if (o.account && (!account || !account.nick)) { account = o.account; saveAccount(); }
+                    cloud.msg = '✅ Carrera restaurada desde el respaldo.';
+                } catch (e) { cloud.msg = 'Ese archivo no es un respaldo válido de CDN 26.'; }
+                renderAccount(); renderAccountChip();
+            };
+            fr.readAsText(file);
+        }
+        // --- Interfaz ---
+        function renderAccountChip() {
+            const b = document.getElementById('btn-account'); if (!b) return;
+            const on = cloud.status === 'online';
+            b.innerHTML = account && account.nick
+                ? `<span class="ac-av">${esc(account.avatar || '⚽')}</span><span class="ac-nm">${esc(account.nick)}</span><span class="ac-st ${on ? 'on' : ''}">${on ? '☁️' : '📱'}</span>`
+                : `<span class="ac-av">👤</span><span class="ac-nm">Cuenta CDN Sports</span>`;
+        }
+        function fmtDate(t) { try { return new Date(t).toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
+        let accDraft = null;
+        function renderAccount() {
+            const box = document.getElementById('account-body'); if (!box) return;
+            const on = cloud.status === 'online';
+            const statusLine = on
+                ? `<div class="ac-cloud on">☁️ <b>Nube conectada</b><span>Sesión: ${esc(cloud.name || 'tu cuenta')} · tus partidas quedan guardadas aunque el juego se actualice o cambies de dispositivo.</span></div>`
+                : cloud.status === 'checking' ? `<div class="ac-cloud">⏳ Conectando con la nube…</div>`
+                : `<div class="ac-cloud">📱 <b>Solo en este dispositivo</b><span>La nube funciona al abrir el juego desde su enlace con tu sesión iniciada. Mientras tanto usa “Descargar respaldo”.</span></div>`;
+            if (!account || !account.nick || accDraft) {
+                const d = accDraft || (accDraft = { nick: (account && account.nick) || (cloud.name ? cloud.name.split(' ')[0] : ''), avatar: (account && account.avatar) || '⚽', fav: (account && account.fav) || 'valpo' });
+                box.innerHTML = `<div class="ac-logo">CDN <b>SPORTS</b></div>
+                    <div class="ac-h">${account && account.nick ? 'Editar perfil' : 'Crea tu cuenta CDN Sports'}</div>
+                    ${statusLine}
+                    <label class="ac-lbl">Nombre de usuario</label><input id="ac-nick" maxlength="18" placeholder="Tu apodo" value="${esc(d.nick)}">
+                    <label class="ac-lbl">Avatar</label><div class="ac-avs">${AVATARS.map(a => `<button class="${a === d.avatar ? 'sel' : ''}" data-av="${a}">${a}</button>`).join('')}</div>
+                    <label class="ac-lbl">Equipo favorito</label><select id="ac-fav">${TEAMS.map(t => `<option value="${t.id}" ${t.id === d.fav ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select>
+                    <div class="ac-msg" id="ac-msg">${esc(cloud.msg || '')}</div>
+                    <div class="ac-row"><button class="tr-btn" data-ac="close">Cancelar</button><button class="tr-btn pri" data-ac="create">${account && account.nick ? 'Guardar' : (on ? '☁️ Crear cuenta' : 'Crear cuenta')}</button></div>`;
+                return;
+            }
+            const meta = career ? careerMeta(career) : null;
+            const saveRow = (sv) => `<div class="ac-save"><div><b>${sv.slot === 'auto' ? '🔄 Automático' : '💾 ' + esc(sv.slot.replace('slot', 'Ranura '))}</b>
+                <span>${esc(sv.clubName || '')} · ${sv.mode === 'player' ? 'Jugador' + (sv.player ? ' ' + esc(sv.player) : '') : 'DT'} · Temp. ${sv.season || 1}, sem. ${sv.week || 1}</span><small>${fmtDate(sv.updated)}</small></div>
+                <div class="ac-sbtn"><button class="tr-btn pri" data-ac="load" data-slot="${sv.slot}">Cargar</button>${sv.slot !== 'auto' ? `<button class="tr-btn" data-ac="del" data-slot="${sv.slot}">🗑</button>` : ''}</div></div>`;
+            box.innerHTML = `<div class="ac-logo">CDN <b>SPORTS</b></div>
+                <div class="ac-prof"><span class="ac-big">${esc(account.avatar)}</span><div><b>${esc(account.nick)}</b><span>${crestHTML(account.fav, '')} ${esc((TEAMS.find(t => t.id === account.fav) || {}).name || '')}</span></div><button class="tr-btn" data-ac="edit">✏️</button></div>
+                ${statusLine}
+                <div class="ac-sec">Tu carrera actual</div>
+                ${meta ? `<div class="ac-cur">⭐ ${esc(meta.clubName)} · ${meta.mode === 'player' ? 'Jugador' : 'DT'} · Temporada ${meta.season}, semana ${meta.week}</div>` : '<div class="ac-cur">No tienes una carrera en curso.</div>'}
+                ${on ? `<div class="ac-sec">Guardar en la nube</div><div class="ac-row wrap" style="margin-top:0"><button class="tr-btn pri" data-ac="save" data-slot="slot1" ${career ? '' : 'disabled'}>☁️ Ranura 1</button><button class="tr-btn pri" data-ac="save" data-slot="slot2" ${career ? '' : 'disabled'}>☁️ Ranura 2</button><button class="tr-btn pri" data-ac="save" data-slot="slot3" ${career ? '' : 'disabled'}>☁️ Ranura 3</button></div>
+                <label class="ac-check"><input type="checkbox" id="ac-auto" ${account.autoCloud === false ? '' : 'checked'}> Guardar automáticamente en la nube mientras juego</label>
+                <div class="ac-sec">Partidas en la nube</div>${cloud.saves.length ? cloud.saves.map(saveRow).join('') : '<div class="ac-cur">Aún no tienes partidas en la nube.</div>'}` : ''}
+                <div class="ac-sec">Respaldo en archivo</div>
+                <div class="ac-row wrap"><button class="tr-btn" data-ac="backup" ${career ? '' : 'disabled'}>⬇️ Descargar respaldo</button><button class="tr-btn" data-ac="import">⬆️ Importar respaldo</button><input type="file" id="ac-file" accept=".json,application/json" hidden></div>
+                <div class="ac-msg" id="ac-msg">${esc(cloud.msg || '')}</div>
+                <div class="ac-row"><button class="tr-btn" data-ac="logout">Cerrar sesión en este dispositivo</button><button class="tr-btn gold" data-ac="close">Listo</button></div>`;
+        }
+        let accConfirm = null;
+        function openAccount() {
+            cloud.msg = ''; accConfirm = null; accDraft = null;
+            document.getElementById('account-panel').classList.remove('hidden');
+            renderAccount();
+            if (cloud.status === 'online') refreshCloudSaves().then(renderAccount);
+        }
+        function setupAccount() {
+            const panel = document.getElementById('account-panel');
+            document.getElementById('btn-account').addEventListener('click', openAccount);
+            panel.addEventListener('input', (e) => { if (e.target.id === 'ac-nick' && accDraft) accDraft.nick = e.target.value; });
+            panel.addEventListener('change', (e) => {
+                if (e.target.id === 'ac-fav' && accDraft) accDraft.fav = e.target.value;
+                if (e.target.id === 'ac-auto') { account.autoCloud = e.target.checked; saveAccount(); }
+                if (e.target.id === 'ac-file' && e.target.files[0]) importBackup(e.target.files[0]);
+            });
+            panel.addEventListener('click', async (e) => {
+                if (e.target === panel) { panel.classList.add('hidden'); return; }
+                const b = e.target.closest('button'); if (!b) return;
+                if (b.dataset.av && accDraft) { accDraft.avatar = b.dataset.av; renderAccount(); return; }
+                const a = b.dataset.ac; if (!a || cloud.busy) return;
+                const slot = b.dataset.slot;
+                const run = async (fn, ok) => { cloud.busy = true; cloud.msg = '⏳ Un momento…'; renderAccount(); try { await fn(); cloud.msg = ok; } catch (err) { cloud.msg = cloudErr(err); } cloud.busy = false; renderAccount(); renderAccountChip(); };
+                if (a === 'close') { if (accDraft && account && account.nick) { accDraft = null; renderAccount(); return; } panel.classList.add('hidden'); return; }
+                if (a === 'edit') { accDraft = { nick: account.nick, avatar: account.avatar, fav: account.fav }; renderAccount(); return; }
+                if (a === 'create') {
+                    const nick = (accDraft.nick || '').trim().slice(0, 18);
+                    if (nick.length < 2) { cloud.msg = 'Escribe un nombre de usuario (mínimo 2 letras).'; renderAccount(); return; }
+                    account = { ...(account || {}), nick, avatar: accDraft.avatar, fav: accDraft.fav, created: (account && account.created) || Date.now() };
+                    saveAccount(); accDraft = null;
+                    if (cloud.status === 'online') {
+                        await run(async () => { await profRef().set({ nick: account.nick, avatar: account.avatar, fav: account.fav, created: account.created, updated: Date.now() }); if (career) await cloudWriteSave('auto', career); }, '✅ ¡Cuenta lista! Tu carrera se guarda en la nube.');
+                    } else { cloud.msg = '✅ Cuenta creada en este dispositivo.'; renderAccount(); }
+                    renderAccountChip(); return;
+                }
+                if (a === 'save') { await run(() => cloudWriteSave(slot, career), '✅ Carrera guardada en la nube.'); return; }
+                if (a === 'load') {
+                    if (career && accConfirm !== 'load:' + slot) { accConfirm = 'load:' + slot; cloud.msg = '⚠️ Esto reemplaza tu carrera actual. Toca “Cargar” otra vez para confirmar.'; renderAccount(); return; }
+                    accConfirm = null;
+                    await run(async () => { const c = await cloudReadSave(slot); career = c; saveCareer(); if (!document.getElementById('menu-career').classList.contains('hidden')) { careerView = 'hub'; refreshCareer(true); } }, '✅ Carrera cargada. Ábrela desde Modo Carrera.');
+                    return;
+                }
+                if (a === 'del') {
+                    if (accConfirm !== 'del:' + slot) { accConfirm = 'del:' + slot; cloud.msg = '⚠️ Toca 🗑 otra vez para borrar esa partida de la nube.'; renderAccount(); return; }
+                    accConfirm = null; await run(() => cloudDeleteSave(slot), 'Partida borrada.'); return;
+                }
+                if (a === 'backup') { downloadBackup(); return; }
+                if (a === 'import') { document.getElementById('ac-file').click(); return; }
+                if (a === 'logout') {
+                    if (accConfirm !== 'logout') { accConfirm = 'logout'; cloud.msg = 'Tu perfil y partidas en la nube no se borran. Toca otra vez para cerrar sesión en este dispositivo.'; renderAccount(); return; }
+                    accConfirm = null; account = null; saveAccount(); cloud.msg = ''; renderAccount(); renderAccountChip(); return;
+                }
+            });
+            renderAccountChip();
+            initCloud();
+        }
+        // =====================================================================
+        // --- CAMPEÓN EN EL MODO CARRERA: los jugadores levantan la copa ---
+        // =====================================================================
+        function cupSVG(type) {
+            const g = type === 'copa' ? ['#fde68a', '#f59e0b', '#b45309'] : ['#f1f5f9', '#cbd5e1', '#64748b'];
+            return `<svg viewBox="0 0 120 150" class="tw-cup-svg"><defs><linearGradient id="tcg${type}" x1="0" x2="1"><stop offset="0" stop-color="${g[2]}"/><stop offset=".45" stop-color="${g[0]}"/><stop offset="1" stop-color="${g[1]}"/></linearGradient></defs>
+                <path d="M28 10 H92 V44 C92 70 76 84 60 86 C44 84 28 70 28 44 Z" fill="url(#tcg${type})" stroke="#78350f" stroke-width="2"/>
+                <path d="M28 18 C10 18 8 34 14 44 C20 54 30 56 34 58" fill="none" stroke="url(#tcg${type})" stroke-width="7"/>
+                <path d="M92 18 C110 18 112 34 106 44 C100 54 90 56 86 58" fill="none" stroke="url(#tcg${type})" stroke-width="7"/>
+                <rect x="54" y="84" width="12" height="20" fill="url(#tcg${type})"/>
+                <path d="M38 104 H82 L88 124 H32 Z" fill="url(#tcg${type})" stroke="#78350f" stroke-width="2"/>
+                <rect x="26" y="124" width="68" height="18" rx="3" fill="#1f2937" stroke="${g[1]}" stroke-width="2"/>
+                <path d="M40 18 C40 40 44 56 52 66" stroke="#fff" stroke-opacity=".55" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+        }
+        function trophyFigure(p, team, center) {
+            const shirt = `<svg viewBox="0 0 100 80" class="tw-body"><path d="M28 6 L8 18 L0 40 L16 46 L20 34 L20 80 L80 80 L80 34 L84 46 L100 40 L92 18 L72 6 Q50 18 28 6Z" fill="${team.primaryColor || '#2563eb'}" stroke="#fff" stroke-width="3"/>
+                <text x="50" y="62" text-anchor="middle" font-family="Teko, Arial Black" font-weight="700" font-size="30" fill="#fff">${p.num || ''}</text></svg>`;
+            return `<div class="tw-fig ${center ? 'tw-cap' : ''}">${center ? `<i class="tw-arm l"></i><i class="tw-arm r"></i><div class="tw-cup">${cupSVG(window.__twType || 'liga')}</div>` : '<i class="tw-arm l up"></i><i class="tw-arm r up"></i>'}
+                <div class="tw-head">${phHTML(p, 'width:100%;height:100%;border-radius:50%')}</div>${shirt}<b>${esc(p.name.split(' ').slice(-1)[0])}${p.me ? ' (TÚ)' : ''}</b></div>`;
+        }
+        function playTrophy(c, cb) {
+            let box = document.getElementById('trophy-anim');
+            if (!box) { box = document.createElement('div'); box.id = 'trophy-anim'; document.body.appendChild(box); }
+            const club = myClub(), team = tTeam(club.id) || {};
+            let five = bestFive(club.roster).slice(0, 5);
+            const mp = career.mode === 'player' ? myPlayer() : null;
+            const capt = mp && club.roster.includes(mp) ? mp : five.slice().sort((a, b) => b.stats - a.stats)[0];
+            five = five.filter(p => p !== capt).slice(0, 4);
+            const order = [five[0], five[1], capt, five[2], five[3]].filter(Boolean);
+            const colors = ['#fbbf24', '#f8fafc', team.primaryColor || '#10b981', '#ef4444', '#3b82f6', '#22c55e'];
+            let conf = ''; for (let k = 0; k < 90; k++) conf += `<i style="left:${Math.random() * 100}%;background:${colors[k % colors.length]};animation-duration:${2.4 + Math.random() * 3}s;animation-delay:${1.2 + Math.random() * 3}s"></i>`;
+            let fw = ''; for (let k = 0; k < 6; k++) fw += `<span class="tw-fw" style="left:${10 + Math.random() * 80}%;top:${8 + Math.random() * 35}%;--fc:${colors[k % colors.length]};animation-delay:${1.4 + k * 0.55}s"></span>`;
+            box.innerHTML = `<div class="tw-bg" style="--c:${team.primaryColor || '#1e3a8a'}"></div><div class="tw-lights"><i></i><i></i></div>${fw}
+                <div class="tw-wrap"><div class="tw-top"><img class="tw-logo" src="${TOUR_LOGOS[c.type]}" alt=""><div><div class="tw-title">¡CAMPEONES!</div>
+                <div class="tw-sub">${crestHTML(club.id, '')} ${esc(team.name || '')} · ${TOUR_NAMES[c.type]} · Temporada ${career.season}</div></div></div>
+                <div class="tw-stage">${(window.__twType = c.type, order.map(p => trophyFigure(p, team, p === capt)).join(''))}</div>
+                <div class="tw-foot"><button class="tr-btn gold big" id="tw-ok">🏆 ¡A celebrar!</button></div></div>
+                <div class="tw-conf">${conf}</div>`;
+            box.classList.remove('hidden');
+            try { audio.playGoal && audio.playGoal(); setTimeout(() => { try { audio.playGoal(); } catch (e) {} }, 1600); } catch (e) {}
+            document.getElementById('tw-ok').onclick = () => { box.classList.add('hidden'); box.innerHTML = ''; cb && cb(); };
+        }
+        // Revisa si tu club acaba de ganar una competición y lanza la animación (una vez por título)
+        let trophyBusy = false;
+        function checkCareerTrophies() {
+            if (!career || trophyBusy || !career.comps) return;
+            const c = ['liga', 'copa'].map(k => career.comps[k]).find(x => x && x.phase === 'done' && x.champion === career.clubId && !x.trophyShown);
+            if (!c) return;
+            c.trophyShown = true; saveCareer();
+            trophyBusy = true;
+            setTimeout(() => playTrophy(c, () => { trophyBusy = false; checkCareerTrophies(); }), 300);
+        }
+        // =====================================================================
+        // --- PENALES INTERACTIVOS: tú eliges dónde patear y hacia dónde se lanza tu portero ---
+        // =====================================================================
+        const PEN_ZONES = [{ c: 0, r: 0 }, { c: 1, r: 0 }, { c: 2, r: 0 }, { c: 0, r: 1 }, { c: 1, r: 1 }, { c: 2, r: 1 }];
+        const PEN_XY = [[17, 30], [50, 26], [83, 30], [17, 72], [50, 74], [83, 72]];          // % dentro del arco
+        function penOutcome(shotZ, diveZ, shooterSkill, keeperSkill) {
+            const s = PEN_ZONES[shotZ], d = PEN_ZONES[diveZ];
+            const miss = clamp((s.r === 0 && s.c !== 1 ? 0.11 : 0.035) + (82 - shooterSkill) * 0.003, 0.02, 0.2);
+            if (Math.random() < miss) return 'miss';
+            if (s.c === d.c) {
+                let save = (s.r === d.r ? 0.84 : 0.5) + (keeperSkill - 82) * 0.006;
+                if (s.c === 1 && s.r === 0) save -= 0.2;
+                return Math.random() < clamp(save, 0.2, 0.95) ? 'save' : 'goal';
+            }
+            return 'goal';
+        }
+        function weighted(ws) { let t = ws.reduce((a, b) => a + b, 0), r = Math.random() * t; for (let i = 0; i < ws.length; i++) { r -= ws[i]; if (r <= 0) return i; } return ws.length - 1; }
+        const aiShotZone = () => weighted([1.2, 0.55, 1.2, 1.35, 0.6, 1.35]);
+        const aiDiveZone = () => weighted([1, 0.35, 1, 1, 0.4, 1]);
+        function penRoster(id) {
+            const t = tTeam(id) || {}; const ro = (t.roster || t.players || []).slice();
+            const gk = ro.find(p => p.isGK) || { name: 'Portero', stats: 80, isGK: true };
+            let field = ro.filter(p => !p.isGK).sort((a, b) => (b.stats || 0) - (a.stats || 0)).slice(0, 5);
+            const me = field.find(p => p.me); if (me) field = [me, ...field.filter(p => p !== me)];
+            if (!field.length) field = [{ name: t.short || 'Jugador', stats: 80 }];
+            return { gk, field, color: t.primaryColor || '#2563eb', gkColor: t.gkColor || '#f59e0b' };
+        }
+        function keeperSVG(color) {
+            return `<svg viewBox="0 0 60 80" width="100%" height="100%"><circle cx="30" cy="13" r="10" fill="#f1c9a5" stroke="#0f172a" stroke-width="2"/>
+                <rect x="17" y="24" width="26" height="30" rx="7" fill="${color}" stroke="#0f172a" stroke-width="2"/>
+                <rect x="2" y="24" width="16" height="8" rx="4" fill="${color}" stroke="#0f172a" stroke-width="2" transform="rotate(-35 18 28)"/>
+                <rect x="42" y="24" width="16" height="8" rx="4" fill="${color}" stroke="#0f172a" stroke-width="2" transform="rotate(35 42 28)"/>
+                <circle cx="5" cy="17" r="5" fill="#fde047" stroke="#0f172a" stroke-width="2"/><circle cx="55" cy="17" r="5" fill="#fde047" stroke="#0f172a" stroke-width="2"/>
+                <rect x="19" y="53" width="9" height="22" rx="4" fill="#111827"/><rect x="32" y="53" width="9" height="22" rx="4" fill="#111827"/></svg>`;
+        }
+        function penSceneHTML() {
+            return `<div class="pk-goal" id="pk-goal"><div class="pk-net"></div>
+                <div class="pk-keeper" id="pk-keeper"></div>
+                <div class="pk-zones" id="pk-zones">${PEN_ZONES.map((z, i) => `<button class="pk-z" data-z="${i}" aria-label="zona ${i + 1}"><span>${['↖', '⬆', '↗', '↙', '⬇', '↘'][i]}</span></button>`).join('')}</div>
+                <div class="pk-ball" id="pk-ball"></div></div><div class="pk-spot"></div>`;
+        }
+        // Anima un penal: z = zona del tiro, dz = zona a la que se lanza el portero
+        function penAnimate(z, dz, outcome, done) {
+            const ball = document.getElementById('pk-ball'), kp = document.getElementById('pk-keeper');
+            if (!ball || !kp) { done(); return; }
+            const [bx, by] = PEN_XY[z], [kx, ky] = PEN_XY[dz];
+            let tx = bx, ty = by;
+            if (outcome === 'miss') { tx = bx < 50 ? -12 : bx > 50 ? 112 : 50; ty = by < 50 ? -18 : by; if (bx === 50) ty = -22; }
+            if (outcome === 'save') { tx = kx + (bx - kx) * 0.3; ty = ky + (by - ky) * 0.3; }
+            const rot = PEN_ZONES[dz].c === 0 ? -62 : PEN_ZONES[dz].c === 2 ? 62 : 0;
+            kp.style.left = kx + '%'; kp.style.top = (PEN_ZONES[dz].r === 0 ? 46 : 60) + '%';
+            kp.style.transform = `translate(-50%,-50%) rotate(${rot}deg)`;
+            ball.style.left = tx + '%'; ball.style.top = ty + '%'; ball.style.width = ball.style.height = '7%';
+            try { audio.playKick(1); } catch (e) {}
+            setTimeout(() => {
+                if (outcome === 'save') { ball.style.left = (kx + (kx < 50 ? -18 : kx > 50 ? 18 : 0)) + '%'; ball.style.top = '108%'; }
+                if (outcome === 'goal') { try { audio.playGoal && audio.playGoal(); } catch (e) {} document.getElementById('pk-goal').classList.add('net-hit'); }
+                setTimeout(done, outcome === 'goal' ? 900 : 700);
+            }, 480);
+        }
+        function penReset() {
+            const ball = document.getElementById('pk-ball'), kp = document.getElementById('pk-keeper'), g = document.getElementById('pk-goal');
+            if (g) g.classList.remove('net-hit');
+            if (ball) { ball.style.transition = 'none'; ball.style.left = '50%'; ball.style.top = '118%'; ball.style.width = ball.style.height = '10%'; void ball.offsetWidth; ball.style.transition = ''; }
+            if (kp) { kp.style.transition = 'none'; kp.style.left = '50%'; kp.style.top = '62%'; kp.style.transform = 'translate(-50%,-50%)'; void kp.offsetWidth; kp.style.transition = ''; }
+        }
+        const PEN_TEXT = { goal: '¡GOOOL!', save: '¡ATAJADA!', miss: '¡AFUERA!' };
+        // Tanda de penales interactiva (tu equipo es userId)
+        function showPensInteractive(m, userId, cb) {
+            const box = document.getElementById('tour-pens');
+            const userHome = m.h === userId;
+            const R = { h: penRoster(m.h), a: penRoster(m.a) };
+            const res = { h: [], a: [] };
+            let turn = 0, busy = false, over = false;
+            const row = (id, side) => `<div class="tp-row">${crestHTML(id, '')}<span>${esc(tTeam(id).short)}</span><div class="tp-dots" id="tp-${side}"></div><b class="pk-sum" id="pk-sum-${side}">0</b></div>`;
+            box.innerHTML = `<div class="tp-card pk-card"><div class="pk-left"><h3>TANDA DE PENALES</h3><div class="pk-sub">${esc(tTeam(m.h).name)} ${m.hg} - ${m.ag} ${esc(tTeam(m.a).name)}</div>
+                ${row(m.h, 'h')}${row(m.a, 'a')}
+                <div class="pk-info" id="pk-info"></div><div class="tp-res" id="tp-res"></div>
+                <div class="pk-btns"><button class="tr-btn" id="tp-skip">⚡ Simular el resto</button><button class="tr-btn pri hidden" id="tp-ok">Continuar ▶</button></div></div>
+                <div class="pk-right">${penSceneHTML()}</div></div>`;
+            box.classList.remove('hidden');
+            const sum = (a) => a.filter(Boolean).length;
+            const decided = () => {
+                const hs = sum(res.h), as = sum(res.a), hk = res.h.length, ak = res.a.length;
+                if (hk <= 5 && ak <= 5) {
+                    if (hs + (5 - hk) < as || as + (5 - ak) < hs) return true;
+                    return hk === 5 && ak === 5 && hs !== as;
+                }
+                return hk === ak && hs !== as;
+            };
+            const draw = () => {
+                ['h', 'a'].forEach(s => {
+                    const el = document.getElementById('tp-' + s);
+                    el.innerHTML = res[s].map(ok => `<i class="${ok ? 'ok' : 'ko'}">${ok ? '✓' : '✕'}</i>`).join('') + (res[s].length < 5 ? '<i></i>'.repeat(5 - res[s].length) : '');
+                    document.getElementById('pk-sum-' + s).textContent = sum(res[s]);
+                });
+            };
+            const finish = () => {
+                over = true;
+                m.pens = { h: sum(res.h), a: sum(res.a) }; try { saveTour(); } catch (e) {}
+                draw();
+                const w = matchWinner(m);
+                const mine = w === userId;
+                document.getElementById('pk-info').innerHTML = '';
+                document.getElementById('tp-res').innerHTML = `${m.pens.h} - ${m.pens.a} · <span style="color:${mine ? '#34d399' : '#f87171'}">${mine ? '¡GANASTE LA TANDA!' : 'Gana ' + esc(tTeam(w).name)}</span>`;
+                document.getElementById('tp-skip').classList.add('hidden');
+                document.getElementById('tp-ok').classList.remove('hidden');
+                document.getElementById('pk-zones').classList.add('off');
+            };
+            const next = () => {
+                if (over) return;
+                if (decided()) return finish();
+                penReset();
+                const side = turn % 2 === 0 ? 'h' : 'a', other = side === 'h' ? 'a' : 'h';
+                const kicker = R[side].field[Math.floor(turn / 2) % R[side].field.length];
+                const keeper = R[other].gk;
+                const userShoots = (side === 'h') === userHome;
+                const kp = document.getElementById('pk-keeper'); kp.innerHTML = keeperSVG(R[other].gkColor);
+                document.getElementById('pk-info').innerHTML = userShoots
+                    ? `<b>⚽ Patea ${esc(kicker.name)}${kicker.me ? ' (TÚ)' : ''}</b><br><span>Toca el arco: elige dónde patear</span>`
+                    : `<b>🧤 Ataja ${esc(keeper.name)}${keeper.me ? ' (TÚ)' : ''}</b><br><span>Patea ${esc(kicker.name)} · elige hacia dónde se lanza tu portero</span>`;
+                document.getElementById('tp-res').textContent = '';
+                const zones = document.getElementById('pk-zones');
+                zones.classList.remove('off'); zones.classList.toggle('dive', !userShoots);
+                busy = false;
+                zones.onclick = (e) => {
+                    const b = e.target.closest('[data-z]'); if (!b || busy || over) return;
+                    busy = true; zones.classList.add('off');
+                    const pick = +b.dataset.z;
+                    const z = userShoots ? pick : aiShotZone(), dz = userShoots ? aiDiveZone() : pick;
+                    const out = penOutcome(z, dz, kicker.stats || 80, keeper.stats || 80);
+                    penAnimate(z, dz, out, () => {
+                        res[side].push(out === 'goal'); turn++; draw();
+                        document.getElementById('tp-res').innerHTML = `<span style="color:${out === 'goal' ? '#34d399' : '#f87171'}">${PEN_TEXT[out]}</span>`;
+                        setTimeout(next, 900);
+                    });
+                };
+            };
+            draw(); next();
+            document.getElementById('tp-skip').onclick = () => {
+                if (over) return;
+                while (!decided()) {
+                    const side = turn % 2 === 0 ? 'h' : 'a', other = side === 'h' ? 'a' : 'h';
+                    const kicker = R[side].field[Math.floor(turn / 2) % R[side].field.length];
+                    res[side].push(penOutcome(aiShotZone(), aiDiveZone(), kicker.stats || 80, R[other].gk.stats || 80) === 'goal'); turn++;
+                }
+                finish();
+            };
+            document.getElementById('tp-ok').onclick = () => { box.classList.add('hidden'); cb && cb(); };
+        }
+
+        // --- Penal durante el partido (falta dentro del área) ---
+        let penaltyPending = null;
+        function isInBox(p, defender) {        // ¿la falta fue dentro del área del defensor?
+            return Math.abs(p.x - defender.ownGoalX) < 120 && Math.abs(p.y - MID_Y) < 150;
+        }
+        function maybePenaltyFoul(t, h) {     // t intentó quitar y falló: a veces es falta en el área
+            if (gameState !== 'PLAYING' || kickoff.active || penaltyPending || t.isGK || h.isGK) return false;
+            if (!isInBox(h, t)) return false;
+            const fromBehind = Math.cos(Math.atan2(h.y - t.y, h.x - t.x) - Math.atan2(MID_Y - h.y, h.oppGoalX - h.x)) > 0.2;
+            const chance = (t.controlled ? 0.09 : 0.05) + (fromBehind ? 0.05 : 0);
+            if (Math.random() > chance) return false;
+            awardPenalty(h, t);
+            return true;
+        }
+        function awardPenalty(fouled, fouler) {
+            const attHome = fouled.isHome;
+            const humanAtt = attHome || gameMode === '2P', humanDef = !attHome || gameMode === '2P';
+            const shooters = players.filter(q => q.isHome === attHome && !q.isGK).sort((a, b) => (lockMe && b.me ? 1 : 0) - (lockMe && a.me ? 1 : 0) || b.att - a.att);
+            const taker = shooters[0] || fouled;
+            const keeper = players.find(q => q.isHome !== attHome && q.isGK);
+            penaltyPending = { taker, keeper, attHome };
+            gameState = 'PENALTY';
+            audio.playWhistle();
+            padToast(`🟥 ¡PENAL! Falta de ${surname(fouler.name)} sobre ${surname(fouled.name)}`);
+            const box = document.getElementById('tour-pens');
+            const userShoots = attHome;                     // el jugador 1 siempre es el local
+            const tName = (attHome ? homeTeam : awayTeam).name;
+            box.innerHTML = `<div class="tp-card pk-card"><div class="pk-left"><h3>¡PENAL!</h3><div class="pk-sub">Falta en el área · ${esc(tName)}</div>
+                <div class="pk-info" id="pk-info">${userShoots ? `<b>⚽ Patea ${esc(taker.name)}${taker.me ? ' (TÚ)' : ''}</b><br><span>Toca el arco: elige dónde patear</span>`
+                    : `<b>🧤 Ataja ${esc(keeper ? keeper.name : 'tu portero')}</b><br><span>Patea ${esc(taker.name)} · elige hacia dónde te lanzas</span>`}</div>
+                <div class="tp-res" id="tp-res"></div></div><div class="pk-right">${penSceneHTML()}</div></div>`;
+            box.classList.remove('hidden');
+            penReset();
+            document.getElementById('pk-keeper').innerHTML = keeperSVG((attHome ? awayTeam : homeTeam).gkColor || '#f59e0b');
+            const zones = document.getElementById('pk-zones');
+            zones.classList.toggle('dive', !userShoots);
+            let busy = false;
+            const resolve = (pick) => {
+                busy = true; zones.classList.add('off');
+                const z = userShoots ? pick : aiShotZone(), dz = userShoots ? aiDiveZone() : pick;
+                const out = penOutcome(z, dz, taker.att || 80, keeper ? keeper.def : 80);
+                penAnimate(z, dz, out, () => {
+                    document.getElementById('tp-res').innerHTML = `<span style="color:${out === 'goal' ? '#34d399' : '#f87171'}">${PEN_TEXT[out]}</span>`;
+                    setTimeout(() => { box.classList.add('hidden'); finishPenalty(out); }, 800);
+                });
+            };
+            zones.onclick = (e) => { const b = e.target.closest('[data-z]'); if (!b || busy) return; resolve(+b.dataset.z); };
+            if (!humanAtt && !humanDef) setTimeout(() => resolve(0), 600);
+        }
+        function finishPenalty(out) {
+            const pp = penaltyPending; penaltyPending = null;
+            if (!pp) { gameState = 'PLAYING'; return; }
+            const { taker, keeper } = pp;
+            gameState = 'PLAYING';
+            lastFrameTime = performance.now();
+            if (out === 'goal') {
+                const gx = taker.oppGoalX;
+                ball.holder = null; ball.lastTouch = taker; taker.assistFrom = null;
+                ball.x = gx - taker.dir * 3; ball.y = MID_Y; ball.vx = taker.dir * 6; ball.vy = 0; ball.isShot = true;
+                MS(taker).shots++; MS(taker).onT++; if (taker.isHome) matchStats.homeShots++; else matchStats.awayShots++;
+                scoreGoalAt(gx < pitch.width / 2 ? 'left' : 'right');
+            } else {
+                MS(taker).shots++; if (out === 'save' && keeper) { MS(keeper).saves++; MS(taker).onT++; }
+                if (keeper) { keeper.x = keeper.ownGoalX + keeper.dir * 30; keeper.y = MID_Y; gainPossession(keeper); }
+            }
+        }
+        // =====================================================================
+        // --- CALIFICACIÓN DEL PARTIDO Y COMENTARIO DEL DT (carrera de jugador) ---
+        // =====================================================================
+        let mstat = {};
+        function MS(p) { const k = (p.isHome ? 'h:' : 'a:') + p.name; return mstat[k] || (mstat[k] = { pass: 0, passOk: 0, shots: 0, onT: 0, tackles: 0, lost: 0, saves: 0 }); }
+        function resetMatchStats() { mstat = {}; }
+        function liveRatingFor(name, isGK, res, gf, ga, sub) {
+            const s = mstat['h:' + name] || { pass: 0, passOk: 0, shots: 0, onT: 0, tackles: 0, lost: 0, saves: 0 };
+            const goals = matchGoals.filter(g => g.forHome && !g.own && g.name === name).length;
+            const assists = matchGoals.filter(g => g.forHome && !g.own && g.assist === name).length;
+            let r = 6.0 + goals * 1.0 + assists * 0.6 + s.passOk * 0.05 - Math.max(0, s.pass - s.passOk) * 0.07
+                + s.onT * 0.15 - Math.max(0, s.shots - s.onT) * 0.05 + s.tackles * 0.18 - s.lost * 0.1
+                + (res === 'W' ? 0.4 : res === 'D' ? 0.1 : -0.3);
+            if (isGK) r += s.saves * 0.25 - ga * 0.35 + (ga === 0 ? 0.6 : 0);
+            if (sub) r = 6 + (r - 6) * 0.8;
+            return { rating: clamp(Math.round(r * 10) / 10, 3, 10), goals, assists, isGK: !!isGK, ga, live: true, ...s };
+        }
+        function ratingColor(r) { return r >= 8 ? '#22c55e' : r >= 7 ? '#84cc16' : r >= 6 ? '#facc15' : r >= 5 ? '#f97316' : '#ef4444'; }
+        function coachComment(rep, res) {
+            const first = (myPlayer() ? myPlayer().name : '').split(' ')[0];
+            const r = rep.rating;
+            let base;
+            if (r >= 8.5) base = pickOne([`¡Partidazo, ${first}! Así se juega. Hoy fuiste el mejor de la cancha.`, `Impresionante, ${first}. Con partidos así te ganas el puesto para siempre.`]);
+            else if (r >= 7.5) base = pickOne([`Muy buen partido, ${first}. Sigue por este camino.`, `Me gustó mucho lo que hiciste hoy, ${first}.`]);
+            else if (r >= 6.5) base = pickOne([`Cumpliste, ${first}. Correcto, pero sé que puedes dar más.`, `Partido aceptable. Quiero verte más participativo.`]);
+            else if (r >= 5.5) base = pickOne([`Hoy te costó, ${first}. Hay que trabajar más en los entrenamientos.`, `No fue tu mejor día. Tienes que meterte más en el juego.`]);
+            else base = pickOne([`Muy flojo, ${first}. Así va a ser difícil que sigas de titular.`, `Esperaba mucho más de ti. Esta semana a entrenar el doble.`]);
+            const tips = [];
+            if (rep.goals >= 3) tips.push('¡Un hat-trick! Te llevas el balón a casa. ⚽⚽⚽');
+            else if (rep.goals === 2) tips.push('Ese doblete nos dio mucho.');
+            else if (rep.goals === 1) tips.push('Bien ese gol.');
+            if (rep.assists) tips.push(rep.assists > 1 ? 'Y repartiste asistencias, excelente visión.' : 'Gran pase en la asistencia.');
+            if (rep.live && !rep.isGK && rep.shots === 0 && rep.goals === 0) tips.push('Tienes que animarte a patear al arco.');
+            if (rep.live && rep.pass >= 4 && rep.passOk / rep.pass < 0.6) tips.push('Perdiste muchos pases, cuida más el balón.');
+            if (rep.live && rep.tackles >= 3) tips.push('Buen trabajo defensivo recuperando balones.');
+            if (rep.live && rep.lost >= 4) tips.push('Te quitaron el balón demasiadas veces.');
+            if (rep.isGK && rep.ga === 0) tips.push('Portería en cero, ¡felicitaciones!');
+            if (rep.isGK && rep.saves >= 3) tips.push('Salvaste al equipo con esas atajadas.');
+            if (res === 'L' && r >= 7) tips.push('Lástima el resultado, pero tú hiciste tu parte.');
+            return base + (tips.length ? ' ' + tips.slice(0, 2).join(' ') : '');
+        }
+        function reportHTML(rep) {
+            if (!rep) return '';
+            const co = coachOf(career.clubId);
+            const chip = (ic, v, l) => `<span class="rp-chip">${ic} <b>${v}</b> ${l}</span>`;
+            const chips = [chip('⚽', rep.goals, 'goles'), chip('🎯', rep.assists, 'asist.')];
+            if (rep.live) {
+                chips.push(chip('🔁', `${rep.passOk}/${rep.pass}`, 'pases'));
+                if (rep.isGK) chips.push(chip('🧤', rep.saves, 'atajadas')); else chips.push(chip('🥅', `${rep.onT}/${rep.shots}`, 'tiros al arco'));
+                chips.push(chip('🛡️', rep.tackles, 'recuperaciones'));
+            }
+            return `<div class="rp-card">
+                <div class="rp-top"><div class="rp-rate" style="--rc:${ratingColor(rep.rating)}"><b>${rep.rating.toFixed(1)}</b><small>TU NOTA</small></div>
+                <div class="rp-chips">${chips.join('')}${rep.sub ? '<span class="rp-chip">⏱️ entraste en el 2º tiempo</span>' : ''}</div></div>
+                <div class="rp-coach"><img src="${coachPhoto(co)}" alt=""><div><small>DT · ${esc(co.name)}</small><p>“${esc(rep.comment)}”</p></div></div></div>`;
+        }
+        function showLiveReport() {
+            const menu = document.getElementById('menu-results');
+            let el = document.getElementById('res-career-card');
+            if (!el) { el = document.createElement('div'); el.id = 'res-career-card'; menu.insertBefore(el, menu.children[1]); }
+            const rep = careerCtx && careerCtx.rep;
+            el.innerHTML = rep ? reportHTML(rep) : '';
+            el.classList.toggle('hidden', !rep);
+        }
+        function hideLiveReport() { const el = document.getElementById('res-career-card'); if (el) el.classList.add('hidden'); }
+        // =====================================================================
         // --- ENERGÍA Y SUSTITUCIONES DURANTE EL PARTIDO ---
         // =====================================================================
         let subsTeamSide = 'home', subSel = null;
@@ -4692,6 +5414,7 @@
             setupMouseAim();
             setupBindings();
             setupSubs();
+            try { setupAccount(); } catch (e) { console.warn(e); }
             requestAnimationFrame(gameLoop);
         }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGame);
@@ -4774,7 +5497,8 @@
             }, { passive: false });
             // Durante el partido no se desplaza la página ni se activa "tirar para actualizar"
             document.addEventListener('touchmove', (e) => {
-                if (document.body.classList.contains('in-match') && !e.target.closest('#ui-layer')) e.preventDefault();
+                // solo se bloquea sobre la cancha y los controles táctiles; los menús y ventanas siempre se pueden desplazar
+                if (document.body.classList.contains('in-match') && e.target.closest('#touch-layer, #gameCanvas, #dpad-container, #touch-actions')) e.preventDefault();
             }, { passive: false });
             // Al salir de la app: pausar música; al volver: reanudar si está en un menú
             let hiddenAt = 0;
@@ -5422,7 +6146,11 @@
             ball.gkTried = null;
             ball.lastTouch = p;
             if (!isShot) ball.lastPass = p;                      // para contar asistencias
+            ball.passCounted = false;
+            if (!kickoff.active) { const st = MS(p); if (isShot) st.shots++; else st.pass++; }
             ball.humanPass = !isShot && !!p.controlled;          // pase del jugador humano: ayuda al recibir
+            ball.humanShot = !!isShot && !!p.controlled;         // tiro del jugador humano: el portero rival ataja algo menos
+            ball.gkPass = !isShot && !!p.isGK;                   // saque del portero: el rival no lo corta tan fácil
             if (kickoff.active) kickoff.active = false;          // el saque se completó
             ball.shotByHome = p.isHome;
             ball.passTarget = null;
@@ -5497,10 +6225,16 @@
             return gk.y < MID_Y ? bottom : top;   // al palo contrario del portero
         }
 
+        // Puntería del jugador: con dirección arriba/abajo va a ese palo; sin dirección busca el palo que deja libre el portero
+        function humanAimY(p, dy) {
+            const half = (GOAL_BOTTOM - GOAL_TOP) / 2 - 16;
+            if (Math.abs(dy) < 0.3) return shotTargetY(p) + (Math.random() - 0.5) * 10;
+            return MID_Y + Math.sign(dy) * half * clamp(Math.abs(dy) * 1.1, 0.55, 1) + (Math.random() - 0.5) * 12;
+        }
         function shoot(p, power01, aimY) {
             const gx = p.oppGoalX + p.dir * 6;
             let ty = aimY === undefined ? shotTargetY(p) : aimY;
-            const error = (1 - p.att / 100) * 110 * (0.4 + power01 * 0.7) * aiDiff(p).aim;
+            const error = (1 - p.att / 100) * 110 * (0.4 + power01 * 0.7) * (p.controlled ? 0.5 : aiDiff(p).aim);   // tus tiros salen más precisos
             ty += (Math.random() * 2 - 1) * error * 0.5;
             kickBall(p, Math.atan2(ty - p.y, gx - p.x), 9 + power01 * 13, true);
         }
@@ -5511,6 +6245,7 @@
             }
             ball.holder = p;
             p.assistFrom = (ball.lastPass && ball.lastPass !== p && ball.lastPass.isHome === p.isHome) ? ball.lastPass : null;
+            if (p.assistFrom && !ball.passCounted) { MS(p.assistFrom).passOk++; ball.passCounted = true; }
             if (ball.lastPass && ball.lastPass.isHome !== p.isHome) ball.lastPass = null;
             ball.lastTouch = p;
             ball.vx = 0; ball.vy = 0;
@@ -5526,7 +6261,7 @@
             if (!h || t.isHome === h.isHome || kickoff.active) return false;
             if (t.tackleCooldown > 0 || t.stun > 0) return false;
             if (t.isGK && !inOwnArea(t)) return false;
-            if (h.isGK && inOwnArea(h)) return false;     // el portero con el balón en sus manos no se roba
+            if (h.isGK && (inOwnArea(h) || h.holdTime < 1.5)) return false;     // el portero con el balón en sus manos no se roba
             if (h.holdTime < (h.controlled && !t.controlled ? 0.75 : 0.4)) return false;   // protección al recibir (más para el humano)
             if (dist(t, h) > 29 + extraReach) return false;
             t.tackleCooldown = t.controlled ? 0.7 : 1.0 * aiDiff(t).tcd;   // la IA no puede intentar quitar sin parar
@@ -5538,9 +6273,11 @@
                 h.stun = 0.5;
                 h.kickCooldown = 0.35;
                 h.isChargingShot = false; h.kickPower = 0;
+                MS(t).tackles++; MS(h).lost++;
                 gainPossession(t);
                 return true;
             }
+            maybePenaltyFoul(t, h);
             return false;
         }
 
@@ -5702,6 +6439,14 @@
 
         function aiWithoutBall(p, role, ctx, k) {
             const ownGoal = { x: p.ownGoalX, y: MID_Y };
+            if ((role === 'press' || role === 'cover') && ball.holder && ball.holder.isGK && ball.holder.isHome !== p.isHome) {
+                // el portero rival tiene el balón en las manos: no se le encima nadie, cada uno vuelve a su zona
+                const f0 = formationTarget(p, false);
+                const away = Math.hypot(f0.x - ball.holder.x, f0.y - ball.holder.y);
+                if (away < 110) { const ux = (f0.x - ball.holder.x) / (away || 1), uy = (f0.y - ball.holder.y) / (away || 1); f0.x = ball.holder.x + ux * 110; f0.y = ball.holder.y + uy * 110; }
+                steer(p, f0.x, f0.y, 0.8, k);
+                return;
+            }
             if (role === 'press' || role === 'receive') {
                 let tgt = role === 'receive'
                     ? (ball.throughPoint && dist(p, ball.throughPoint) > 18 ? ball.throughPoint : ball)
@@ -5752,7 +6497,7 @@
             const towardGoal = (ball.vx * -p.dir) > 2 && !ball.holder;
             if (towardGoal) {
                 const t = (p.x - ball.x) / (ball.vx || 0.001);
-                if (t > 0 && t < 70) { ty = clamp(ball.y + ball.vy * t, GOAL_TOP - 14, GOAL_BOTTOM + 14); tx = p.x; speed = 1.55 + d.gk; }
+                if (t > 0 && t < 70) { ty = clamp(ball.y + ball.vy * t, GOAL_TOP - 14, GOAL_BOTTOM + 14); tx = p.x; speed = (ball.humanShot && !p.controlled ? 1.32 : 1.55) + d.gk; }
             }
             // Balón suelto en su área: sale a buscarlo
             if (!ball.holder && dBallGoal < 160 && Math.hypot(ball.vx, ball.vy) < 7) { tx = ball.x; ty = ball.y; speed = 1.2; }
@@ -5883,6 +6628,11 @@
             side.prevPass = ck.pass; side.prevShoot = ck.shoot;
 
             if (hasBall) side.pressHeld = false;
+            if (hasBall && p.isGK && p.holdTime > 2.4 && !p.passCharging && !p.isChargingShot) {   // tu portero no se queda parado con el balón: saca solo
+                const t = bestPassTarget(p, false);
+                if (t) passTo(p, t.p); else kickBall(p, p.dir > 0 ? (Math.random() - 0.5) * 0.8 : Math.PI + (Math.random() - 0.5) * 0.8, 15, false);
+                return;
+            }
             if (hasBall) {
                 // Pases con barra de potencia: toque corto = fuerza automática; mantener = eliges la fuerza
                 if (!p.passCharging && (passEdge || throughEdge || (kickoff.active && kickoff.taker === p && shootEdge))) {
@@ -5935,7 +6685,7 @@
                     } else if (p.isGK) {
                         kickBall(p, p.angle, 11 + power * 9, false);                       // portero: saque largo hacia donde mira
                     } else if (Math.cos(toGoal - p.angle) > 0.1) {
-                        shoot(p, power, MID_Y + dy * 48 + (Math.random() - 0.5) * 20);   // apunta con el joystick
+                        shoot(p, power, humanAimY(p, dy));   // apunta con el joystick (sin dirección: al palo libre)
                     } else {
                         kickBall(p, p.angle, 9 + power * 11, false);                      // despeje hacia donde mira
                     }
@@ -6078,6 +6828,7 @@
             secondHalf = false;
             sidesSwapped = false;
             resetEnergies();
+            resetMatchStats(); hideLiveReport();
             stopCelebration();
             document.body.classList.toggle('lock-me', !!lockMe);
             document.getElementById('halftime-panel').classList.add('hidden');
@@ -6354,6 +7105,7 @@
                     if (p.isGK && inOwnArea(p)) reach = 40;          // el portero ataja con las manos
                     if (p.isGK && ball.isShot && p.isHome !== ball.shotByHome && ball.gkTried === p) return;
                     else if (sp > 14) reach = CONTROL_DIST * 0.7;    // un tiro fuerte es difícil de cortar
+                    if (ball.gkPass && sp > 3 && ball.lastPass && p.isHome !== ball.lastPass.isHome && dist(ball, ball.lastPass) < 160) reach *= 0.45;   // saque del portero protegido
                     if (ball.humanPass && sp > 3) {                  // tus pases: el rival los corta menos y tu compañero los recibe mejor
                         if (p.isHome !== (ball.lastPass && ball.lastPass.isHome)) reach *= 0.6;
                         else if (p === ball.passTarget) reach *= 1.45;
@@ -6365,7 +7117,9 @@
                     ball.gkTried = best;
                     const d = dist(best, ball);
                     // probabilidad de atajar: menor si el tiro es fuerte y va lejos de su cuerpo
-                    const save = clamp(0.97 - Math.max(0, sp - 12) * 0.028 - Math.max(0, d - 20) * 0.016 + (best.def - 85) / 100 + aiDiff(best).gk, 0.3, 0.97);
+                    const save = clamp(0.97 - Math.max(0, sp - 12) * 0.028 - Math.max(0, d - 20) * 0.016 + (best.def - 85) / 100 + aiDiff(best).gk - (ball.humanShot && !best.controlled ? 0.17 : 0), ball.humanShot && !best.controlled ? 0.2 : 0.3, 0.97);
+                    if (ball.lastTouch) MS(ball.lastTouch).onT++;
+                    MS(best).saves++;
                     if (Math.random() < save) gainPossession(best);
                     else if (Math.random() < 0.5) {                      // la desvía con la mano
                         if (best.isHome) matchStats.homeSaves++; else matchStats.awaySaves++;
@@ -6644,6 +7398,10 @@
             const target = h
                 ? { x: h.x + h.dir * 60 + h.vx * 10, y: h.y + h.vy * 6 }      // centra al que lleva el balón, mirando hacia adelante
                 : { x: ball.x + ball.vx * 8, y: ball.y + ball.vy * 8 };
+            if (lockMe) {          // carrera de jugador: la cámara se inclina un poco hacia tu futbolista
+                const me = players.find(q => q.isHome && q.me);
+                if (me && ball.holder !== me) { target.x += clamp(me.x - target.x, -170, 170) * 0.3; target.y += clamp(me.y - target.y, -110, 110) * 0.3; }
+            }
             const a = 1 - Math.pow(0.9, Math.min(dt, 0.1) * 60);
             cam.x += (target.x - cam.x) * a;
             cam.y += (target.y - cam.y) * a;
@@ -6848,6 +7606,48 @@
             ctx.beginPath(); ctx.arc(x + ball.x * sx, y + ball.y * sy, 2 * d, 0, Math.PI * 2); ctx.fill();
         }
 
+        // Indicador "TÚ": marca a tu jugador y, si sale de la pantalla, una flecha en el borde indica dónde está
+        function drawMeIndicator() {
+            const me = lockMe ? players.find(q => q.isHome && q.me) : humanSides.home.current;
+            if (!me) return;
+            const d = view.dpr, W = canvas.width, H = canvas.height;
+            const sx = (me.x - cam.x) * view.scale + W / 2, sy = (me.y - cam.y) * view.scale + H / 2;
+            const m = 30 * d;
+            const on = sx > m && sx < W - m && sy > m && sy < H - m;
+            const t = performance.now() / 1000;
+            ctx.save();
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            if (on) {
+                if (!lockMe) { ctx.restore(); return; }
+                const y0 = sy - (me.radius + 34) * view.scale - Math.abs(Math.sin(t * 4)) * 5 * d;
+                ctx.font = `800 ${12 * d}px Inter, sans-serif`;
+                const label = 'TÚ';
+                const w = ctx.measureText(label).width + 12 * d;
+                ctx.fillStyle = '#fde047';
+                ctx.beginPath(); ctx.roundRect ? ctx.roundRect(sx - w / 2, y0 - 9 * d, w, 18 * d, 6 * d) : ctx.rect(sx - w / 2, y0 - 9 * d, w, 18 * d); ctx.fill();
+                ctx.beginPath(); ctx.moveTo(sx - 5 * d, y0 + 9 * d); ctx.lineTo(sx + 5 * d, y0 + 9 * d); ctx.lineTo(sx, y0 + 15 * d); ctx.fill();
+                ctx.fillStyle = '#0f172a'; ctx.fillText(label, sx, y0 + 0.5 * d);
+            } else {
+                const cx = clamp(sx, m, W - m);
+                const cy = clamp(sy, (cx < 150 * d ? 112 : 50) * d, H - m);      // no tapa el radar ni el marcador
+                const ang = Math.atan2(sy - cy, sx - cx);
+                const pulse = 1 + Math.sin(t * 6) * 0.08;
+                const r = 19 * d * pulse;
+                ctx.fillStyle = 'rgba(15,23,42,.85)'; ctx.strokeStyle = '#fde047'; ctx.lineWidth = 2.5 * d;
+                ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(ang);
+                ctx.fillStyle = '#fde047';
+                ctx.beginPath(); ctx.moveTo(r + 10 * d, 0); ctx.lineTo(r - 1 * d, -8 * d); ctx.lineTo(r - 1 * d, 8 * d); ctx.closePath(); ctx.fill();
+                ctx.restore();
+                ctx.fillStyle = '#fde047'; ctx.font = `800 ${11 * d}px Inter, sans-serif`;
+                ctx.fillText(lockMe ? 'TÚ' : (me.num ? '#' + me.num : 'TÚ'), cx, cy - 3 * d);
+                ctx.fillStyle = '#e2e8f0'; ctx.font = `700 ${8 * d}px Inter, sans-serif`;
+                const metres = Math.round(Math.hypot(me.x - cam.x, me.y - cam.y) / 12);
+                ctx.fillText(metres + ' m', cx, cy + 8 * d);
+            }
+            ctx.restore();
+        }
+
         function renderGame() {
             const now = performance.now();
             const dt = (now - lastRenderTime) / 1000;
@@ -6884,6 +7684,7 @@
             ctx.restore();
 
             if (view.follow && players.length) drawRadar();
+            if (view.follow && players.length && (gameState === 'PLAYING' || gameState === 'PAUSED')) drawMeIndicator();
 
             if (gameState === 'GOAL') {
                 const intro = Math.max(0, 1 - goalTimer / 1.1);             // primero el grito grande, luego se ve el festejo
