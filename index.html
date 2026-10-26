@@ -1986,7 +1986,7 @@
                 formation: '2-2',
                 roster: [
                     { name: 'Francisco Bahamondes', isGK: true, stats: 86, num: 5, photo: PHOTOS.f_franciscobahamondes },
-                    { name: 'Sebasthian Contreras', isGK: false, stats: 89, num: 60, pos: 'MCO', photo: PHOTOS.f_sebasthiancontreras },
+                    { name: 'Sebasthian Contreras', isGK: false, stats: 89, num: 69, pos: 'MCO', photo: PHOTOS.f_sebasthiancontreras },
                     { name: 'Alonso Fuentes', isGK: false, stats: 86, num: 14, pos: 'LD', photo: PHOTOS.f_alonsofuentes },
                     { name: 'Santiago Hidalgo', isGK: false, stats: 86, num: 8, pos: 'MC', photo: PHOTOS.f_santiagohidalgo },
                     { name: 'Cesar Rodriguez', isGK: false, stats: 88, num: 10, pos: 'MCD', photo: PHOTOS.f_cesarrodriguez },
@@ -3145,8 +3145,8 @@
         // Jugadores retirados del juego: también salen de las carreras ya guardadas
         try { if (career && career.clubs) career.clubs.forEach(c => { c.roster = c.roster.filter(p => p.me || p.name !== 'Agustín Cárdenas'); }); } catch (e) {}
         // Dorsales oficiales actualizados (Distrito LMJ) también en carreras ya guardadas
-        try { const NUMS = { 'Sebasthian Contreras': [1, 60], 'Alonso Fuentes': [2, 14], 'Cesar Rodriguez': [4, 10], 'Andrés Pérez': [3, 9] };
-            if (career && career.clubs) { const c = career.clubs.find(x => x.id === 'lmj'); if (c) c.roster.forEach(p => { const n = NUMS[p.name]; if (n && p.num === n[0]) p.num = n[1]; }); } } catch (e) {}
+        try { const NUMS = { 'Sebasthian Contreras': [1, 69], 'Sebasthian Contreras ': [60, 69], 'Alonso Fuentes': [2, 14], 'Cesar Rodriguez': [4, 10], 'Andrés Pérez': [3, 9] };
+            if (career && career.clubs) { const c = career.clubs.find(x => x.id === 'lmj'); if (c) c.roster.forEach(p => { const n = NUMS[p.name], n2 = NUMS[p.name + ' ']; if (n && p.num === n[0]) p.num = n[1]; else if (n2 && p.num === n2[0]) p.num = n2[1]; }); } } catch (e) {}
         // Jugadores exclusivos: solo existen en el modo carrera y en Ultimate Team (no en partidas rápidas ni torneos)
         const EXCLUSIVES = [{ key: 'cdn|Agustín Vilches', name: 'Agustín Vilches', isGK: true, stats: 86, num: 1, photo: PHOTOS.f_agustinvilches, utVer: 'icono', utR: 99 }];
         let cdnCrestCache = null;
@@ -6603,7 +6603,7 @@
                 '↩️ Damián Núñez vuelve a Valpo City como suplente.',
                 '🧤 Agustín Vilches, portero exclusivo: llega al Modo Carrera como agente libre (fichaje gratis) y a Ultimate Team como carta Ícono de 99, todos los lunes en la tienda por 15.000 monedas.',
                 '📝 Nueva sección de notas de actualización.',
-                '🔢 Distrito LMJ: dorsales y posiciones actualizados (Pérez 9 DC, Rodríguez 10 MCD, Contreras 60 MCO, Hidalgo 8 MC, Fuentes 14 LD).'] },
+                '🔢 Distrito LMJ: dorsales y posiciones actualizados (Pérez 9 DC, Rodríguez 10 MCD, Contreras 69 MCO, Hidalgo 8 MC, Fuentes 14 LD).'] },
             { v: 'Beta 2.0 · 25 de octubre (tarde)', items: [
                 '🌐 Salas online de hasta 10 jugadores (5 por equipo): 1 vs 1, 2 vs 2, 1 vs 3… hasta 5 vs 5.',
                 '🔄 Si faltan jugadores en un equipo, cada uno puede cambiar entre los compañeros que maneja la IA.',
